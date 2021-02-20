@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<!--
+Template Name: Metronic - Bootstrap 4 HTML, React, Angular 9 & VueJS Admin Dashboard Theme
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: https://1.envato.market/EA4JP
+Renew Support: https://1.envato.market/EA4JP
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<html lang="en" >
+    <!--begin::Head-->
+    <head><base href="../../../">
+                <meta charset="utf-8"/>
+        <title>Queue Manager</title>
+        <meta name="description" content="Wizard examples"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <!--begin::Fonts-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>        <!--end::Fonts-->
+
+
+        <!--begin::Page Custom Styles(used by this page)-->
+                    <link href="CMPS253/Template/assets/css/pages/wizard/wizard-3.css" rel="stylesheet" type="text/css"/>
+            <!--end::Page Custom Styles-->
+
+        <!--begin::Global Theme Styles(used by all pages)-->
+                    <link href="CMPS253/Template/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+                    <link href="CMPS253/Template/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css"/>
+                    <link href="CMPS253/Template/assets/css/style.bundle.css" rel="stylesheet" type="text/css"/>
+                <!--end::Global Theme Styles-->
+
+        <!--begin::Layout Themes(used by all pages)-->
+
+<link href="CMPS253/Template/assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css"/>
+<link href="CMPS253/Template/assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css"/>
+<link href="CMPS253/Template/assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css"/>
+<link href="CMPS253/Template/assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css"/>        <!--end::Layout Themes-->
+
+<link rel="shortcut icon" href="CMPS253/Template/assets/media/logos/favicon.ico"/>
+<style>
+    .tagify--outside{
+    border: 0;
+}
+
+.tagify--outside .tagify__input{
+  order: -1;
+  flex: 100%;
+  border: 1px solid var(--tags-border-color);
+  margin-bottom: 1em;
+  transition: .1s;
+}
+
+.tagify--outside .tagify__input:hover{ border-color:var(--tags-hover-border-color); }
+.tagify--outside.tagify--focus .tagify__input{
+  transition:0s;
+  border-color: var(--tags-focus-border-color);
+}
+</style>
+</head>
+<!--end::Head-->
+
+<!--begin::Body-->
+<body  id="kt_body"  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"  >
+
+
+<!--begin::Entry-->
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    <div class=" container ">
+        <div class="card card-custom">
+<div class="card-body p-0">
+    <!--begin: Wizard-->
+    <div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="step-first" data-wizard-clickable="true">
+        <!--begin: Wizard Nav-->
+        <div class="wizard-nav">
+            <div class="wizard-steps px-8 py-8 px-lg-15 py-lg-3">
+
+                <!--begin::Wizard Step 3 Nav-->
+                <div class="wizard-step" data-wizard-type="step">
+                    <div class="wizard-label">
+                        <h3 class="wizard-title">
+                            <span>1.</span> Select Services
+                        </h3>
+                        <div class="wizard-bar"></div>
+                    </div>
+                </div>
+                <!--end::Wizard Step 3 Nav-->
+
+                <!--begin::Wizard Step 5 Nav-->
+                <div class="wizard-step" data-wizard-type="step">
+                    <div class="wizard-label">
+                        <h3 class="wizard-title">
+                            <span>2.</span> Review and Submit
+                        </h3>
+                        <div class="wizard-bar"></div>
+                    </div>
+                </div>
+                <!--end::Wizard Step 5 Nav-->
+            </div>
+        </div>
+        <!--end: Wizard Nav-->
+
+        <!--begin: Wizard Body-->
+        <div class="row justify-content-center py-10 px-8 py-lg-12 px-lg-10">
+            <div class="col-xl-12 col-xxl-7">
+                <!--begin: Wizard Form-->
+                <form class="form" id="kt_form">
+                    <!--begin: Wizard Step 1-->
+                    <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
+                        <h4 class="mb-10 font-weight-bold text-dark">Setup Your Queues</h4>
+                        <!--begin::Input-->
+                        <div class="form-group">
+                            <label>Queue Name</label>
+                            <input type="text" class="form-control" name="queueName" placeholder="Queue Name" value=""/>
+                            <span class="form-text text-muted">Please enter the name of the Queue.</span>
+                        </div>
+
+                    <div class="form-group row">
+                        <!-- <label class="col-form-label text-right col-lg-3 col-sm-12">Outside of the box example</label> -->
+                        <div class="col-lg-6 col-md-9 col-sm-12">
+                            <label>Service</label>
+                            <!-- <input type="text" class="form-control" name="queueService" placeholder="Choose your service" value=""/> -->
+                            <input id="kt_tagify_3" class="form-control" name='tags-outside' class='form-control tagify tagify--outside' value='' placeholder='Write some services'/>
+
+                            <div class="mt-3 text-muted">
+                                Please enter the services of the queue.
+                            </div>
+                        </div>
+                    </div>
+                        
+                    </div>
+                    <!--end: Wizard Step 1-->
+
+
+                    <!--begin: Wizard Step 5-->
+                    <div class="pb-5" data-wizard-type="step-content">
+                        <!--begin::Section-->
+                        <h4 class="mb-10 font-weight-bold text-dark">Review your Details and Submit</h4>
+                        <h6 class="font-weight-bolder mb-3">
+                            Queue Name:
+                        </h6>
+                        <div class="text-dark-50 line-height-lg">
+                            <div>Counter 1</div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <!--end::Section-->
+
+                        <!--begin::Section-->
+                        <h6 class="font-weight-bolder mb-3">
+                            Services:
+                        </h6>
+                        <div class="text-dark-50 line-height-lg">
+                            <div>Cash Transaction</div>
+                            <div>Cheque Deposit</div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <!--end::Section-->
+
+                        <!--begin::Section-->
+                        <!-- <h6 class="font-weight-bolder mb-3">
+                            Delivery Service Type:
+                        </h6>
+                        <div class="text-dark-50 line-height-lg">
+                            <div>Overnight Delivery with Regular Packaging</div>
+                            <div>Preferred Morning (8:00AM - 11:00AM) Delivery</div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div> -->
+                        <!--end::Section-->
+
+                        <!--begin::Section-->
+                        <!-- <h6 class="font-weight-bolder mb-3">
+                            Delivery Address:
+                        </h6>
+                        <div class="text-dark-50 line-height-lg">
+                            <div>Address Line 1</div>
+                            <div>Address Line 2</div>
+                            <div>Preston 3072, VIC, Australia</div>
+                        </div> -->
+                        <!--end::Section-->
+                    </div>
+                    <!--end: Wizard Step 5-->
+
+                    <!--begin: Wizard Actions-->
+                    <div class="d-flex justify-content-between border-top mt-5 pt-10">
+                        <div class="mr-2">
+                            <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4" data-wizard-type="action-prev">
+                                Previous
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-success font-weight-bold text-uppercase px-9 py-4" data-wizard-type="action-submit">
+                                Submit
+                            </button>
+                            <button type="button" class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" data-wizard-type="action-next">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                    <!--end: Wizard Actions-->
+                </form>
+                <!--end: Wizard Form-->
+            </div>
+        </div>
+        <!--end: Wizard Body-->
+    </div>
+    <!--end: Wizard-->
+</div>
+</div>
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Entry-->
+
+
+<script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
+<!--begin::Global Config(global config for global JS scripts)-->
+<script>
+    var KTAppSettings = {
+"breakpoints": {
+"sm": 576,
+"md": 768,
+"lg": 992,
+"xl": 1200,
+"xxl": 1400
+},
+"colors": {
+"theme": {
+    "base": {
+        "white": "#ffffff",
+        "primary": "#3699FF",
+        "secondary": "#E5EAEE",
+        "success": "#1BC5BD",
+        "info": "#8950FC",
+        "warning": "#FFA800",
+        "danger": "#F64E60",
+        "light": "#E4E6EF",
+        "dark": "#181C32"
+    },
+    "light": {
+        "white": "#ffffff",
+        "primary": "#E1F0FF",
+        "secondary": "#EBEDF3",
+        "success": "#C9F7F5",
+        "info": "#EEE5FF",
+        "warning": "#FFF4DE",
+        "danger": "#FFE2E5",
+        "light": "#F3F6F9",
+        "dark": "#D6D6E0"
+    },
+    "inverse": {
+        "white": "#ffffff",
+        "primary": "#ffffff",
+        "secondary": "#3F4254",
+        "success": "#ffffff",
+        "info": "#ffffff",
+        "warning": "#ffffff",
+        "danger": "#ffffff",
+        "light": "#464E5F",
+        "dark": "#ffffff"
+    }
+},
+"gray": {
+    "gray-100": "#F3F6F9",
+    "gray-200": "#EBEDF3",
+    "gray-300": "#E4E6EF",
+    "gray-400": "#D1D3E0",
+    "gray-500": "#B5B5C3",
+    "gray-600": "#7E8299",
+    "gray-700": "#5E6278",
+    "gray-800": "#3F4254",
+    "gray-900": "#181C32"
+}
+},
+"font-family": "Poppins"
+};
+</script>
+<!--end::Global Config-->
+
+<!--begin::Global Theme Bundle(used by all pages)-->
+           <script src="CMPS253/Template/assets/plugins/global/plugins.bundle.js"></script>
+           <script src="CMPS253/Template/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+           <script src="CMPS253/Template/assets/js/scripts.bundle.js"></script>
+        <!--end::Global Theme Bundle-->
+
+
+            <!--begin::Page Scripts(used by this page)-->
+            <script src="CMPS253/Template/assets/js/pages/custom/wizard/wizard-3.js"></script>
+            <script src="CMPS253/Template/assets/js/pages/crud/forms/widgets/tagify.js"></script>
+<!--end::Page Scripts-->
+
+<script>
+    var input = document.querySelector('input[name=tags-outside]')
+        // init Tagify script on the above inputs
+        var tagify = new Tagify(input, {
+            whitelist: ["foo", "bar", "baz"],
+            dropdown: {
+                position: "input",
+                enabled: 0 // always opens dropdown when input gets focus
+            }
+        })
+</script>
+    </body>
+<!--end::Body-->
+</html>
