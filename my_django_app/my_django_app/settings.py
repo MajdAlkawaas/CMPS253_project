@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'guest.apps.GuestConfig',
     'customer.apps.CustomerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -74,10 +75,19 @@ WSGI_APPLICATION = 'my_django_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
+# edit this dict for your local database
+# edit for remote database on google cloud
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'queuemakerdb',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        
     }
 }
 
