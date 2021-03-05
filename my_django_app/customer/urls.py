@@ -6,4 +6,6 @@ urlpatterns = [
     path('signup/', views.signup, name="singup-customer-page"),
     path('forgot/', views.forgot, name="forgot-customer-page"),
     path('queueSetup/', views.queueSetup, name="queueSetup-customer-page"),
+    path('queueManagement/', views.queueManagement, name="queueManagement-customer-page"),
+    path('edit/', views.edit, name="edit-customer-page"),
 ]
