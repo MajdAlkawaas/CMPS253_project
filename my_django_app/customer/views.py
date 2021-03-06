@@ -11,3 +11,9 @@ def forgot(request):
 
 def queueSetup(request):
     return render(request, 'customer/queueSetup.html') 
+
+def queueManagement(request):
+    return render(request, 'customer/queueManagement.html') 
+
+def edit(request):
+    return render(request, 'customer/edit.html') 
