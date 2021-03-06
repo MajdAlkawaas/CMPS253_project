@@ -4,7 +4,6 @@ import datetime
 
 class Guest(models.Model):
     PhoneNumber = models.CharField(max_length=50)
-    password   = models.CharField(max_length=50)
     WalkedAway = models.BooleanField()
     Kickedout  = models.BooleanField()
     Served     = models.BooleanField()
@@ -17,3 +16,4 @@ class Guest(models.Model):
     Queue      = models.ForeignKey('customer.Queue', on_delete=models.CASCADE)
     Category = models.ForeignKey('customer.Category', on_delete=models.CASCADE)
     Queueoperator = models.ForeignKey('customer.Queueoperator', on_delete=models.CASCADE)
+
