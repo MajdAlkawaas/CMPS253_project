@@ -207,6 +207,20 @@ var KTLogin = function() {
 							}
 						}
 					},
+					username: {
+						validators: {
+							notEmpty: {
+								message: 'user name is required'
+							}
+						}
+					},
+					password: {
+						validators: {
+							notEmpty: {
+								message: 'user name is required'
+							}
+						}
+					},
 					email: {
 						validators: {
 							notEmpty: {
@@ -230,38 +244,41 @@ var KTLogin = function() {
 			form,
 			{
 				fields: {
-					address1: {
+					Name: {
 						validators: {
 							notEmpty: {
-								message: 'Address is required'
+								message: 'Name is required'
 							}
 						}
 					},
-					phonenumber: {
+					ContactFirstName: {
+						validators: {
+							notEmpty: {
+								message: 'Contact First Name is required'
+							}
+						}
+					},
+					ContactLastName: {
+						validators: {
+							notEmpty: {
+								message: 'Contact Last Name is required'
+							}
+						}
+					},
+					PhoneNumber: {
 						validators: {
 							notEmpty: {
 								message: 'Phone number is required'
 							}
 						}
 					},
-					city: {
+					EmailAddress: {
 						validators: {
 							notEmpty: {
-								message: 'City is required'
-							}
-						}
-					},
-					state: {
-						validators: {
-							notEmpty: {
-								message: 'State is required'
-							}
-						}
-					},
-					country: {
-						validators: {
-							notEmpty: {
-								message: 'Country is required'
+								message: 'Email is required'
+							},
+							emailAddress: {
+								message: 'The value is not a valid email address'
 							}
 						}
 					}
