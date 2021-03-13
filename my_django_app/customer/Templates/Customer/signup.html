@@ -184,7 +184,8 @@ License: You must have a valid license purchased only from themeforest(the above
             <!--begin::Signin-->
             <div class="login-form login-form-signup">
                 <!--begin::Form-->
-                <form class="form" novalidate="novalidate" id="kt_login_signup_form">
+                <form method="POST" class="form" novalidate="novalidate" id="kt_login_signup_form">
+                    {% csrf_token %}
                     <!--begin: Wizard Step 1-->
                     <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
                         <!--begin::Title-->
@@ -217,12 +218,33 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                         </div>
                         <!--end::Row-->
+                        <!--begin::Row-->
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <!--begin::Input-->
+                                <div class="form-group">
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Username</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="username" placeholder="User Name" value="" />
+                                </div>
+                                <!--end::Input-->
+                            </div>
+                            <div class="col-xl-6">
+                                <!--begin::Input-->
+                                <div class="form-group">
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="email" placeholder="Email Address" value="" />
+                                </div>
+                                <!--end::Input-->
+                            </div>
+                        </div>
+                        <!--end::Row-->
+
 
                         <!--begin::Form group-->
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
-                            <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="email" autocomplete="on"/>
-                        </div>
+                            <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="EmailAddress" autocomplete="on"/>
+                        </div> -->
                         <!--end::Form group-->
 
                         <!--begin::Form Group-->
@@ -232,72 +254,56 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                         <!--end::Form Group-->
 
-                        
-
-
-                        
                     </div>
                     <!--end: Wizard Step 1-->
 
-                    <!--begin: Wizard Step 2-->
                     <div class="pb-5" data-wizard-type="step-content">
-                        <!--begin::Title-->
                         <div class="pt-lg-0 pt-5 pb-15">
-                            <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Address Details</h3>
+                            <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Customer Information</h3>
                             <div class="text-muted font-weight-bold font-size-h4">
                                 Have a Different Address ?
                                 <a href="#" class="text-primary font-weight-bolder">Add Address</a>
                             </div>
                         </div>
-                        <!--begin::Title-->
 
-                        <!--begin::Row-->
                         <div class="row">
                             <div class="col-xl-6">
-                                <!--begin::Input-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Address Line 1</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="address1" placeholder="Address Line 1" value="Address Line 1" />
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Name</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="Name" placeholder="Name" value="" />
                                 </div>
-                                <!--end::Input-->
                             </div>
                             <div class="col-xl-6">
-                                <!--begin::Input-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Address Line 2</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="address2" placeholder="Address Line 2" value="Address Line 2" />
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Contact First Name</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="ContactFirstName" placeholder="Contact First Name" value="" />
                                 </div>
-                                <!--end::Input-->
                             </div>
                         </div>
-                        <!--end::Row-->
 
-                        <!--begin::Row-->
                         <div class="row">
                             <div class="col-xl-6">
-                                <!--begin::Input-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Phone</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="phonenumber" placeholder="Phone" value="+12233434-34" />
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Contact Last Name</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="ContactLastName" placeholder="Contact Last Name" value="" />
                                 </div>
-                                <!--end::Input-->
                             </div>
                             <div class="col-xl-6">
-                                <!--begin::Input-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">City</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="city" placeholder="City" value="Melbourne" />
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Email Address</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="EmailAddress" placeholder="Email Address" value="" />
                                 </div>
-                                <!--end::Input-->
                             </div>
                         </div>
-                        <!--end::Row-->
+                        
+                        <div class="form-group">
+                            <label class="font-size-h6 font-weight-bolder text-dark">Phone Number</label>                            
+                            <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"  name="PhoneNumber" placeholder="Phone Number" value="" />    
+                        </div>
 
-                                <!--end::Input-->
                             </div>
                         </div>
-                        <!--end::Row-->
-                    </div>
+                    </div> 
                     <!--end: Wizard Step 2-->
 
                     <!--begin: Wizard Step 3-->
@@ -432,7 +438,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </button>
                         </div>
                         <div>
-                            <button type="button" class="btn btn-primary font-weight-bolder font-size-h6 pl-5 pr-8 py-4 my-3" data-wizard-type="action-submit" type="submit" id="kt_login_signup_form_submit_button">
+                            <button class="btn btn-primary font-weight-bolder font-size-h6 pl-5 pr-8 py-4 my-3" data-wizard-type="action-submit" type="submit" id="kt_login_signup_form_submit_button">
                                 Submit
                                 <span class="svg-icon svg-icon-md ml-2"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Right-2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
