@@ -1,6 +1,36 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+
+# Backup files # 
+*.bak 
 
 
-.vscode/settings.json
-my_django_app/mysqlclient-1.4.6-cp38-cp38-win32.whl
+
+# Environments 
+.env 
+.venv 
+env/ 
+venv/ 
+ENV/ 
+env.bak/ 
+venv.bak/
+my_django_app/cmps253_env
+
+
+# Visual Studio Code # 
+.vscode/* 
+.vscode/settings.json 
+.vscode/tasks.json 
+.vscode/launch.json 
+.vscode/extensions.json 
+.history
+
+
+# my_django_app/mysqlclient-1.4.6-cp38-cp38-win32.whl
 
 
