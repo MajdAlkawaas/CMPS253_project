@@ -106,7 +106,8 @@ License: You must have a valid license purchased only from themeforest(the above
             <!--begin::Signin-->
             <div class="login-form">
                 <!--begin::Form-->
-                <form class="form" id="kt_login_singin_form" action="">
+                <form method="POST" class="form" id="kt_login_singin_form">
+                    {% csrf_token %}
                     <!--begin::Title-->
                     <div class="pb-5 pb-lg-15">
                         <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h3>
@@ -119,7 +120,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     <!--begin::Form group-->
                     <div class="form-group">
-                        <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
+                        <label class="font-size-h6 font-weight-bolder text-dark">Username</label>
                         <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="username" autocomplete="off"/>
                     </div>
                     <!--end::Form group-->
