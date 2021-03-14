@@ -24,7 +24,7 @@ def signup(request):
     return render(request, 'customer/signup.html')
 
 def signin(request):
-    print(request)
+    print(request.POST)
     if request.method == "POST":
         print(request.POST)
         username = request.POST.get('username')
@@ -36,7 +36,7 @@ def signin(request):
             auth.login(request, user)
             return redirect("queueSetup-customer-page")
         else:
-            return redirect("singin-customer-page")
+            return redirect("signin-customer-page")
     print(request.POST)
     return render(request, 'customer/signin.html')
 

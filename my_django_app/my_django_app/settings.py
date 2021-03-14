@@ -121,9 +121,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'newschema',
+            'NAME': 'queuemakerdb',
             'USER': 'root',
-            'PASSWORD': 'Ahmsad!@12',
+            'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '3306',
         }
