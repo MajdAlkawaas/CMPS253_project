@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Director, Customer
-from django.contrib.auth.models import User, auth
+from .models import Director, Customer, Queue
+from django.contrib.auth import authenticate, login, logout
+import json
 
 def signup(request):
     if request.method == "POST":
@@ -18,31 +19,42 @@ def signup(request):
                               password     = value.get('password'),
                               Customer     = customer01)
         director01.save()
-        return redirect("singin-customer-page")
-                                
+        return redirect("signin-customer-page")
     return render(request, 'customer/signup.html')
 
 def signin(request):
-    print(request.POST)
     if request.method == "POST":
-        print(request.POST)
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        value = request.POST
+        username = value.get('username')
+        password = value.get('password')
+        # username = request.POST.get('username')
+        # password = request.POST.get('password')
 
-        user = auth.authenticate(username=username, password=password)
+        user = authenticate(request, username=username, password=password)
+        print(user)
             
         if user is not None:
-            auth.login(request, user)
+            login(request, user)
             return redirect("queueSetup-customer-page")
         else:
-            return redirect("signin-customer-page")
-    print(request.POST)
+            return render(request, "customer/signin.html")
+    
     return render(request, 'customer/signin.html')
 
 def forgot(request):
     return render(request, 'customer/forgot.html') 
 
 def queueSetup(request):
+    if request.method == "POST":
+        value = request.POST
+        user = request.Director
+        queue01 = Queue(Name=value.get("queueName"), Director=user, Active=False)
+        queue01.save()
+
+
+        tags = json.loads(request.POST.get("categories"))
+        print(tags)
+
     return render(request, 'customer/queueSetup.html') 
 
 def queueManagement(request):
@@ -50,3 +62,6 @@ def queueManagement(request):
 
 def edit(request):
     return render(request, 'customer/edit.html') 
+
+def home(request):
+    return render(request, 'customer/home.html')
