@@ -1,12 +1,12 @@
 "use strict";
 
 // Class Definition
-var KTLogin = function () {
+var KTLogin = function() {
 	var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
 
-	var _handleFormSignin = function () {
+	var _handleFormSignin = function() {
 		var form = KTUtil.getById('kt_login_singin_form');
-		// var formSubmitUrl = KTUtil.attr(form, 'action');
+		var formSubmitUrl = KTUtil.attr(form, 'action');
 		var formSubmitButton = KTUtil.getById('kt_login_singin_form_submit_button');
 
 		if (!form) {
@@ -14,10 +14,10 @@ var KTLogin = function () {
 		}
 
 		FormValidation
-			.formValidation(
-				form,
-				{
-					fields: {
+		    .formValidation(
+		        form,
+		        {
+		            fields: {
 						username: {
 							validators: {
 								notEmpty: {
@@ -32,69 +32,69 @@ var KTLogin = function () {
 								}
 							}
 						}
-					},
-					plugins: {
+		            },
+		            plugins: {
 						trigger: new FormValidation.plugins.Trigger(),
 						submitButton: new FormValidation.plugins.SubmitButton(),
-						defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+	            		//defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
 						bootstrap: new FormValidation.plugins.Bootstrap({
-							//	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
-							//	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+						//	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+						//	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
 						})
-					}
-				}
-			)
-			.on('core.form.valid', function () {
+		            }
+		        }
+		    )
+		    .on('core.form.valid', function() {
 				// Show loading state on button
 				KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
 
 				// Simulate Ajax request
-				setTimeout(function () {
+				setTimeout(function() {
 					KTUtil.btnRelease(formSubmitButton);
 				}, 2000);
 
 				// Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+				/**
+		        FormValidation.utils.fetch(formSubmitUrl, {
+		            method: 'POST',
+					dataType: 'json',
+		            params: {
+		                name: form.querySelector('[name="username"]').value,
+		                email: form.querySelector('[name="password"]').value,
+		            },
+		        }).then(function(response) { // Return valid JSON
+					// Release button
+					KTUtil.btnRelease(formSubmitButton);
 
-				// FormValidation.utils.fetch(formSubmitUrl, {
-				//     method: 'POST',
-				// 	dataType: 'json',
-				//     params: {
-				//         name: form.querySelector('[name="username"]').value,
-				//         email: form.querySelector('[name="password"]').value,
-				//     },
-				// }).then(function(response) { // Return valid JSON
-				// 	// Release button
-				// 	KTUtil.btnRelease(formSubmitButton);
-
-				// 	if (response && typeof response === 'object' && response.status && response.status == 'success') {
-				// 		Swal.fire({
-				//             text: "All is cool! Now you submit this form",
-				//             icon: "success",
-				//             buttonsStyling: false,
-				// 			confirmButtonText: "Ok, got it!",
-				// 			customClass: {
-				// 				confirmButton: "btn font-weight-bold btn-light-primary"
-				// 			}
-				//         }).then(function() {
-				// 			KTUtil.scrollTop();
-				// 		});
-				// 	} else {
-				// 		Swal.fire({
-				//             text: "Sorry, something went wrong, please try again.",
-				//             icon: "error",
-				//             buttonsStyling: false,
-				// 			confirmButtonText: "Ok, got it!",
-				// 			customClass: {
-				// 				confirmButton: "btn font-weight-bold btn-light-primary"
-				// 			}
-				//         }).then(function() {
-				// 			KTUtil.scrollTop();
-				// 		});
-				// 	}
-				// });
-
-			})
-			.on('core.form.invalid', function () {
+					if (response && typeof response === 'object' && response.status && response.status == 'success') {
+						Swal.fire({
+			                text: "All is cool! Now you submit this form",
+			                icon: "success",
+			                buttonsStyling: false,
+							confirmButtonText: "Ok, got it!",
+							customClass: {
+								confirmButton: "btn font-weight-bold btn-light-primary"
+							}
+			            }).then(function() {
+							KTUtil.scrollTop();
+						});
+					} else {
+						Swal.fire({
+			                text: "Sorry, something went wrong, please try again.",
+			                icon: "error",
+			                buttonsStyling: false,
+							confirmButtonText: "Ok, got it!",
+							customClass: {
+								confirmButton: "btn font-weight-bold btn-light-primary"
+							}
+			            }).then(function() {
+							KTUtil.scrollTop();
+						});
+					}
+		        });
+				**/
+		    })
+			.on('core.form.invalid', function() {
 				Swal.fire({
 					text: "Sorry, looks like there are some errors detected, please try again.",
 					icon: "error",
@@ -103,13 +103,13 @@ var KTLogin = function () {
 					customClass: {
 						confirmButton: "btn font-weight-bold btn-light-primary"
 					}
-				}).then(function () {
+				}).then(function() {
 					KTUtil.scrollTop();
 				});
-			});
-	}
+		    });
+    }
 
-	var _handleFormForgot = function () {
+	var _handleFormForgot = function() {
 		var form = KTUtil.getById('kt_login_forgot_form');
 		var formSubmitUrl = KTUtil.attr(form, 'action');
 		var formSubmitButton = KTUtil.getById('kt_login_forgot_form_submit_button');
@@ -119,10 +119,10 @@ var KTLogin = function () {
 		}
 
 		FormValidation
-			.formValidation(
-				form,
-				{
-					fields: {
+		    .formValidation(
+		        form,
+		        {
+		            fields: {
 						email: {
 							validators: {
 								notEmpty: {
@@ -133,28 +133,28 @@ var KTLogin = function () {
 								}
 							}
 						}
-					},
-					plugins: {
+		            },
+		            plugins: {
 						trigger: new FormValidation.plugins.Trigger(),
 						submitButton: new FormValidation.plugins.SubmitButton(),
-						//defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+	            		//defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
 						bootstrap: new FormValidation.plugins.Bootstrap({
-							//	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
-							//	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+						//	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+						//	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
 						})
-					}
-				}
-			)
-			.on('core.form.valid', function () {
+		            }
+		        }
+		    )
+		    .on('core.form.valid', function() {
 				// Show loading state on button
 				KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
 
 				// Simulate Ajax request
-				setTimeout(function () {
+				setTimeout(function() {
 					KTUtil.btnRelease(formSubmitButton);
 				}, 2000);
-			})
-			.on('core.form.invalid', function () {
+		    })
+			.on('core.form.invalid', function() {
 				Swal.fire({
 					text: "Sorry, looks like there are some errors detected, please try again.",
 					icon: "error",
@@ -163,13 +163,13 @@ var KTLogin = function () {
 					customClass: {
 						confirmButton: "btn font-weight-bold btn-light-primary"
 					}
-				}).then(function () {
+				}).then(function() {
 					KTUtil.scrollTop();
 				});
-			});
-	}
+		    });
+    }
 
-	var _handleFormSignup = function () {
+	var _handleFormSignup = function() {
 		// Base elements
 		var wizardEl = KTUtil.getById('kt_login');
 		var form = KTUtil.getById('kt_login_signup_form');
@@ -412,19 +412,19 @@ var KTLogin = function () {
 		wizardObj.on('change', function (wizard) {
 			KTUtil.scrollTop();
 		});
-	}
+    }
 
-	// Public Functions
-	return {
-		init: function () {
-			_handleFormSignin();
+    // Public Functions
+    return {
+        init: function() {
+            _handleFormSignin();
 			_handleFormForgot();
 			_handleFormSignup();
-		}
-	};
+        }
+    };
 }();
 
 // Class Initialization
-jQuery(document).ready(function () {
-	KTLogin.init();
+jQuery(document).ready(function() {
+    KTLogin.init();
 });

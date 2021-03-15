@@ -1,8 +1,7 @@
 from django.db import models
 import datetime
+import uuid
 # Create your models here.
-
-
 
 
 class Customer(models.Model):
@@ -23,11 +22,13 @@ class Director(models.Model):
     Customer     = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
 class Queue(models.Model):
-    Name      = models.CharField(max_length=50)
-    CreatedAt = models.DateTimeField(auto_now=True)
-    Active    = models.BooleanField()
-    Director  = models.ForeignKey(Director, on_delete=models.CASCADE)
-
+    Name       = models.CharField(max_length=50)
+    CreatedAt  = models.DateTimeField(auto_now=True)
+    Active     = models.BooleanField()
+    Director   = models.ForeignKey(Director, on_delete=models.CASCADE)
+    queue_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    QRcode     = models.ImageField(upload_to="QRcodes/", null=True, blank=True)
+                
 class Queueoperator(models.Model):
     FirstName    = models.CharField(max_length=50)
     LastName     = models.CharField(max_length=50)

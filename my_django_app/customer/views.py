@@ -6,19 +6,18 @@ import json
 def signup(request):
     if request.method == "POST":
         value = request.POST
-
-        customer01 = Customer(Name=value.get('Name'),
-                             ContactFirstName=value.get('ContactFirstName'),
-                             ContactLastName=value.get('ContactLastName'),
-                             EmailAddress=value.get('EmailAddress'),
-                             PhoneNumber=value.get('PhoneNumber'))
+        customer01 = Customer(Name             = value.get('Name'),
+                              ContactFirstName = value.get('ContactFirstName'),
+                              ContactLastName  = value.get('ContactLastName'),
+                              EmailAddress     = value.get('EmailAddress'),
+                              PhoneNumber      = value.get('PhoneNumber'))
         customer01.save()
-        director01 = Director(FirstName=value.get('fname'),
-                                LastName=value.get('lname'),
-                                username=value.get('username'),
-                                EmailAddress=value.get('email'),
-                                password=value.get('password'),
-                                Customer = customer01)
+        director01 = Director(FirstName    = value.get('fname'),
+                              LastName     = value.get('lname'),
+                              username     = value.get('username'),
+                              EmailAddress = value.get('email'),
+                              password     = value.get('password'),
+                              Customer     = customer01)
         director01.save()
         return redirect("signin-customer-page")
     return render(request, 'customer/signup.html')
@@ -39,6 +38,7 @@ def signin(request):
             return redirect("queueSetup-customer-page")
         else:
             return render(request, "customer/signin.html")
+    
     return render(request, 'customer/signin.html')
 
 def forgot(request):
