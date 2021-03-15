@@ -25,7 +25,7 @@ def guest_view_id(request, queue_id):
         'categories': categories
     }
 
-    return render(request, 'guest/guest.html', context) 
+    return render(request, 'guest/guest_beta.html', context) 
 
 
 
@@ -57,7 +57,7 @@ def guest_view_uuid(request, queue_uuid):
         'categories': categories
     }
 
-    return render(request, 'guest/guest.html', context) 
+    return render(request, 'guest/guest_beta.html', context) 
 
 # def guest(request):
 
