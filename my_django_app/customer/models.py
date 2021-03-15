@@ -27,7 +27,7 @@ class Queue(models.Model):
     Active     = models.BooleanField()
     Director   = models.ForeignKey(Director, on_delete=models.CASCADE)
     queue_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    QRcode     = models.ImageField(upload_to="QRcodes/", null=True)
+    QRcode     = models.ImageField(upload_to="QRcodes/", null=True, blank=True)
                 
 class Queueoperator(models.Model):
     FirstName    = models.CharField(max_length=50)
