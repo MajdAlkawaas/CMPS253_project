@@ -51,12 +51,43 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--end::Head-->
 
 <body>
-
+    <div class="row">
+        <div class="col-md-4">
+            <h1> Customer {{ customer.id }} </h1>
+            <ul>
+                <li> {{customer.Name}} </li>
+                <li> {{customer.ContactFirstName}} </li>
+                <li> {{customer.ContactLastName}} </li>
+                <li> {{customer.EmailAddress}} </li>
+                <li> {{customer.PhoneNumber}} </li>
+                <li> {{customer.CreatedAt}} </li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h1> Director {{ director.id }} </h1>
+            <ul>
+                <li> {{director.FirstName}} </li>
+                <li> {{director.LastName}} </li>
+                <li> {{director.EmailAddress}} </li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h1> Queue {{ queue.id }} </h1>
+            <ul>
+                <li> {{queue.Name}} </li>
+                <li> {{queue.queue_uuid}} </li>
+                <li> {{queue.CreatedAt}} </li>
+            </ul>
+        </div>
+    </div>
     <!--begin::Wrapper-->
     <div class="d-flex flex-row-fluid flex-center">
         <!--begin::Signin-->
         <!-- <div class="login-form login-form-signup"> -->
             <!--begin::Form-->
+            
+
+
             <form class="form" novalidate="novalidate" id="kt_login_signup_form">
 
                 <!--begin: Wizard Step 2-->
@@ -79,11 +110,10 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="form-group">
                                 <label class="font-size-h6 font-weight-bolder text-dark">Categories</label>
                                 <select class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" id="exampleSelect1">
-                                    <option>Cash Transaction</option>
-                                    <option>Cheque Deposit</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    <option>Choose a category</option>
+                                    {% for category in categories %}
+                                        <option> {{category.Name}} </option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <!--end::Input-->
