@@ -75,10 +75,8 @@
         <!-- <div class="login-form login-form-signup"> -->
             <!--begin::Form-->
             
-
-
-            <form class="form" novalidate="novalidate" id="kt_login_signup_form">
-
+            <form method="POST" class="form" novalidate="novalidate" id="kt_login_signup_form">
+                {% csrf_token %}
                 <!--begin: Wizard Step 2-->
                 <div class="pb-5" data-wizard-type="step-content">
 
@@ -90,7 +88,7 @@
                                 <label class="font-size-h6 font-weight-bolder text-dark">Phone</label>
                                 <input type="text"
                                     class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
-                                    name="phonenumber" placeholder="Phone" value="+12233434-34" />
+                                    name="phonenumber" placeholder="Phone" value="" />
                             </div>
                             <!--end::Input-->
                         </div>
@@ -112,7 +110,7 @@
                 </div>
                 <!--begin::Input-->
                 <div>
-                    <button type="reset" class="btn btn-primary mr-2">Submit</button>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 </div>
                 <!--end::Input-->
 

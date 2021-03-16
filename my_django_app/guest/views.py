@@ -1,31 +1,35 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from customer.models import Customer,Director, Category, Queue
 from django.http import HttpResponse, Http404
 
 
 def guest_view_id(request, queue_id):
-    try:
-        # queue = Customer.objects.get(queue_uuid= queue_uuid)
-        queue = Queue.objects.get(pk= queue_id)
-    except Queue.DoesNotExist:
-        raise Http404("Queue with uuid {} doesn't exit".format(queue_id)) 
+    if request.method == "POST":
+        return redirect("guest-waiting-page")
+        # return render(request, 'guest/guest_beta.html') 
+    else:
+        try:
+            # queue = Customer.objects.get(queue_uuid= queue_uuid)
+            queue = Queue.objects.get(pk= queue_id)
+        except Queue.DoesNotExist:
+            raise Http404("Queue with uuid {} doesn't exit".format(queue_id)) 
+        director   = Director.objects.get(pk= queue.Director.id)
+        customer   = Customer.objects.get(pk=director.Customer.id)
+        categories = Category.objects.all().filter(Queue_id=queue_id)
 
-    director   = Director.objects.get(pk= queue.Director.id)
-    customer   = Customer.objects.get(pk=director.Customer.id)
-    categories = Category.objects.all().filter(Queue_id=queue_id)
+        print(categories)
+        for category in categories:
+            print(category.Name)
 
-    print(categories)
-    for category in categories:
-        print(category.Name)
+        context = {
+            'queue'     : queue,
+            'director'  : director,
+            'customer'  : customer,
+            'categories': categories
+        }
+        # context = {}
 
-    context = {
-        'queue'     : queue,
-        'director'  : director,
-        'customer'  : customer,
-        'categories': categories
-    }
-
-    return render(request, 'guest/guest_beta.html', context) 
+        return render(request, 'guest/guest_beta.html', context) 
 
 
 
@@ -62,3 +66,7 @@ def guest_view_uuid(request, queue_uuid):
 # def guest(request):
 
 #     return render(request, 'guest/guest.html') 
+
+
+def guest_waiting_page(request):
+    return render(request, "guest/waitingPage.html")
