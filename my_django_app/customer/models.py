@@ -1,6 +1,11 @@
 from django.db import models
 import datetime
 import uuid
+import qrcode
+import urllib.parse
+from io import BytesIO
+from django.core.files import File
+from PIL import Image, ImageDraw
 # Create your models here.
 
 
@@ -28,6 +33,18 @@ class Queue(models.Model):
     Director   = models.ForeignKey(Director, on_delete=models.CASCADE)
     queue_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     QRcode     = models.ImageField(upload_to="QRcodes/", null=True, blank=True)
+    def save(self, domain="http://127.0.0.1:8000/", *args, **kwargs):
+        queue_url = urllib.parse.urljoin(domain, 'queue/uuid/{}'.format(str(self.queue_uuid)))
+        qrcode_img = qrcode.make(queue_url)
+        canvas = Image.new('RGB', (560,560), 'white')
+        draw = ImageDraw.Draw(canvas)
+        canvas.paste(qrcode_img)
+        fname = f'(qr_code-{self.queue_uuid}.png'
+        buffer = BytesIO()
+        canvas.save(buffer,'PNG')
+        self.QRcode.save(fname, File(buffer), save=False)
+        canvas.close()
+        super().save(*args,**kwargs)
                 
 class Queueoperator(models.Model):
     FirstName    = models.CharField(max_length=50)
