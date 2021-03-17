@@ -33,10 +33,12 @@ class Queue(models.Model):
     Director   = models.ForeignKey(Director, on_delete=models.CASCADE)
     queue_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     QRcode     = models.ImageField(upload_to="QRcodes/", null=True, blank=True)
+   
     def save(self, domain="http://127.0.0.1:8000/", *args, **kwargs):
         queue_url = urllib.parse.urljoin(domain, 'queue/uuid/{}'.format(str(self.queue_uuid)))
         qrcode_img = qrcode.make(queue_url)
-        canvas = Image.new('RGB', (560,560), 'white')
+        
+        canvas = Image.new('RGB', (450,450), 'white')
         draw = ImageDraw.Draw(canvas)
         canvas.paste(qrcode_img)
         fname = f'(qr_code-{self.queue_uuid}.png'
