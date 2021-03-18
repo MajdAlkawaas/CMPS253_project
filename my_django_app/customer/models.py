@@ -57,7 +57,7 @@ class Queueoperator(models.Model):
     CreatedAt    = models.DateTimeField(auto_now=True)
     Customer     = models.ForeignKey(Customer, on_delete=models.CASCADE)
     Director     = models.ForeignKey(Director, on_delete=models.CASCADE)
-    Queue        = models.ForeignKey(Queue, on_delete=models.CASCADE)
+    Queue        = models.ManyToManyField(Queue)
 
 class Category(models.Model):
     Name      = models.CharField(max_length=50)
