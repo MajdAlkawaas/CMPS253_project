@@ -25,28 +25,29 @@ class Director(models.Model):
     password     = models.CharField(max_length=50)
     CreatedAt    = models.DateTimeField(auto_now=True)
     Customer     = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    director_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    QRcode     = models.ImageField(upload_to="QRcodes/", null=True, blank=True)
+   
+    def save(self, domain="http://127.0.0.1:8000/", *args, **kwargs):
+        director_uuid = urllib.parse.urljoin(domain, 'customer/uuid/{}'.format(str(self.director_uuid)))
+        qrcode_img = qrcode.make(director_uuid)
+        
+        canvas = Image.new('RGB', (450,450), 'white')
+        draw = ImageDraw.Draw(canvas)
+        canvas.paste(qrcode_img)
+        fname = f'(qr_code-{self.director_uuid}.png'
+        buffer = BytesIO()
+        canvas.save(buffer,'PNG')
+        self.QRcode.save(fname, File(buffer), save=False)
+        canvas.close()
+        super().save(*args,**kwargs)
 
 class Queue(models.Model):
     Name       = models.CharField(max_length=50)
     CreatedAt  = models.DateTimeField(auto_now=True)
     Active     = models.BooleanField()
     Director   = models.ForeignKey(Director, on_delete=models.CASCADE)
-    queue_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    QRcode     = models.ImageField(upload_to="QRcodes/", null=True, blank=True)
-   
-    def save(self, domain="http://127.0.0.1:8000/", *args, **kwargs):
-        queue_url = urllib.parse.urljoin(domain, 'queue/uuid/{}'.format(str(self.queue_uuid)))
-        qrcode_img = qrcode.make(queue_url)
-        
-        canvas = Image.new('RGB', (450,450), 'white')
-        draw = ImageDraw.Draw(canvas)
-        canvas.paste(qrcode_img)
-        fname = f'(qr_code-{self.queue_uuid}.png'
-        buffer = BytesIO()
-        canvas.save(buffer,'PNG')
-        self.QRcode.save(fname, File(buffer), save=False)
-        canvas.close()
-        super().save(*args,**kwargs)
+    
                 
 class Queueoperator(models.Model):
     FirstName    = models.CharField(max_length=50)
