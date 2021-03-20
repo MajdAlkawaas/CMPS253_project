@@ -2,6 +2,8 @@ from django.shortcuts import render
 from customer.models import Customer,Director, Category, Queue
 from django.http import HttpResponse, Http404
 
+def guest(request):
+    return render(request, 'guest/guest.html') 
 
 def guest_view_id(request, queue_id):
     try:
