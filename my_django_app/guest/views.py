@@ -8,6 +8,8 @@ from io import BytesIO
 from django.core.files import File
 from PIL import Image, ImageDraw
 
+def guest(request):
+    return render(request, 'guest/guest.html') 
 
 
 def guest_view_id(request, queue_id):
