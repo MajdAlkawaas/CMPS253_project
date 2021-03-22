@@ -106,10 +106,10 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div class="wizard-label">
                                 <h3 class="wizard-title">
-                                    Address Details
+                                    Customer
                                 </h3>
                                 <div class="wizard-desc">
-                                    Setup Residence Address
+                                    Choose Customer
                                 </div>
                             </div>
                         </div>
@@ -125,25 +125,6 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div class="wizard-label">
                                 <h3 class="wizard-title">
-                                    Make Payment
-                                </h3>
-                                <div class="wizard-desc">
-                                    Use Credit or Debit Cards
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Wizard Step 3 Nav-->
-
-                    <!--begin::Wizard Step 4 Nav-->
-                    <div class="wizard-step" data-wizard-type="step">
-                        <div class="wizard-wrapper">
-                            <div class="wizard-icon">
-                                <i class="wizard-check ki ki-check"></i>
-                                <span class="wizard-number">4</span>
-                            </div>
-                            <div class="wizard-label">
-                                <h3 class="wizard-title">
                                     Completed!
                                 </h3>
                                 <div class="wizard-desc">
@@ -152,7 +133,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                         </div>
                     </div>
-                    <!--end::Wizard Step 4 Nav-->
+                    <!--end::Wizard Step 3 Nav-->
                 </div>
                 <!--end::Wizard Steps-->
             </div>
@@ -185,7 +166,9 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="login-form login-form-signup">
                 <!--begin::Form-->
                 <form method="POST" class="form" novalidate="novalidate" id="kt_login_signup_form">
+
                     {% csrf_token %}
+                    {{ form.non_field_errors }}
                     <!--begin: Wizard Step 1-->
                     <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
                         <!--begin::Title-->
@@ -203,8 +186,11 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="col-xl-6">
                                 <!--begin::Input-->
                                 <div class="form-group">
+                                    {% comment %} {{ form.FirstName.errors }} {% endcomment %}
                                     <label class="font-size-h6 font-weight-bolder text-dark">First Name</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="fname" placeholder="First Name" value="" />
+                                    {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="fname" placeholder="First Name" value="" /> {% endcomment %}
+                                    {{ form.FirstName }}
+                                    
                                 </div>
                                 <!--end::Input-->
                             </div>
@@ -212,7 +198,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <!--begin::Input-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Last Name</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="lname" placeholder="Last Name" value="" />
+                                    {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="lname" placeholder="Last Name" value="" /> {% endcomment %}
+                                    {{ form.LastName }}
                                 </div>
                                 <!--end::Input-->
                             </div>
@@ -224,7 +211,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <!--begin::Input-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Username</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="username" placeholder="User Name" value="" />
+                                    {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="username" placeholder="User Name" value="" /> {% endcomment %}
+                                    {{ form.username }}
                                 </div>
                                 <!--end::Input-->
                             </div>
@@ -232,7 +220,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <!--begin::Input-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="email" placeholder="Email Address" value="" />
+                                    {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="email" placeholder="Email Address" value="" /> {% endcomment %}
+                                    {{ form.EmailAddress }}
                                 </div>
                                 <!--end::Input-->
                             </div>
@@ -250,7 +239,8 @@ License: You must have a valid license purchased only from themeforest(the above
                         <!--begin::Form Group-->
                         <div class="form-group">
                             <label class="font-size-h6 font-weight-bolder text-dark">Password</label>                            
-                            <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"  name="password" autocomplete="off" />    
+                            {% comment %} <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"  name="password" autocomplete="off" />     {% endcomment %}
+                            {{form.password}}
                         </div>
                         <!--end::Form Group-->
 
@@ -259,46 +249,17 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     <div class="pb-5" data-wizard-type="step-content">
                         <div class="pt-lg-0 pt-5 pb-15">
-                            <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Customer Information</h3>
-                            <div class="text-muted font-weight-bold font-size-h4">
-                                Have a Different Address ?
-                                <a href="#" class="text-primary font-weight-bolder">Add Address</a>
-                            </div>
+                            <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Choose Customer</h3>
                         </div>
 
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Name</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="Name" placeholder="Name" value="" />
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Contact First Name</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="ContactFirstName" placeholder="Contact First Name" value="" />
-                                </div>
-                            </div>
-                        </div>
+                        
 
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Contact Last Name</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="ContactLastName" placeholder="Contact Last Name" value="" />
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Email Address</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="EmailAddress" placeholder="Email Address" value="" />
-                                </div>
-                            </div>
-                        </div>
+                        
                         
                         <div class="form-group">
-                            <label class="font-size-h6 font-weight-bolder text-dark">Phone Number</label>                            
-                            <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"  name="PhoneNumber" placeholder="Phone Number" value="" />    
+                            <label class="font-size-h6 font-weight-bolder text-dark">Customer</label>
+                            {{form.Customer}}
+                             
                         </div>
 
                             </div>
@@ -306,80 +267,9 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div> 
                     <!--end: Wizard Step 2-->
 
+                    
+
                     <!--begin: Wizard Step 3-->
-                    <div class="pb-5" data-wizard-type="step-content">
-                        <!--begin::Title-->
-                        <div class="pt-lg-0 pt-5 pb-15">
-                            <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Payment Details</h3>
-                            <div class="text-muted font-weight-bold font-size-h4">
-                                Enter your Payment Details
-                            </div>
-                        </div>
-                        <!--end::Title-->
-
-                        <!--begin::Row-->
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <!--begin::Input-->
-                                <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Name on Card</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="ccname" placeholder="Card Name" value="John Wick" />
-                                    <span class="form-text text-muted">Please enter your Card Name.</span>
-                                </div>
-                                <!--end::Input-->
-                            </div>
-                            <div class="col-xl-6">
-                                <!--begin::Input-->
-                                <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Card Number</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="ccnumber" placeholder="Card Number" value="4444 3333 2222 1111"  />
-                                    <span class="form-text text-muted">Please enter your Address.</span>
-                                </div>
-                                <!--end::Input-->
-                            </div>
-                        </div>
-                        <!--end::Row-->
-
-                        <!--begin::Row-->
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <!--begin::Input-->
-                                <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Card Expiry Month</label>
-                                    <input type="number" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="ccmonth" placeholder="Card Expiry Month" value="01"  />
-                                    <span class="form-text text-muted">Please enter your Card Expiry Month.</span>
-                                </div>
-                                <!--end::Input-->
-                            </div>
-                            <div class="col-xl-6">
-                                <!--begin::Input-->
-                                <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Card Expiry Year</label>
-                                    <input type="number" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="ccyear" placeholder="Card Expire Year" value="21" />
-                                    <span class="form-text text-muted">Please enter your Card Expiry Year.</span>
-                                </div>
-                                <!--end::Input-->
-                            </div>
-                        </div>
-                        <!--end::Row-->
-
-                        <!--begin::Row-->
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <!--begin::Input-->
-                                <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Card CVV Number</label>
-                                    <input type="number" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="cccvv" placeholder="Card CVV Number" value="123"  />
-                                    <span class="form-text text-muted">Please enter your Card CVV Number.</span>
-                                </div>
-                                <!--end::Input-->
-                            </div>
-                        </div>
-                        <!--end::Row-->
-                    </div>
-                    <!--end: Wizard Step 3-->
-
-                    <!--begin: Wizard Step 4-->
                     <div class="pb-5" data-wizard-type="step-content">
                         <!--begin::Title-->
                         <div class="pt-lg-0 pt-5 pb-15">
@@ -422,7 +312,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                         <!--end::Section-->
                     </div>
-                    <!--end: Wizard Step 4-->
+                    <!--end: Wizard Step 3-->
 
                     <!--begin: Wizard Actions-->
                     <div class="d-flex justify-content-between pt-3">
