@@ -121,7 +121,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'queuemakerdb',
+            'NAME': 'projectdb',
             'USER': 'root',
             'PASSWORD': '',
             'HOST': 'localhost',

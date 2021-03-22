@@ -4,7 +4,7 @@ import datetime
 
 class Guest(models.Model):
     PhoneNumber = models.CharField(max_length=50)
-    WalkedAway = models.BooleanField()
+    WalkedAway = models.BooleanField(null=True)
     Kickedout  = models.BooleanField()
     Served     = models.BooleanField()
     CreatedAt  = models.DateTimeField(auto_now=True)
