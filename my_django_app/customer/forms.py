@@ -47,3 +47,29 @@ class SingupForm(forms.Form):
         attrs={
                 'class' : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
             }))
+    favorite_fruit = forms.CharField(widget=forms.Select(choices=FRUIT_CHOICES,
+                                        attrs={
+                                            
+                                        } ))
+                                        
+
+
+
+class signinForm(forms.Form):
+    EmailAddress    = forms.EmailField(max_length=250,
+                                    widget=forms.EmailInput(
+                                        attrs={
+                                            'type'       : 'email',
+                                            'class'      : 'form-control h-auto py-7 px-6 rounded-lg border-0',
+                                            'placeholder': 'Email Address'
+                                        }
+                                    ))
+    
+    password        = forms.CharField(max_length=50,
+                                      widget=forms.PasswordInput(
+                                          attrs={
+                                              'type'            : 'password',
+                                              'class'           : 'form-control h-auto py-7 px-6 rounded-lg border-0',
+                                              'autocomplete'    : 'off'
+                                          }
+                                      ))
