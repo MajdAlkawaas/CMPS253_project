@@ -47,10 +47,6 @@ class SingupForm(forms.Form):
         attrs={
                 'class' : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
             }))
-    favorite_fruit = forms.CharField(widget=forms.Select(choices=FRUIT_CHOICES,
-                                        attrs={
-                                            
-                                        } ))
                                         
 
 
