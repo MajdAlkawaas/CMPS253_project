@@ -9,17 +9,17 @@
     <title>Document</title>
 
     <!--begin::Global Theme Styles(used by all pages)-->
-    <link rel="stylesheet" href="{%static 'customer/plugins.bundle.css'%}">
-    <link rel="stylesheet" href="{%static 'customer/prismjs.bundle.css'%}">
-    <link rel="stylesheet" href="{%static 'customer/style.bundle.css'%}">
+    <link rel="stylesheet" href="{%static 'guest/plugins.bundle.css'%}">
+    <link rel="stylesheet" href="{%static 'guest/prismjs.bundle.css'%}">
+    <link rel="stylesheet" href="{%static 'guest/style.bundle.css'%}">
     <!--end::Global Theme Styles-->
 
     <!--begin::Layout Themes(used by all pages)-->
 
-    <link rel="stylesheet" href="{%static 'customer/dark.css'%}">
-    <link rel="stylesheet" href="{%static 'customer/dark1.css'%}">
-    <link rel="stylesheet" href="{%static 'customer/light.css'%}">
-    <link rel="stylesheet" href="{%static 'cthe exampustomer/light1.css'%}">
+    <link rel="stylesheet" href="{%static 'guest/dark.css'%}">
+    <link rel="stylesheet" href="{%static 'guest/dark1.css'%}">
+    <link rel="stylesheet" href="{%static 'guest/light.css'%}">
+    <link rel="stylesheet" href="{%static 'guest/light1.css'%}">
     <!--end::Layout Themes-->
 
 </head>
@@ -37,22 +37,354 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form method="POST">
+        <form method="POST" class="form" id="kt_form_1">
             {% csrf_token %}
             <div class="card-body">
 
+                <!--begin: Code-->
+                <div class="example-code mb-10">
+                    <ul class="example-nav nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-2x">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#example_code_html">HTML</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#example_code_js">JS</a>
+                        </li>
+                    </ul>
+                    <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="example_code_html" role="tabpanel">
+                            <div class="example-highlight">
+                                <pre style="height:400px"><code class="language-html">
+								&lt;form class=&quot;form&quot; id=&quot;kt_form_1&quot;&gt;
+									&lt;div class=&quot;form-group row&quot;&gt;
+										&lt;label class=&quot;col-form-label text-right col-lg-3 col-sm-12&quot;&gt;Email *&lt;/label&gt;
+										&lt;div class=&quot;col-lg-9 col-md-9 col-sm-12&quot;&gt;
+											&lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;email&quot; placeholder=&quot;Enter your email&quot;/&gt;
+											&lt;span class=&quot;form-text text-muted&quot;&gt;We\ll never share your email with anyone else.&lt;/span&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+
+									&lt;div class=&quot;form-group row&quot;&gt;
+										&lt;label class=&quot;col-form-label text-right col-lg-3 col-sm-12&quot;&gt;URL *&lt;/label&gt;
+										&lt;div class=&quot;col-lg-9 col-md-9 col-sm-12&quot;&gt;
+											&lt;div class=&quot;input-group&quot;&gt;
+												&lt;div class=&quot;input-group-prepend&quot;&gt;
+													&lt;span class=&quot;input-group-text&quot;&gt;
+														&lt;i class=&quot;flaticon2-website&quot;&gt;&lt;/i&gt;
+													&lt;/span&gt;
+												&lt;/div&gt;
+												&lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;url&quot; placeholder=&quot;Enter your url&quot;/&gt;
+											&lt;/div&gt;
+											&lt;span class=&quot;form-text text-muted&quot;&gt;Please enter your website URL.&lt;/span&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+
+									&lt;div class=&quot;form-group row&quot;&gt;
+										&lt;label class=&quot;col-form-label text-right col-lg-3 col-sm-12&quot;&gt;Digits&lt;/label&gt;
+										&lt;div class=&quot;col-lg-9 col-md-9 col-sm-12&quot;&gt;
+											&lt;div class=&quot;input-group&quot;&gt;
+												&lt;div class=&quot;input-group-prepend&quot;&gt;
+													&lt;span class=&quot;input-group-text&quot;&gt;&lt;i class=&quot;flaticon2-browser&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+												&lt;/div&gt;
+												&lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;digits&quot; placeholder=&quot;Enter digits&quot;/&gt;
+											&lt;/div&gt;
+											&lt;span class=&quot;form-text text-muted&quot;&gt;Please enter only digits&lt;/span&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+
+									&lt;div class=&quot;form-group row&quot;&gt;
+										&lt;label class=&quot;col-form-label text-right col-lg-3 col-sm-12&quot;&gt;Credit Card&lt;/label&gt;
+										&lt;div class=&quot;col-lg-9 col-md-9 col-sm-12&quot;&gt;
+											&lt;div class=&quot;input-group&quot;&gt;
+												&lt;div class=&quot;input-group-prepend&quot;&gt;
+													&lt;span class=&quot;input-group-text&quot; &gt;&lt;i class=&quot;flaticon-price-tag&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+												&lt;/div&gt;
+												&lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;creditcard&quot; placeholder=&quot;Enter card number&quot;/&gt;
+											&lt;/div&gt;
+											&lt;span class=&quot;form-text text-muted&quot;&gt;Please enter your credit card number&lt;/span&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+
+									&lt;div class=&quot;form-group row&quot;&gt;
+										&lt;label class=&quot;col-form-label text-right col-lg-3 col-sm-12&quot;&gt;US Phone&lt;/label&gt;
+										&lt;div class=&quot;col-lg-9 col-md-9 col-sm-12&quot;&gt;
+											&lt;div class=&quot;input-group&quot;&gt;
+												&lt;div class=&quot;input-group-prepend&quot;&gt;
+													&lt;span class=&quot;input-group-text&quot; &gt;&lt;i class=&quot;flaticon2-phone&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+												&lt;/div&gt;
+												&lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;phone&quot; placeholder=&quot;Enter phone&quot;/&gt;
+											&lt;/div&gt;
+											&lt;span class=&quot;form-text text-muted&quot;&gt;Please enter your US phone number&lt;/span&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+
+									&lt;div class=&quot;form-group row&quot;&gt;
+										&lt;label class=&quot;col-form-label text-right col-lg-3 col-sm-12&quot;&gt;Option *&lt;/label&gt;
+										&lt;div class=&quot;col-lg-9 col-md-9 col-sm-12&quot;&gt;
+											&lt;select class=&quot;form-control&quot; name=&quot;option&quot;&gt;
+												&lt;option value=&quot;&quot;&gt;Select&lt;/option&gt;
+												&lt;option&gt;1&lt;/option&gt;
+												&lt;option&gt;2&lt;/option&gt;
+												&lt;option&gt;3&lt;/option&gt;
+												&lt;option&gt;4&lt;/option&gt;
+												&lt;option&gt;5&lt;/option&gt;
+											&lt;/select&gt;
+											&lt;span class=&quot;form-text text-muted&quot;&gt;Please select an option.&lt;/span&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+
+									&lt;div class=&quot;form-group row&quot;&gt;
+										&lt;label class=&quot;col-form-label text-right col-lg-3 col-sm-12&quot;&gt;Options *&lt;/label&gt;
+										&lt;div class=&quot;col-lg-9 col-md-9 col-sm-12&quot;&gt;
+											&lt;select class=&quot;form-control&quot; name=&quot;options&quot; multiple size=&quot;7&quot;&gt;
+												&lt;option&gt;Option 1&lt;/option&gt;
+												&lt;option&gt;Option 2&lt;/option&gt;
+												&lt;option&gt;Option 3&lt;/option&gt;
+												&lt;option&gt;Option 4&lt;/option&gt;
+												&lt;option&gt;Option 5&lt;/option&gt;
+												&lt;option&gt;Option 6&lt;/option&gt;
+												&lt;option&gt;Option 7&lt;/option&gt;
+											&lt;/select&gt;
+											&lt;span class=&quot;form-text text-muted&quot;&gt;Please select at least 2 or maximum 5 options&lt;/span&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+
+									&lt;div class=&quot;form-group row&quot;&gt;
+										&lt;label class=&quot;col-form-label text-right col-lg-3 col-sm-12&quot;&gt;Memo *&lt;/label&gt;
+										&lt;div class=&quot;col-lg-9 col-md-9 col-sm-12&quot;&gt;
+											&lt;textarea class=&quot;form-control&quot; name=&quot;memo&quot; placeholder=&quot;Enter a menu&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;
+											&lt;span class=&quot;form-text text-muted&quot;&gt;Please enter a menu within text length range 50 and 100.&lt;/span&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+
+									&lt;div class=&quot;separator separator-dashed my-10&quot;&gt;&lt;/div&gt;
+
+									&lt;div class=&quot;form-group row&quot;&gt;
+										&lt;label class=&quot;col-form-label text-right col-lg-3 col-sm-12&quot;&gt;Checkbox *&lt;/label&gt;
+										&lt;div class=&quot;col-lg-9 col-md-9 col-sm-12&quot;&gt;
+											&lt;div class=&quot;form-check checkbox-inline&quot;&gt;
+												&lt;label class=&quot;checkbox checkbox-outline&quot;&gt;
+													&lt;input type=&quot;checkbox&quot; name=&quot;checkbox&quot;/&gt;
+													&lt;span&gt;&lt;/span&gt;
+												&lt;/label&gt;
+											&lt;/div&gt;
+											&lt;span class=&quot;form-text text-muted&quot;&gt;Please tick the checkbox&lt;/span&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+
+									&lt;div class=&quot;form-group row&quot;&gt;
+										&lt;label class=&quot;col-form-label text-right col-lg-3 col-sm-12&quot;&gt;Checkboxes *&lt;/label&gt;
+										&lt;div class=&quot;col-lg-9 col-md-9 col-sm-12&quot;&gt;
+											&lt;div class=&quot;form-check checkbox-list&quot;&gt;
+												&lt;label class=&quot;checkbox checkbox-outline&quot;&gt;
+													&lt;input type=&quot;checkbox&quot; name=&quot;checkboxes&quot;/&gt;
+													&lt;span&gt;&lt;/span&gt;
+													Option 1
+												&lt;/label&gt;
+												&lt;label class=&quot;checkbox checkbox-outline&quot;&gt;
+													&lt;input type=&quot;checkbox&quot; name=&quot;checkboxes&quot;/&gt;
+													&lt;span&gt;&lt;/span&gt;
+													Option 2
+												&lt;/label&gt;
+												&lt;label class=&quot;checkbox checkbox-outline&quot;&gt;
+													&lt;input type=&quot;checkbox&quot; name=&quot;checkboxes&quot;/&gt;
+													&lt;span&gt;&lt;/span&gt;
+													Option 3
+												&lt;/label&gt;
+											&lt;/div&gt;
+											&lt;span class=&quot;form-text text-muted&quot;&gt;Please select at lease 1 and maximum 2 options&lt;/span&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+
+									&lt;div class=&quot;form-group row&quot;&gt;
+										&lt;label class=&quot;col-form-label text-right col-lg-3 col-sm-12&quot;&gt;Radios *&lt;/label&gt;
+										&lt;div class=&quot;col-lg-9 col-md-9 col-sm-12&quot;&gt;
+											&lt;div class=&quot;form-check radio-inline&quot;&gt;
+												&lt;label class=&quot;radio radio-outline&quot;&gt;
+													&lt;input type=&quot;checkbox&quot; name=&quot;radios&quot;/&gt;
+													&lt;span&gt;&lt;/span&gt;
+													Option 1
+												&lt;/label&gt;
+												&lt;label class=&quot;radio radio-outline&quot;&gt;
+													&lt;input type=&quot;checkbox&quot; name=&quot;radios&quot;/&gt;
+													&lt;span&gt;&lt;/span&gt;
+													Option 2
+												&lt;/label&gt;
+												&lt;label class=&quot;radio radio-outline&quot;&gt;
+													&lt;input type=&quot;radio&quot; name=&quot;radios&quot;/&gt;
+													&lt;span&gt;&lt;/span&gt;
+													Option 3
+												&lt;/label&gt;
+											&lt;/div&gt;
+											&lt;span class=&quot;form-text text-muted&quot;&gt;Please select an option&lt;/span&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+
+									&lt;div class=&quot;row&quot;&gt;
+										&lt;div class=&quot;col-lg-9 ml-lg-auto&quot;&gt;
+											&lt;button type=&quot;submit&quot; class=&quot;btn btn-primary font-weight-bold mr-2&quot;&gt;Validate&lt;/button&gt;
+											&lt;button type=&quot;reset&quot; class=&quot;btn btn-light-primary font-weight-bold&quot;&gt;Cancel&lt;/button&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+								&lt;/form&gt;
+								</code></pre>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="example_code_js">
+                            <div class="example-highlight">
+                                <pre style="height:400px"><code class="language-js">
+								FormValidation.formValidation(
+									document.getElementById('kt_form_1'),
+									{
+										fields: {
+											email: {
+												validators: {
+													notEmpty: {
+														message: 'Email is required'
+													},
+													emailAddress: {
+														message: 'The value is not a valid email address'
+													}
+												}
+											},
+
+											url: {
+												validators: {
+													notEmpty: {
+														message: 'Website URL is required'
+													},
+													uri: {
+														message: 'The website address is not valid'
+													}
+												}
+											},
+
+											digits: {
+												validators: {
+													notEmpty: {
+														message: 'Digits is required'
+													},
+													digits: {
+														message: 'The velue is not a valid digits'
+													}
+												}
+											},
+
+											creditcard: {
+												validators: {
+													notEmpty: {
+														message: 'Credit card number is required'
+													},
+													creditCard: {
+														message: 'The credit card number is not valid'
+													}
+												}
+											},
+
+											phone: {
+												validators: {
+													notEmpty: {
+														message: 'US phone number is required'
+													},
+													phone: {
+														country: 'US',
+														message: 'The value is not a valid US phone number'
+													}
+												}
+											},
+
+											option: {
+												validators: {
+													notEmpty: {
+														message: 'Please select an option'
+													}
+												}
+											},
+
+											options: {
+												validators: {
+													choice: {
+														min:2,
+														max:5,
+														message: 'Please select at least 2 and maximum 5 options'
+													}
+												}
+											},
+
+											memo: {
+												validators: {
+													notEmpty: {
+														message: 'Please enter memo text'
+													},
+													stringLength: {
+														min:50,
+														max:100,
+														message: 'Please enter a menu within text length range 50 and 100'
+													}
+												}
+											},
+
+											checkbox: {
+												validators: {
+													choice: {
+														min:1,
+														message: 'Please kindly check this'
+													}
+												}
+											},
+
+											checkboxes: {
+												validators: {
+													choice: {
+														min:2,
+														max:5,
+														message: 'Please check at least 1 and maximum 2 options'
+													}
+												}
+											},
+
+											radios: {
+												validators: {
+													choice: {
+														min:1,
+														message: 'Please kindly check this'
+													}
+												}
+											},
+										},
+
+										plugins: {
+											trigger: new FormValidation.plugins.Trigger(),
+											// Bootstrap Framework Integration
+											bootstrap: new FormValidation.plugins.Bootstrap(),
+											// Validate fields when clicking the Submit button
+											submitButton: new FormValidation.plugins.SubmitButton(),
+						            		// Submit the form when all fields are valid
+											defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+										}
+									}
+								);
+								</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end: Code-->
+                
                 <div class="form-group">
                     <label>Name </label>
-                    <input type="text" class="form-control" placeholder="Enter name" />
+                    <input type="text" class="form-control" name="name" placeholder="Enter name" />
 
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Phone Number </label>
-                    <input type="tel" class="form-control" name="PhoneNumber" id="exampleInputPassword1" placeholder="Enter phonenumber" />
+                    <input type="tel" class="form-control" name="PhoneNumber" id="exampleInputPassword1"
+                        placeholder="Enter phonenumber" pattern="^\d{4}-\d{3}-\d{4}$"/>
                 </div>
                 <div class="form-group">
                     <label for="exampleSelect2">Categories </label>
-                    <select multiple="" class="form-control" id="exampleSelect2" name="Category">
+                    <select multiple="" class="form-control" id="exampleSelect2" name="options">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -60,82 +392,7 @@
                         <option>5</option>
                     </select>
                 </div>
-                <!--begin: Code-->
-                <div class="example-code mt-10">
-                    <div class="example-highlight">
-                        <pre style="height:400px"><code class="language-html">
-							&lt;div class=&quot;card card-custom&quot;&gt;
-								&lt;div class=&quot;card-header&quot;&gt;
-									&lt;h3 class=&quot;card-title&quot;&gt;
-										Base Controls
-									&lt;/h3&gt;
-									&lt;div class=&quot;card-toolbar&quot;&gt;
-										&lt;div class=&quot;example-tools justify-content-center&quot;&gt;
-											&lt;span class=&quot;example-toggle&quot; data-toggle=&quot;tooltip&quot; title=&quot;View code&quot;&gt;&lt;/span&gt;
-											&lt;span class=&quot;example-copy&quot; data-toggle=&quot;tooltip&quot; title=&quot;Copy code&quot;&gt;&lt;/span&gt;
-										&lt;/div&gt;
-									&lt;/div&gt;
-								&lt;/div&gt;
-								&lt;!--begin::Form--&gt;
-								&lt;form&gt;
-									&lt;div class=&quot;card-body&quot;&gt;
-										&lt;div class=&quot;form-group mb-8&quot;&gt;
-											&lt;div class=&quot;alert alert-custom alert-default&quot; role=&quot;alert&quot;&gt;
-												&lt;div class=&quot;alert-icon&quot;&gt;&lt;i class=&quot;flaticon-warning text-primary&quot;&gt;&lt;/i&gt;&lt;/div&gt;
-												&lt;div class=&quot;alert-text&quot;&gt;
-													The example form below demonstrates common HTML form elements that receive updated styles from Bootstrap with additional classes.
-												&lt;/div&gt;
-											&lt;/div&gt;
-										&lt;/div&gt;
-										&lt;div class=&quot;form-group&quot;&gt;
-											&lt;label&gt;Email address &lt;span class=&quot;text-danger&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
-											&lt;input type=&quot;email&quot; class=&quot;form-control&quot;  placeholder=&quot;Enter email&quot;/&gt;
-											&lt;span class=&quot;form-text text-muted&quot;&gt;We'll never share your email with anyone else.&lt;/span&gt;
-										&lt;/div&gt;
-										&lt;div class=&quot;form-group&quot;&gt;
-											&lt;label for=&quot;exampleInputPassword1&quot;&gt;Password &lt;span class=&quot;text-danger&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
-											&lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;exampleInputPassword1&quot; placeholder=&quot;Password&quot;/&gt;
-										&lt;/div&gt;
-										&lt;div class=&quot;form-group&quot;&gt;
-											&lt;label&gt;Static:&lt;/label&gt;
-											&lt;p class=&quot;form-control-plaintext text-muted&quot;&gt;email@example.com&lt;/p&gt;
-										&lt;/div&gt;
-										&lt;div class=&quot;form-group&quot;&gt;
-											&lt;label for=&quot;exampleSelect1&quot;&gt;Example select &lt;span class=&quot;text-danger&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
-											&lt;select class=&quot;form-control&quot; id=&quot;exampleSelect1&quot;&gt;
-												&lt;option&gt;1&lt;/option&gt;
-												&lt;option&gt;2&lt;/option&gt;
-												&lt;option&gt;3&lt;/option&gt;
-												&lt;option&gt;4&lt;/option&gt;
-												&lt;option&gt;5&lt;/option&gt;
-											&lt;/select&gt;
-										&lt;/div&gt;
-										&lt;div class=&quot;form-group&quot;&gt;
-											&lt;label for=&quot;exampleSelect2&quot;&gt;Example multiple select &lt;span class=&quot;text-danger&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
-											&lt;select multiple=&quot;&quot; class=&quot;form-control&quot; id=&quot;exampleSelect2&quot;&gt;
-												&lt;option&gt;1&lt;/option&gt;
-												&lt;option&gt;2&lt;/option&gt;
-												&lt;option&gt;3&lt;/option&gt;
-												&lt;option&gt;4&lt;/option&gt;
-												&lt;option&gt;5&lt;/option&gt;
-											&lt;/select&gt;
-										&lt;/div&gt;
-										&lt;div class=&quot;form-group mb-1&quot;&gt;
-											&lt;label for=&quot;exampleTextarea&quot;&gt;Example textarea &lt;span class=&quot;text-danger&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
-											&lt;textarea class=&quot;form-control&quot; id=&quot;exampleTextarea&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;
-										&lt;/div&gt;
-									&lt;/div&gt;
-									&lt;div class=&quot;card-footer&quot;&gt;
-										&lt;button type=&quot;reset&quot; class=&quot;btn btn-primary mr-2&quot;&gt;Submit&lt;/button&gt;
-										&lt;button type=&quot;reset&quot; class=&quot;btn btn-secondary&quot;&gt;Cancel&lt;/button&gt;
-									&lt;/div&gt;
-								&lt;/form&gt;
-								&lt;!--end::Form--&gt;
-							&lt;/div&gt;
-						</code></pre>
-                    </div>
-                </div>
-                <!--end: Code-->
+
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
@@ -209,10 +466,10 @@
     <!--end::Global Config-->
 
     <!--begin::Global Theme Bundle(used by all pages)-->
-    <script src="{%static 'customer/plugins.bundle.js'%}"></script>
-    <script src="{%static 'customer/prismjs.bundle.js'%}"></script>
-    <script src="{%static 'customer/scripts.bundle.js'%}"></script>
-    <script src="{%static 'customer/tagify.js'%}"></script>
+    <script src="{%static 'guest/plugins.bundle.js'%}"></script>
+    <script src="{%static 'guest/prismjs.bundle.js'%}"></script>
+    <script src="{%static 'guest/scripts.bundle.js'%}"></script>
+    <script src="{%static 'guest/form-controls.js'%}"></script>
     <!--end::Global Theme Bundle-->
 </body>
 <!--end::Body-->
