@@ -63,6 +63,13 @@ var KTWizard3 = function () {
 							}
 						}
 					},
+					categories: {
+						validators: {
+							notEmpty: {
+								message: 'Categories are required when creating a queue'
+							}
+						}
+					},
 					postcode: {
 						validators: {
 							notEmpty: {
