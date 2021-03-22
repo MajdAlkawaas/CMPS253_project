@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Director, Customer, Queue
 from django.contrib.auth import authenticate, login, logout
 import json
-from customer.forms import SingupForm
+from customer.forms import SingupForm, signinForm
 
 
 def signup(request):
@@ -25,20 +25,9 @@ def signup(request):
 
 def signin(request):
     if request.method == "POST":
-        value = request.POST
-        username = value.get('username')
-        password = value.get('password')
-        # username = request.POST.get('username')
-        # password = request.POST.get('password')
+        form = signinForm(request.POST)
 
-        user = authenticate(request, username=username, password=password)
-        print(user)
-            
-        if user is not None:
-            login(request, user)
-            return redirect("queueSetup-customer-page")
-        else:
-            return render(request, "customer/signin.html")
+        return redirect("queueSetup-customer-page")
     
     return render(request, 'customer/signin.html')
 
