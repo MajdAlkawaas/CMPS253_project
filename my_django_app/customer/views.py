@@ -1,26 +1,27 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Director, Customer, Queue
 from django.contrib.auth import authenticate, login, logout
 import json
+from customer.forms import SingupForm
+
 
 def signup(request):
-    if request.method == "POST":
-        value = request.POST
-        customer01 = Customer(Name             = value.get('Name'),
-                              ContactFirstName = value.get('ContactFirstName'),
-                              ContactLastName  = value.get('ContactLastName'),
-                              EmailAddress     = value.get('EmailAddress'),
-                              PhoneNumber      = value.get('PhoneNumber'))
-        customer01.save()
-        director01 = Director(FirstName    = value.get('fname'),
-                              LastName     = value.get('lname'),
-                              username     = value.get('username'),
-                              EmailAddress = value.get('email'),
-                              password     = value.get('password'),
-                              Customer     = customer01)
-        director01.save()
-        return redirect("signin-customer-page")
-    return render(request, 'customer/signup.html')
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SingupForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            Director.objects.create(**form.cleaned_data)
+            # redirect to a new URL:
+            return HttpResponseRedirect('/signin/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = SingupForm()
+
+    return render(request, 'customer/signup.html', {'form': form})
+
 
 def signin(request):
     if request.method == "POST":
