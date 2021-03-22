@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from customer.models import Customer,Director, Category, Queue
+from guest.models import Guest
 from django.http import HttpResponse, Http404
 from django.db import models
 import qrcode
@@ -9,8 +10,13 @@ from django.core.files import File
 from PIL import Image, ImageDraw
 
 def guest(request):
+    if request.method == "POST":
+        value = request.POST
+        guest01 = Guest(PhoneNumber       = value.get('PhoneNumber')
+        )
+        guest01.save()
+        return redirect("guest-waiting-page")
     return render(request, 'guest/guest.html') 
-
 
 def guest_view_id(request, queue_id):
     if request.method == "POST":
