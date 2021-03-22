@@ -9,7 +9,7 @@ media
 # Backup files # 
 *.bak 
 
-
+QRcode/
 
 # Environments 
 .env 
