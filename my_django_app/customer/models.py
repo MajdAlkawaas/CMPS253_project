@@ -17,6 +17,10 @@ class Customer(models.Model):
     PhoneNumber      = models.CharField(max_length=50)
     CreatedAt        = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.Name
+    
+
 class Director(models.Model):
     FirstName    = models.CharField(max_length=50)
     LastName     = models.CharField(max_length=50)
