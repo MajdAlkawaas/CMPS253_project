@@ -1,11 +1,5 @@
 from django import forms
-
-FRUIT_CHOICES= [
-    ('orange', 'Oranges'),
-    ('cantaloupe', 'Cantaloupes'),
-    ('mango', 'Mangoes'),
-    ('honeydew', 'Honeydews'),
-    ]
+from .models import Customer
 
 
 class SingupForm(forms.Form):
@@ -49,8 +43,7 @@ class SingupForm(forms.Form):
                                             "autocomplete": "off"
                                         }))
 
-    favorite_fruit = forms.CharField(widget=forms.Select(choices=FRUIT_CHOICES,
-                                        attrs={
-                                            
-                                        } ))
-    
+    Customer = forms.ModelChoiceField(queryset=Customer.objects.all(),empty_label="Select Customer", widget=forms.Select(
+        attrs={
+                'class' : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
+            }))
