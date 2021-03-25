@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import Director, Customer, Queue
+from .models import Director, Customer, Queue, Category
 from django.contrib.auth import authenticate, login, logout
 import json
 from customer.forms import SingupForm, signinForm
@@ -37,13 +37,21 @@ def forgot(request):
 def queueSetup(request):
     if request.method == "POST":
         value = request.POST
-        user = request.Director
-        queue01 = Queue(Name=value.get("queueName"), Director=user, Active=False)
-        queue01.save()
+        category = value.get("categories")
+        category = category.split(',')
 
+        queue = Queue(
+            Name = value.get('queueName'),
+            Active = False,
+        )
+        queue.save()
 
-        tags = json.loads(request.POST.get("categories"))
-        print(tags)
+        for i in range(len(category)):
+            cat = Category(
+                Name = category[i],
+                Queue = queue
+            )
+            cat.save()
 
     return render(request, 'customer/queueSetup.html') 
 
