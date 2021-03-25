@@ -7,6 +7,8 @@ var KTWizard3 = function () {
 	var _formEl;
 	var _wizard;
 	var _validations = [];
+	var formEl = $('#kt_form');
+	var validator;
 
 	// Private functions
 	var initWizard = function () {
@@ -63,173 +65,10 @@ var KTWizard3 = function () {
 							}
 						}
 					},
-					postcode: {
+					categories: {
 						validators: {
 							notEmpty: {
 								message: 'Postcode is required'
-							}
-						}
-					},
-					city: {
-						validators: {
-							notEmpty: {
-								message: 'City is required'
-							}
-						}
-					},
-					state: {
-						validators: {
-							notEmpty: {
-								message: 'State is required'
-							}
-						}
-					},
-					country: {
-						validators: {
-							notEmpty: {
-								message: 'Country is required'
-							}
-						}
-					}
-				},
-				plugins: {
-					trigger: new FormValidation.plugins.Trigger(),
-					bootstrap: new FormValidation.plugins.Bootstrap()
-				}
-			}
-		));
-
-		// Step 2
-		_validations.push(FormValidation.formValidation(
-			_formEl,
-			{
-				fields: {
-					package: {
-						validators: {
-							notEmpty: {
-								message: 'Package details is required'
-							}
-						}
-					},
-					weight: {
-						validators: {
-							notEmpty: {
-								message: 'Package weight is required'
-							},
-							digits: {
-								message: 'The value added is not valid'
-							}
-						}
-					},
-					width: {
-						validators: {
-							notEmpty: {
-								message: 'Package width is required'
-							},
-							digits: {
-								message: 'The value added is not valid'
-							}
-						}
-					},
-					height: {
-						validators: {
-							notEmpty: {
-								message: 'Package height is required'
-							},
-							digits: {
-								message: 'The value added is not valid'
-							}
-						}
-					},
-					packagelength: {
-						validators: {
-							notEmpty: {
-								message: 'Package length is required'
-							},
-							digits: {
-								message: 'The value added is not valid'
-							}
-						}
-					}
-				},
-				plugins: {
-					trigger: new FormValidation.plugins.Trigger(),
-					bootstrap: new FormValidation.plugins.Bootstrap()
-				}
-			}
-		));
-
-		// Step 3
-		_validations.push(FormValidation.formValidation(
-			_formEl,
-			{
-				fields: {
-					delivery: {
-						validators: {
-							notEmpty: {
-								message: 'Delivery type is required'
-							}
-						}
-					},
-					packaging: {
-						validators: {
-							notEmpty: {
-								message: 'Packaging type is required'
-							}
-						}
-					},
-					preferreddelivery: {
-						validators: {
-							notEmpty: {
-								message: 'Preferred delivery window is required'
-							}
-						}
-					}
-				},
-				plugins: {
-					trigger: new FormValidation.plugins.Trigger(),
-					bootstrap: new FormValidation.plugins.Bootstrap()
-				}
-			}
-		));
-
-		// Step 4
-		_validations.push(FormValidation.formValidation(
-			_formEl,
-			{
-				fields: {
-					locaddress1: {
-						validators: {
-							notEmpty: {
-								message: 'Address is required'
-							}
-						}
-					},
-					locpostcode: {
-						validators: {
-							notEmpty: {
-								message: 'Postcode is required'
-							}
-						}
-					},
-					loccity: {
-						validators: {
-							notEmpty: {
-								message: 'City is required'
-							}
-						}
-					},
-					locstate: {
-						validators: {
-							notEmpty: {
-								message: 'State is required'
-							}
-						}
-					},
-					loccountry: {
-						validators: {
-							notEmpty: {
-								message: 'Country is required'
 							}
 						}
 					}
@@ -242,6 +81,36 @@ var KTWizard3 = function () {
 		));
 	}
 
+	var initSubmit = function() {
+        var btn = formEl.find('[data-wizard-action="submit"]');
+
+        btn.on('click', function(e) {
+			formEl.submit();
+            // e.preventDefault();
+
+            if (7) {
+                //== See: src\js\framework\base\app.js
+                mApp.progress(btn);
+                //mApp.block(formEl); 
+
+                //== See: http://malsup.com/jquery/form/#ajaxSubmit
+                formEl.ajaxSubmit({
+                    success: function() {
+                        mApp.unprogress(btn);
+                        //mApp.unblock(formEl);
+
+                        swal({
+                            "title": "", 
+                            "text": "The application has been successfully submitted!", 
+                            "type": "success",
+                            "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                        });
+                    }
+                });
+            }
+        });
+    }
+
 	return {
 		// public functions
 		init: function () {
@@ -250,6 +119,7 @@ var KTWizard3 = function () {
 
 			initWizard();
 			initValidation();
+			initSubmit();
 		}
 	};
 }();
@@ -257,3 +127,5 @@ var KTWizard3 = function () {
 jQuery(document).ready(function () {
 	KTWizard3.init();
 });
+
+
