@@ -9,7 +9,7 @@ media
 # Backup files # 
 *.bak 
 
-
+*.png
 
 # Environments 
 .env 

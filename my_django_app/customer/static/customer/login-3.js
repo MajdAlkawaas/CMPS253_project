@@ -18,17 +18,20 @@ var KTLogin = function () {
 				form,
 				{
 					fields: {
-						username: {
-							validators: {
-								notEmpty: {
-									message: 'Username is required'
-								}
-							}
-						},
 						password: {
 							validators: {
 								notEmpty: {
 									message: 'Password is required'
+								}
+							}
+						},
+						EmailAddress: {
+							validators: {
+								notEmpty: {
+									message: 'Email is required'
+								},
+								emailAddress: {
+									message: 'The value is not a valid email address'
 								}
 							}
 						}

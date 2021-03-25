@@ -66,9 +66,10 @@ var KTWizard3 = function () {
 						}
 					},
 					categories: {
+
 						validators: {
 							notEmpty: {
-								message: 'Postcode is required'
+								message: 'Categories are required when creating a queue'
 							}
 						}
 					}
