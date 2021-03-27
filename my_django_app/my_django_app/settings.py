@@ -121,7 +121,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'projectdb',
+            'NAME': 'queuemaker-users-db',
             'USER': 'root',
             'PASSWORD': '',
             'HOST': 'localhost',
@@ -169,3 +169,5 @@ USE_TZ = True
 STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
 # STATIC_DIR = ''
+
+AUTH_USER_MODEL = 'customer.User'
