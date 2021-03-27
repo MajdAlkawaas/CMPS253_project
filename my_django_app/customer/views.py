@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate, login, logout
 import json
 from customer.forms import SingupForm, signinForm
 
-
 def signup(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -19,7 +18,6 @@ def signup(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = SingupForm()
-
     return render(request, 'customer/signup.html', {'form': form})
 
 
@@ -55,11 +53,19 @@ def queueSetup(request):
 
     return render(request, 'customer/queueSetup.html') 
 
+
 def queueManagement(request):
-    return render(request, 'customer/queueManagement.html') 
+    data = Queue.objects.all()
+    context = {"data" : data}
+    return render(request, 'customer/queueManagement.html', context) 
 
 def edit(request):
     return render(request, 'customer/edit.html') 
 
 def home(request):
     return render(request, 'customer/home.html')
+
+
+
+
+

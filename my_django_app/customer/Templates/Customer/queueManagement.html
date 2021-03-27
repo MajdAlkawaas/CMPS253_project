@@ -18,7 +18,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <head>
 	<base href="../../../">
 	<meta charset="utf-8" />
-	<title>Metronic | List Datatable</title>
+	<title>Queue Management Page</title>
 	<meta name="description" content="Contacts datatable listing" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -29,19 +29,19 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
 
-            <!--begin::Global Theme Styles(used by all pages)-->
-            <link rel="stylesheet" href="{%static 'customer/plugins.bundle.css'%}">
-            <link rel="stylesheet" href="{%static 'customer/prismjs.bundle.css'%}">
-            <link rel="stylesheet" href="{%static 'customer/style.bundle.css'%}">
-            <!--end::Global Theme Styles-->
+	<!--begin::Global Theme Styles(used by all pages)-->
+	<link rel="stylesheet" href="{%static 'customer/plugins.bundle.css'%}">
+	<link rel="stylesheet" href="{%static 'customer/prismjs.bundle.css'%}">
+	<link rel="stylesheet" href="{%static 'customer/style.bundle.css'%}">
+	<!--end::Global Theme Styles-->
 
-            <!--begin::Layout Themes(used by all pages)-->
+	<!--begin::Layout Themes(used by all pages)-->
 
-            <link rel="stylesheet" href="{%static 'customer/dark.css'%}">
-            <link rel="stylesheet" href="{%static 'customer/dark1.css'%}">
-            <link rel="stylesheet" href="{%static 'customer/light.css'%}">
-            <link rel="stylesheet" href="{%static 'customer/light1.css'%}">
-            <!--end::Layout Themes-->
+	<link rel="stylesheet" href="{%static 'customer/dark.css'%}">
+	<link rel="stylesheet" href="{%static 'customer/dark1.css'%}">
+	<link rel="stylesheet" href="{%static 'customer/light.css'%}">
+	<link rel="stylesheet" href="{%static 'customer/light1.css'%}">
+	<!--end::Layout Themes-->
 
 
 
@@ -153,7 +153,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										data-menu-toggle="click" aria-haspopup="true"><a href="javascript:;"
 											class="menu-link menu-toggle"><span class="menu-text">Pages</span><i
 												class="menu-arrow"></i></a>
-										
+
 									</li>
 									<li class="menu-item  menu-item-submenu" data-menu-toggle="click"
 										aria-haspopup="true"><a href="javascript:;" class="menu-link menu-toggle"><span
@@ -173,7 +173,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click"
 										aria-haspopup="true"><a href="javascript:;" class="menu-link menu-toggle"><span
 												class="menu-text">Apps</span><i class="menu-arrow"></i></a>
-										
+
 									</li>
 								</ul>
 								<!--end::Header Nav-->
@@ -186,7 +186,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						<div class="topbar">
 
 
-							
+
 
 							<!--begin::User-->
 							<div class="topbar-item">
@@ -213,50 +213,87 @@ License: You must have a valid license purchased only from themeforest(the above
 				<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
 
 
-                    <!--begin::Entry-->
-                    <div class="d-flex flex-column-fluid">
-                        <!--begin::Container-->
-                        <div class=" container ">
-                            <!--begin::Card-->
-                            <div class="card card-custom gutter-b">
-                                <div class="card-body">
-                                    <!--begin: Datatable-->
-                                    <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
-                                    </div>
-                                    <!--end: Datatable-->
-                                </div>
-                            </div>
-                            <!--end::Card-->
+					<!--begin::Entry-->
+					<div class="d-flex flex-column-fluid">
+						<!--begin::Container-->
+						<div class=" container ">
+							<!--begin::Card-->
+							<div class="card card-custom gutter-b">
+								<div class="card-body">
+									<!--begin: Datatable-->
+									<!-- <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"> -->
+									<table id="table" class="display" style="width:100%">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>CreatedAt</th>
+												<th>Active</th>
+												<th>Queue Settings</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for element in data%}
+											<tr>
+												<td>{{element.Name}}</td>
+												<td>{{element.CreatedAt}}</td>
+												<td>{{element.Active}}</td>
+												<td>
+													<a href="/edit" target="_blank">
+														<span class="svg-icon svg-icon-primary svg-icon-2x">
+															<svg
+																xmlns="http://www.w3.org/2000/svg"
+																xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+																height="24px" viewBox="0 0 24 24" version="1.1">
+																<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																	<rect x="0" y="0" width="24" height="24" />
+																	<path
+																		d="M5,8.6862915 L5,5 L8.6862915,5 L11.5857864,2.10050506 L14.4852814,5 L19,5 L19,9.51471863 L21.4852814,12 L19,14.4852814 L19,19 L14.4852814,19 L11.5857864,21.8994949 L8.6862915,19 L5,19 L5,15.3137085 L1.6862915,12 L5,8.6862915 Z M12,15 C13.6568542,15 15,13.6568542 15,12 C15,10.3431458 13.6568542,9 12,9 C10.3431458,9 9,10.3431458 9,12 C9,13.6568542 10.3431458,15 12,15 Z"
+																		fill="#000000" />
+																</g>
+															</svg>
+															<!--end::Svg Icon-->
+														</span>
+													</a>
+												</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+									<!-- </div> -->
+									<!--end: Datatable-->
+								</div>
+							</div>
+							<!--end::Card-->
 
-                            <!--begin::Modal-->
-                            <div class="modal fade" id="kt_datatable_records_fetch_modal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Selected Records</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true"></span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="kt-scroll" data-scroll="true" data-height="200">
-                                                <ul id="kt_apps_user_fetch_records_selected"></ul>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary"
-                                                data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Modal-->
-                        </div>
-                        <!--end::Container-->
-                    </div>
-                    <!--end::Entry-->
-                </div>
+							<!--begin::Modal-->
+							<div class="modal fade" id="kt_datatable_records_fetch_modal" tabindex="-1" role="dialog"
+								aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Selected Records</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true"></span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<div class="kt-scroll" data-scroll="true" data-height="200">
+												<ul id="kt_apps_user_fetch_records_selected"></ul>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-primary"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--end::Modal-->
+						</div>
+						<!--end::Container-->
+					</div>
+					<!--end::Entry-->
+				</div>
 				<!--end::Content-->
 
 				<!--begin::Footer-->
@@ -362,22 +399,27 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!--end::Global Config-->
 
 	<!--begin::Global Theme Bundle(used by all pages)-->
-    <script src="{%static 'customer/plugins.bundle.js'%}"></script>
-    <script src="{%static 'customer/prismjs.bundle.js'%}"></script>
-    <script src="{%static 'customer/scripts.bundle.js'%}"></script>
-    <script src="{%static 'customer/tagify.js'%}"></script>
-    <!--end::Global Theme Bundle-->
+	<script src="{%static 'customer/plugins.bundle.js'%}"></script>
+	<script src="{%static 'customer/prismjs.bundle.js'%}"></script>
+	<script src="{%static 'customer/scripts.bundle.js'%}"></script>
+	<script src="{%static 'customer/tagify.js'%}"></script>
+	<!--end::Global Theme Bundle-->
 
 
-    <!--begin::Page Scripts(used by this page)-->
-    <script src="{%static 'customer/queueManagement.js'%}"></script>
-    <!--end::Page Scripts-->
+	<!--begin::Page Scripts(used by this page)-->
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#table').DataTable();
+
+		});
+	</script>
+	<!-- <script src="{%static 'customer/queueManagement.js'%}"></script> -->
+	<!--end::Page Scripts-->
 	<!--end::Page Scripts-->
 </body>
 <!--end::Body-->
 
 </html>
-
-        
-
-
