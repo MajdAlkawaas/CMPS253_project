@@ -71,9 +71,14 @@ def queueSetup(request):
         category = value.get("categories")
         category = category.split(',')
 
+        director = Director(
+            user = request.user,
+        )
+
         queue = Queue(
             Name = value.get('queueName'),
             Active = False,
+            Director = director,
         )
         queue.save()
 
@@ -83,7 +88,7 @@ def queueSetup(request):
                 Queue = queue
             )
             cat.save()
-
+        return redirect('queueManagement-customer-page')
     return render(request, 'customer/queueSetup.html') 
 
 @login_required()
