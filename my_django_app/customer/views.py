@@ -1,37 +1,70 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import Director, Customer, Queue, Category
+from .models import Director, Customer, Queue, Category, User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
 import json
-from customer.forms import SingupForm, signinForm
+from customer.forms import SingupForm, SigninForm
+from django.views.generic import CreateView
 
 def signup(request):
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
+        print("HERE Request is post")
         form = SingupForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            Director.objects.create(**form.cleaned_data)
-            # redirect to a new URL:
+            form.save()
+            print("HERE Input is valid")
+            print("---------------------")
+            print(request)
+            print("---------------------")
             return HttpResponseRedirect('/signin/')
-
+        else:
+            print("Here input is invalid")
+            print(form.cleaned_data)
+            print(form.is_valid)
     # if a GET (or any other method) we'll create a blank form
     else:
+        print("HERE Request is not post")
         form = SingupForm()
+
     return render(request, 'customer/signup.html', {'form': form})
 
-
 def signin(request):
-    if request.method == "POST":
-        form = signinForm(request.POST)
+    print("Sign in 01")
+    if request.method == 'POST':
+        print("Sign in 02")
+        form = SigninForm(request.POST)
+        if form.is_valid():
+            print("Sign in 03")
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                print("HERE User {} is logged in".format(username))
+                return redirect('welcome-customer-page')
+            else:
+                print("HERE User is not logged in")
+    else:
+        form = SigninForm()
+    context = {'form': form}
+    return render(request, 'customer/signin.html', context)
 
-        return redirect("queueSetup-customer-page")
-    
-    return render(request, 'customer/signin.html')
+def welcome(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('signin-customer-page')
+    if not request.user.is_authenticated:
+        return redirect('signin-customer-page')
+    return render(request, 'customer/welcome.html')
+
 
 def forgot(request):
     return render(request, 'customer/forgot.html') 
 
+@login_required()
 def queueSetup(request):
     if request.method == "POST":
         value = request.POST
@@ -53,19 +86,19 @@ def queueSetup(request):
 
     return render(request, 'customer/queueSetup.html') 
 
-
+@login_required()
 def queueManagement(request):
     data = Queue.objects.all()
     context = {"data" : data}
     return render(request, 'customer/queueManagement.html', context) 
 
+@login_required()
 def edit(request):
     return render(request, 'customer/edit.html') 
 
+@login_required()
 def home(request):
     return render(request, 'customer/home.html')
 
-
-
-
-
+def error(request):
+    return render(request, 'customer/error.html')
