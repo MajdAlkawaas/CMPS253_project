@@ -189,7 +189,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     {% comment %} {{ form.FirstName.errors }} {% endcomment %}
                                     <label class="font-size-h6 font-weight-bolder text-dark">First Name</label>
                                     {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="fname" placeholder="First Name" value="" /> {% endcomment %}
-                                    {{ form.FirstName }}
+                                    {{ form.first_name }}
                                     
                                 </div>
                                 <!--end::Input-->
@@ -199,7 +199,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Last Name</label>
                                     {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="lname" placeholder="Last Name" value="" /> {% endcomment %}
-                                    {{ form.LastName }}
+                                    {{ form.last_name }}
                                 </div>
                                 <!--end::Input-->
                             </div>
@@ -221,7 +221,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
                                     {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="email" placeholder="Email Address" value="" /> {% endcomment %}
-                                    {{ form.EmailAddress }}
+                                    {{ form.email }}
                                 </div>
                                 <!--end::Input-->
                             </div>
@@ -240,7 +240,15 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="form-group">
                             <label class="font-size-h6 font-weight-bolder text-dark">Password</label>                            
                             {% comment %} <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"  name="password" autocomplete="off" />     {% endcomment %}
-                            {{form.password}}
+                            {{form.password1}}
+                        </div>
+                        <!--end::Form Group-->
+
+                        <!--begin::Form Group-->
+                        <div class="form-group">
+                            <label class="font-size-h6 font-weight-bolder text-dark">Comfirm Password</label>                            
+                            {% comment %} <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"  name="password" autocomplete="off" />     {% endcomment %}
+                            {{form.password2}}
                         </div>
                         <!--end::Form Group-->
 
@@ -258,7 +266,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         
                         <div class="form-group">
                             <label class="font-size-h6 font-weight-bolder text-dark">Customer</label>
-                            {{form.Customer}}
+                            {{form.customer_list}}
                              
                         </div>
 

@@ -59,6 +59,7 @@
                         <!--begin::Form-->
                         <form method="POST" class="form" id="kt_login_singin_form">
                             {% csrf_token %}
+                            {{ form.non_field_errors }}
                             <!--begin::Title-->
                             <div class="pb-5 pb-lg-15">
                                 <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h3>
@@ -73,8 +74,8 @@
                             <!--begin::Form group-->
                             <div class="form-group">
                                 <label class="font-size-h6 font-weight-bolder text-dark">Username</label>
-                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text"
-                                    name="username" autocomplete="off" />
+                                {% comment %} <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="username" autocomplete="off" /> {% endcomment %}
+                                {{ form.username }}
                             </div>
                             <!--end::Form group-->
 
@@ -88,8 +89,8 @@
                                         Forgot Password ?
                                     </a>
                                 </div>
-                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password"
-                                    name="password" autocomplete="off" />
+                                {% comment %} <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password" name="password" autocomplete="off" /> {% endcomment %}
+                                {{form.password}}
                             </div>
                             <!--end::Form group-->
 
