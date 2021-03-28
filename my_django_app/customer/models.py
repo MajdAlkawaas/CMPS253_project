@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 import datetime
 import uuid
 import qrcode
@@ -7,6 +8,8 @@ from io import BytesIO
 from django.core.files import File
 from PIL import Image, ImageDraw
 # Create your models here.
+
+
 
 
 class Customer(models.Model):
@@ -21,16 +24,17 @@ class Customer(models.Model):
         return self.Name
     
 
+class User(AbstractUser):
+    is_director      = models.BooleanField(default=False)
+    is_queueoperator = models.BooleanField(default=False)
+
+
 class Director(models.Model):
-    FirstName    = models.CharField(max_length=50)
-    LastName     = models.CharField(max_length=50)
-    username     = models.CharField(max_length=50)
-    EmailAddress = models.EmailField(max_length=250)
-    password     = models.CharField(max_length=50)
-    CreatedAt    = models.DateTimeField(auto_now=True)
-    Customer     = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    user          = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    CreatedAt     = models.DateTimeField(auto_now=True)
+    Customer      = models.ForeignKey(Customer, on_delete=models.CASCADE)
     director_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    QRcode     = models.ImageField(upload_to="QRcodes/", null=True, blank=True)
+    QRcode        = models.ImageField(upload_to="QRcodes/", null=True, blank=True)
    
     def save(self, domain="http://127.0.0.1:8000/", *args, **kwargs):
         director_uuid = urllib.parse.urljoin(domain, 'customer/uuid/{}'.format(str(self.director_uuid)))
@@ -54,15 +58,11 @@ class Queue(models.Model):
     
                 
 class Queueoperator(models.Model):
-    FirstName    = models.CharField(max_length=50)
-    LastName     = models.CharField(max_length=50)
-    username     = models.CharField(max_length=50)
-    EmailAddress = models.EmailField(max_length=250)
-    password     = models.CharField(max_length=50)
-    CreatedAt    = models.DateTimeField(auto_now=True)
-    Customer     = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    Director     = models.ForeignKey(Director, on_delete=models.CASCADE)
-    Queue        = models.ManyToManyField(Queue)
+    user      = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    CreatedAt = models.DateTimeField(auto_now=True)
+    Customer  = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    Director  = models.ForeignKey(Director, on_delete=models.CASCADE)
+
 
 class Category(models.Model):
     Name      = models.CharField(max_length=50)
