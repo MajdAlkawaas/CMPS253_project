@@ -123,7 +123,7 @@ else:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'projectdb',
             'USER': 'root',
-            'PASSWORD': '',
+            'PASSWORD': 'Raafat1968',
             'HOST': 'localhost',
             'PORT': '3306',
         }
@@ -168,4 +168,7 @@ USE_TZ = True
 
 STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
+AUTH_USER_MODEL = 'customer.User'
 # STATIC_DIR = ''
+
+

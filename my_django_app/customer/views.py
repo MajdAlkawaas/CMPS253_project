@@ -71,7 +71,10 @@ def queueSetup(request):
         category = value.get("categories")
         category = category.split(',')
 
-        director = Director(user = request.user)
+        director = Director(
+            user = request.user,
+        )
+
 
         queue = Queue(
             Name = value.get('queueName'),
@@ -86,8 +89,7 @@ def queueSetup(request):
                 Queue = queue
             )
             cat.save()
-        return redirect("queueManagement-customer-page")
-
+        return redirect('queueManagement-customer-page')
     return render(request, 'customer/queueSetup.html') 
 
 @login_required()
@@ -97,9 +99,43 @@ def queueManagement(request):
     context = {"data" : data, "director" : director}
     return render(request, 'customer/queueManagement.html', context) 
 
+
 @login_required()
-def edit(request):
-    return render(request, 'customer/edit.html') 
+def edit(request,queue_id):
+    if request.method == "POST":
+        value = request.POST
+
+        queue      = Queue.objects.get(id=queue_id)
+        queue.Name = value.get('queueNameEdited')
+        queue.save()
+
+        listOfCategories = Category.objects.all().filter(Queue_id = queue_id)
+        for i in listOfCategories:
+            listOfCategories.delete()
+
+        categories = value.get("categoriesEdited")
+        categories = categories.split(',')
+
+        for i in range(len(categories)):
+            category = Category(
+                Name  = categories[i],
+                Queue = queue
+            )
+            category.save()
+
+        return redirect('queueManagement-customer-page')
+
+    queue      = Queue.objects.get(pk=queue_id)
+    categories = Category.objects.all().filter(Queue_id = queue_id)
+    lista      = []
+
+    for i in categories:
+        lista.append(i.Name)
+
+    categoriesStr = ",".join(lista)
+    context       = {"queue" : queue, "categoriesStr" : categoriesStr}
+
+    return render(request, 'customer/edit.html', context) 
 
 @login_required()
 def home(request):
