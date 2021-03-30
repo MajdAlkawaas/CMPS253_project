@@ -10,6 +10,6 @@ urlpatterns = [
     path('forgot/', views.forgot, name="forgot-customer-page"),
     path('queueSetup/', views.queueSetup, name="queueSetup-customer-page"),
     path('queueManagement/', views.queueManagement, name="queueManagement-customer-page"),
-    path('edit/', views.edit, name="edit-customer-page"),
+    path('edit/<int:queue_id>', views.edit, name="edit-customer-page"),
     path('', views.home, name="customer-home"),
 ]
