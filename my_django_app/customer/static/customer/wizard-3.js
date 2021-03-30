@@ -87,7 +87,7 @@ var KTWizard3 = function () {
 
         btn.on('click', function(e) {
 			formEl.submit();
-            // e.preventDefault();
+            e.preventDefault();
 
             if (7) {
                 //== See: src\js\framework\base\app.js

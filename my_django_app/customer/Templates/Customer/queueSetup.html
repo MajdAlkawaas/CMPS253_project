@@ -18,7 +18,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <head>
     <base href="../../../">
     <meta charset="utf-8" />
-    <title>Queue Manager</title>
+    <title>Queue Setup</title>
     <meta name="description" content="Wizard examples" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -43,6 +43,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="stylesheet" href="{%static 'customer/dark1.css'%}">
     <link rel="stylesheet" href="{%static 'customer/light.css'%}">
     <link rel="stylesheet" href="{%static 'customer/light1.css'%}">
+
+    
 
     <!--end::Global Theme Styles-->
 
@@ -137,8 +139,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>Queue Name</label>
-                                            <input type="text" class="form-control" name="queueName"
-                                                placeholder="Queue Name" value="" />
+                                            <input type="text" id="qname" class="form-control" name="queueName"
+                                                placeholder="Queue Name"/>
                                             <span class="form-text text-muted">Please enter the name of the
                                                 Queue.</span>
                                         </div>
@@ -148,7 +150,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <!-- <div class="col-lg-6 col-md-9 col-sm-12"> -->
                                                 <label>Categories (Please enter your different categories seperated by a comma)</label>
                                                 <!-- <input type="text" class="form-control" name="queueService" placeholder="Choose your service" value=""/> -->
-                                                <input type="text" class="form-control" name="categories" placeholder="Categories" />
+                                                <input type="text" id="qcategories" class="form-control" name="categories" placeholder="Categories" />
                                                     <span class="form-text text-muted">Please enter the services of the Queue.</span>
                                                 <!-- <div class="mt-3 text-muted">
                                                     Please enter the services of the queue.
@@ -168,7 +170,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             Queue Name:
                                         </h6>
                                         <div class="text-dark-50 line-height-lg">
-                                            <div>Counter 1</div>
+                                            <div id="result"></div>
                                         </div>
                                         <div class="separator separator-dashed my-5"></div>
                                         <!--end::Section-->
@@ -177,9 +179,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <h6 class="font-weight-bolder mb-3">
                                             Services:
                                         </h6>
-                                        <div class="text-dark-50 line-height-lg">
-                                            <div>Cash Transaction</div>
-                                            <div>Cheque Deposit</div>
+                                        <div id="result1" class="text-dark-50 line-height-lg">
+                                            
                                         </div>
                                         <div class="separator separator-dashed my-5"></div>
                                         <!--end::Section-->
@@ -213,7 +214,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="mr-2">
                                             <button type="button"
                                                 class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
-                                                data-wizard-type="action-prev">
+                                                data-wizard-type="action-prev" id="prev">
                                                 Previous
                                             </button>
                                         </div>
@@ -317,6 +318,29 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!--begin::Page Scripts(used by this page)-->
     <script src="{%static 'customer/wizard-3.js'%}"></script>
+    <script>
+        var q = document.getElementById("qname");
+        q.onchange = function(){
+            document.getElementById("result").innerHTML = q.value;
+        }
+
+
+
+        var cat = document.getElementById("qcategories");
+        cat.onchange = function(){
+            var temp = cat.value.split(",");
+            var parent1 = document.getElementById("result1");
+            while(parent1.firstChild){
+                    parent1.removeChild(parent1.firstChild);
+                }
+            temp.forEach(element => {
+                var child = document.createElement("div");
+                child.innerHTML = element;
+                parent1.appendChild(child);                
+            });
+        }
+        
+    </script>
     <!-- <script src="{%static 'customer/tagify.js'%}"></script> -->
 
     <!-- <script src="CMPS253/Template/assets/js/pages/custom/wizard/wizard-3.js"></script>

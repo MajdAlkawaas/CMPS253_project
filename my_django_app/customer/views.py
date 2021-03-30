@@ -74,6 +74,8 @@ def queueSetup(request):
         director = Director(
             user = request.user,
         )
+
+
         queue = Queue(
             Name = value.get('queueName'),
             Active = False,
@@ -93,7 +95,8 @@ def queueSetup(request):
 @login_required()
 def queueManagement(request):
     data = Queue.objects.all()
-    context = {"data" : data}
+    director = Director(user = request.user)
+    context = {"data" : data, "director" : director}
     return render(request, 'customer/queueManagement.html', context) 
 
 
@@ -131,7 +134,7 @@ def edit(request,queue_id):
 
     categoriesStr = ",".join(lista)
     context       = {"queue" : queue, "categoriesStr" : categoriesStr}
-    
+
     return render(request, 'customer/edit.html', context) 
 
 @login_required()
