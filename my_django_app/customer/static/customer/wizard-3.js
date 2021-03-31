@@ -89,26 +89,6 @@ var KTWizard3 = function () {
 			formEl.submit();
             e.preventDefault();
 
-            if (7) {
-                //== See: src\js\framework\base\app.js
-                mApp.progress(btn);
-                //mApp.block(formEl); 
-
-                //== See: http://malsup.com/jquery/form/#ajaxSubmit
-                formEl.ajaxSubmit({
-                    success: function() {
-                        mApp.unprogress(btn);
-                        //mApp.unblock(formEl);
-
-                        swal({
-                            "title": "", 
-                            "text": "The application has been successfully submitted!", 
-                            "type": "success",
-                            "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-                        });
-                    }
-                });
-            }
         });
     }
 
