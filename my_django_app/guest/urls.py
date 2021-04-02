@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [   
     # Request a queue guest page using queue_uuid
-    path('queue/uuid/<uuid:queue_uuid>', views.guest_view_uuid, name="queue-page"),
+    path('customer/uuid/<uuid:director_uuid>', views.guest_view_uuid, name="queue-page"),
 
     # Request a queue guest page using queue_id
     path('queue/id/<int:queue_id>', views.guest_view_id, name="queue-page"),
