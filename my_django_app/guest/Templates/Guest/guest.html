@@ -374,22 +374,24 @@
                 
                 <div class="form-group">
                     <label>Name </label>
-                    <input type="text" class="form-control" name="name" placeholder="Enter name" />
-
+                    {% comment %} <input type="text" class="form-control" name="name" placeholder="Enter name" /> {% endcomment %}
+					{{ form.name }}
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Phone Number </label>
-                    <input type="tel" class="form-control" name="PhoneNumber" id="exampleInputPassword1"
-                        placeholder="Enter phonenumber" pattern="^\d{4}-\d{3}-\d{4}$"/>
+                    <label for="exampleInputPassword1">Phone Number</label>
+                    {% comment %} <input type="tel" class="form-control" name="PhoneNumber" id="exampleInputPassword1"
+                        placeholder="Enter phonenumber" pattern="^\d{4}-\d{3}-\d{4}$"/> {% endcomment %}
+					{{ form.phoneNumber }}	
                 </div>
                 <div class="form-group">
                     <label for="exampleSelect2">Categories </label>
-                    <select multiple="" class="form-control" id="exampleSelect2" name="options">
-                        <option>Cheque Deposit</option>
-                        <option>Cash Transaction</option>
-                        <option>Customer Service</option>
-                        <option>Debit and Credit Cards</option>
-                    </select>
+                    {% comment %} <select multiple="" class="form-control" id="exampleSelect2" name="category_option">
+                        <option>Choose a category</option>
+						{% for category in categories %}
+							<option> {{category.Name}} </option>
+						{% endfor %}
+                    </select> {% endcomment %}
+					{{ form.categories_list }}
                 </div>
 
             </div>

@@ -33,4 +33,7 @@ my_django_app/cmps253_env
 
 # my_django_app/mysqlclient-1.4.6-cp38-cp38-win32.whl
 
-
+# Extra Files not related to the core project
+db/
+Template/
+./my_django_app/cloud_sql_proxy.exe

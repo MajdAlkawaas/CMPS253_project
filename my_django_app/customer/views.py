@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Director, Customer, Queue, Category, User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-import json
+from .decorators import director_required, queueoperator_required
 from customer.forms import SingupForm, SigninForm, QueueOperatorSignup
 from django.views.generic import CreateView
 
@@ -59,11 +59,11 @@ def welcome(request):
         return redirect('signin-customer-page')
     return render(request, 'customer/welcome.html')
 
-
 def forgot(request):
     return render(request, 'customer/forgot.html') 
 
 @login_required()
+@director_required()
 def queueSetup(request):
     if request.method == "POST":
         value = request.POST
@@ -93,6 +93,7 @@ def queueSetup(request):
     return render(request, 'customer/queueSetup.html') 
 
 @login_required()
+@director_required()
 def queueManagement(request):
     data = Queue.objects.all()
     director = Director(user = request.user)
@@ -138,6 +139,7 @@ def edit(request,queue_id):
     return render(request, 'customer/edit.html', context) 
 
 @login_required()
+@director_required()
 def home(request):
     return render(request, 'customer/home.html')
 
