@@ -4,9 +4,7 @@ from .models import Director, Customer, Queue, Category, User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .decorators import director_required, queueoperator_required
-
-import json
-from customer.forms import SingupForm, SigninForm
+from customer.forms import SingupForm, SigninForm, QueueOperatorSignup
 from django.views.generic import CreateView
 
 def signup(request):
