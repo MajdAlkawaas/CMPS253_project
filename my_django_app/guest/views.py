@@ -11,14 +11,6 @@ from django.core.files import File
 from PIL import Image, ImageDraw
 
 
-def guest(request):
-    if request.method == "POST":
-        value = request.POST
-        guest01 = Guest(PhoneNumber = value.get('PhoneNumber'))
-        guest01.save()
-        return redirect("guest-waiting-page")
-    return render(request, 'guest/guest.html') 
-
 
 def guest_view_uuid(request, director_uuid):
     director_uuid_hex = director_uuid.hex
