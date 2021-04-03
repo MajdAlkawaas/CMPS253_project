@@ -19,34 +19,6 @@ def guest(request):
         return redirect("guest-waiting-page")
     return render(request, 'guest/guest.html') 
 
-def guest_view_id(request, queue_id):
-    if request.method == "POST":
-        return redirect("guest-waiting-page")
-        # return render(request, 'guest/guest_beta.html') 
-    else:
-        try:
-            # queue = Customer.objects.get(queue_uuid= queue_uuid)
-            queue = Queue.objects.get(pk= queue_id)
-        except Queue.DoesNotExist:
-            raise Http404("Queue with uuid {} doesn't exit".format(queue_id)) 
-        director   = Director.objects.get(pk= queue.Director.id)
-        customer   = Customer.objects.get(pk=director.Customer.id)
-        categories = Category.objects.all().filter(Queue_id=queue_id)
-
-        print(categories)
-        for category in categories:
-            print(category.Name)
-
-        context = {
-            'queue'     : queue,
-            'director'  : director,
-            'customer'  : customer,
-            'categories': categories
-        }
-        # context = {}
-
-        return render(request, 'guest/guest_beta.html', context) 
-
 
 def guest_view_uuid(request, director_uuid):
     director_uuid_hex = director_uuid.hex
