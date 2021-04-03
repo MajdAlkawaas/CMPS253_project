@@ -56,18 +56,24 @@ class Queue(models.Model):
     Active     = models.BooleanField()
     Director   = models.ForeignKey(Director, on_delete=models.CASCADE)
     
+    def __str__(self):
+        return self.Name
+    
                 
 class Queueoperator(models.Model):
     user      = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     CreatedAt = models.DateTimeField(auto_now=True)
     Customer  = models.ForeignKey(Customer, on_delete=models.CASCADE)
     Director  = models.ForeignKey(Director, on_delete=models.CASCADE)
-
+    Queue     = models.ManyToManyField(Queue)
 
 class Category(models.Model):
     Name      = models.CharField(max_length=50)
     CreatedAt = models.DateTimeField(auto_now=True)
     Queue     = models.ForeignKey(Queue, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.Name
 
 
 

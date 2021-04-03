@@ -3,8 +3,10 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Director, Customer, Queue, Category, User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .decorators import director_required, queueoperator_required
+
 import json
-from customer.forms import SingupForm, SigninForm, QueueOperatorSignup
+from customer.forms import SingupForm, SigninForm
 from django.views.generic import CreateView
 
 def signup(request):
@@ -59,11 +61,11 @@ def welcome(request):
         return redirect('signin-customer-page')
     return render(request, 'customer/welcome.html')
 
-
 def forgot(request):
     return render(request, 'customer/forgot.html') 
 
 @login_required()
+@director_required()
 def queueSetup(request):
     if request.method == "POST":
         value = request.POST
@@ -88,11 +90,11 @@ def queueSetup(request):
                 Queue = queue
             )
             cat.save()
-
         return redirect('queueManagement-customer-page')
     return render(request, 'customer/queueSetup.html') 
 
 @login_required()
+@director_required()
 def queueManagement(request):
     data = Queue.objects.all()
     director = Director(user = request.user)
@@ -138,32 +140,9 @@ def edit(request,queue_id):
     return render(request, 'customer/edit.html', context) 
 
 @login_required()
+@director_required()
 def home(request):
     return render(request, 'customer/home.html')
 
 def error(request):
     return render(request, 'customer/error.html')
-
-@login_required()
-def QueueOperatorSignupView(request):
-    if request.method == 'POST':
-        print("HERE Request is post")
-        form = QueueOperatorSignup(request.POST, user=request.user)
-        # check whether it's valid:
-        if form.is_valid():
-            form.save()
-            print("HERE Input is valid")
-            print("---------------------")
-            print(request)
-            print("---------------------")
-            return HttpResponseRedirect('/signin/')
-        else:
-            print("Here input is invalid")
-            print(form.cleaned_data)
-            print(form.is_valid)
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        print("HERE Request is not post")
-        form = QueueOperatorSignup()
-
-    return render(request, 'customer/QueueOperatorSignup.html', {'form': form})
