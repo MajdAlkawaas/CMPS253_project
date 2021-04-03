@@ -3,9 +3,8 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Director, Customer, Queue, Category, User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
 import json
-from customer.forms import SingupForm, SigninForm
+from customer.forms import SingupForm, SigninForm, QueueOperatorSignup
 from django.views.generic import CreateView
 
 def signup(request):
@@ -89,6 +88,7 @@ def queueSetup(request):
                 Queue = queue
             )
             cat.save()
+
         return redirect('queueManagement-customer-page')
     return render(request, 'customer/queueSetup.html') 
 
@@ -143,3 +143,27 @@ def home(request):
 
 def error(request):
     return render(request, 'customer/error.html')
+
+@login_required()
+def QueueOperatorSignupView(request):
+    if request.method == 'POST':
+        print("HERE Request is post")
+        form = QueueOperatorSignup(request.POST, user=request.user)
+        # check whether it's valid:
+        if form.is_valid():
+            form.save()
+            print("HERE Input is valid")
+            print("---------------------")
+            print(request)
+            print("---------------------")
+            return HttpResponseRedirect('/signin/')
+        else:
+            print("Here input is invalid")
+            print(form.cleaned_data)
+            print(form.is_valid)
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        print("HERE Request is not post")
+        form = QueueOperatorSignup()
+
+    return render(request, 'customer/QueueOperatorSignup.html', {'form': form})
