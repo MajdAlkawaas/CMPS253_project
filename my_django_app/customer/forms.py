@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from customer.models import Customer, Director, User
+from customer.models import Customer, Director, User, Queueoperator
 from django.db import transaction
 
 
@@ -48,7 +48,7 @@ class SingupForm(UserCreationForm):
         fields = ('first_name','last_name', 'username', 'email', 'password1', 'password2')
         
 
-    @transaction.atomic
+    
 
     def __init__(self, *args, **kwargs): 
         super(SingupForm, self).__init__(*args, **kwargs)
@@ -76,7 +76,8 @@ class SingupForm(UserCreationForm):
         for field in self.fields:
             print(field)
         print("------------------------")
-    
+
+    @transaction.atomic
     def save(self):
         print("HERE SingupForm.save")
         user = super().save(commit=False)
