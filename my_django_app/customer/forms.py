@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from customer.models import Customer, Director, User
+from customer.models import Customer, Director, User, Queueoperator
 from django.db import transaction
 
 
@@ -40,7 +40,6 @@ class SingupForm(UserCreationForm):
                 'class' : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
             }
         ),
-        
     )
 
     class Meta(UserCreationForm.Meta):
@@ -48,7 +47,7 @@ class SingupForm(UserCreationForm):
         fields = ('first_name','last_name', 'username', 'email', 'password1', 'password2')
         
 
-    @transaction.atomic
+    
 
     def __init__(self, *args, **kwargs): 
         super(SingupForm, self).__init__(*args, **kwargs)
@@ -76,7 +75,8 @@ class SingupForm(UserCreationForm):
         for field in self.fields:
             print(field)
         print("------------------------")
-    
+
+    @transaction.atomic
     def save(self):
         print("HERE SingupForm.save")
         user = super().save(commit=False)
@@ -84,3 +84,49 @@ class SingupForm(UserCreationForm):
         user.save()
         director = Director.objects.create(user=user, Customer = self.cleaned_data.get('customer_list'))
         return user    
+
+class QueueOperatorSignup(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ('first_name','last_name', 'username', 'email', 'password1', 'password2')
+        
+
+
+    def __init__(self, *args, **kwargs): 
+        self.director = kwargs.pop('user',None)
+        super(QueueOperatorSignup, self).__init__(*args, **kwargs)
+        
+        self.fields['first_name'].widget.attrs['class'] = 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
+        self.fields['first_name'].widget.attrs['placeholder'] = 'Write your first name here'
+
+        self.fields['username'].widget.attrs['class'] = 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
+        self.fields['username'].widget.attrs['placeholder'] = 'Write your username here'
+
+
+        self.fields['last_name'].widget.attrs['class'] = 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
+        self.fields['last_name'].widget.attrs['placeholder'] = 'Write your first name here'
+
+        self.fields['email'].widget.attrs['class'] = 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
+        self.fields['email'].widget.attrs['placeholder'] = 'Write your first name here'
+
+        self.fields['password1'].widget.attrs['class'] = 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
+        self.fields['password1'].widget.attrs['placeholder'] = 'Write your first name here'
+
+        self.fields['password2'].widget.attrs['class'] = 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
+        self.fields['password2'].widget.attrs['placeholder'] = 'Write your first name here'
+
+        print("-----------SingupForm-----------")
+        for field in self.fields:
+            print(field)
+        print("------------------------")
+    
+    
+    @transaction.atomic
+    def save(self):
+        print("HERE SingupForm.save")
+        user = super().save(commit=False)
+        director = Director.objects.get(user= self.director)
+        user.is_queueoperator = True
+        user.save()
+        queueoperator = Queueoperator.objects.create(user=user, Director=director, Customer=director.Customer)
+        return user

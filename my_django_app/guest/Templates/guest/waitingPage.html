@@ -31,7 +31,7 @@
         <div class="d-flex flex-column-fluid">
             <div class=" container ">
                 <div class="row justify-content-md-center">
-                    <div class="col-xs-6">
+                    <div class="col-md-6 ml-1">
 
                         <div class="card card-custom">
                             <div class="card-header">
@@ -45,22 +45,21 @@
                                 <h1>Cash Transcation</h1>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <br>
-                <div class="row justify-content-md-center">
-                    <div class="col-xs-6">
+                        <br>
+                        
                         <div class="card card-custom">
                             <div class="card-body">
                                 <h1 style="font-size: 200px; text-align: center;">1</h1>
                             </div>
                             <div class="card-footer d-flex justify-content-between">
-                                <a href="#" class="btn btn-light-primary font-weight-bold">Widthraw</a>
-                                <input type="text" disabled="disabled" placeholder="Time Left" style="width: 100px;">
+                                <input type="submit" value="Widthraw" class="btn btn-light-primary font-weight-bold">
+                                <button type="button" class="btn text-muted">Time Left</button>
                             </div>
                         </div>
+
                     </div>
                 </div>
+                <br>
             </div>
         </div>
     </div>
@@ -69,6 +68,10 @@
     <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
     <!--begin::Global Config(global config for global JS scripts)-->
     <script>
+        .ml-1 
+        {
+            margin-left: ($spacer * .25) !important;
+        }
         var KTAppSettings = {
             "breakpoints": {
                 "sm": 576,
