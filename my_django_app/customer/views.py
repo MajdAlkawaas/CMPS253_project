@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import Director, Customer, Queue, Category, User
+from .models import Director, Customer, Queue, Category, User, Queueoperator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .decorators import director_required, queueoperator_required
@@ -69,8 +69,8 @@ def queueSetup(request):
     if request.method == "POST":
         value = request.POST
         
-        director = Director.objects.filter(user = request.user)
-        queue = Queue.objects.cerate(Name = value.get('queueName'),
+        director = Director.objects.get(user = request.user)
+        queue = Queue.objects.create(Name = value.get('queueName'),
                                      Active = False,
                                      Director = director)
 
@@ -87,9 +87,11 @@ def queueSetup(request):
 @director_required()
 def queueManagement(request):
     current_director = Director.objects.get(user_id = request.user)
-    data     = Queue.objects.filter(Director = current_director)
+    data             = Queue.objects.filter(Director = current_director)
+    operators        = Queueoperator.objects.filter(Director=current_director)
     context  = {"data"    : data, 
-               "director" : current_director}
+               "director" : current_director,
+               "operators": operators}
                
     return render(request, 'customer/queueManagement.html', context) 
 
@@ -142,6 +144,8 @@ def error(request):
 
 
 @login_required()
+@director_required()
+# @queueoperator_required()
 def QueueOperatorSignupView(request):
     if request.method == 'POST':
         print("HERE Request is post")
