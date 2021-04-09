@@ -95,7 +95,6 @@ def queueManagement(request):
                
     return render(request, 'customer/queueManagement.html', context) 
 
-
 @login_required()
 def edit(request,queue_id):
     if request.method == "POST":
@@ -168,3 +167,4 @@ def QueueOperatorSignupView(request):
         form = QueueOperatorSignup()
 
     return render(request, 'customer/QueueOperatorSignup.html', {'form': form})
+

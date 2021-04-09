@@ -1,0 +1,132 @@
+----------------------------Week ended at: 28/02/2021------------------------------
+***********************************************************************************
+-----------------------------------------------------------------------------------
+
+This the weekly update video for project 15 online queue maker:
+
+During the past week we did two main things:
+
+We created the main django app and included the customer template that 
+we built during the previous taking into consideration the static files
+architecture.
+----------------------------------------------------------
+----------------------------------------------------------
+We choose google cloud for deployment, we created a project using Google 
+cloud App Engine standard environment there setup mysql server on the 
+cloud and created and instance of it with the following configurations:
+
+ ""SHOW THE PAGE""
+
+Currently we have a hosted app on google cloud with admin access for the
+team members
+
+--------------------------NEXT WEEK--------------------------------
+For next week we are going to work on generating unique links and transforming
+them to QR codes which the customer uis going to use.
+
+
+
+----------------------------Week ended at: 08/03/2021------------------------------
+***********************************************************************************
+-----------------------------------------------------------------------------------
+
+
+This the weekly update video for project 15 online queue maker:
+
+During this week we built the customer and guest models using django models classes
+and connected the cusotmer forms with the models.
+
+    ""SHOW CODE""
+
+This a sample code that connects the sign up form with the models
+
+
+We also researched methods for generating unique URLs for each queue, we have set tled
+on using UUID (Universally unique IDs) for each queue.
+QR codes will be generated using those fixed URL with the UUIDs to redirect the geust
+to a specfic queue
+
+--------------------------NEXT WEEK--------------------------------
+
+As we discussed during our last meeting, we are going to working demo
+that includes interaction between the guest and customer.
+
+
+----------------------------Week ended at: 15/03/2021------------------------------
+***********************************************************************************
+-----------------------------------------------------------------------------------
+
+This the weekly update video for project 15 online queue maker: 
+
+During this week we modified the queue model code to include a uuid field and image 
+field to store the QRcode images for each queue. We also added the QRcode generator 
+functionality.
+
+We also created a guest view that retrieves the guest user interface for a particular
+queue. 
+
+    ""SHOW CODE""
+
+--------------------------NEXT WEEK--------------------------------
+
+We are going to work on inserting a geust into the queue, and all the
+related functionalities
+
+----------------------------Week ended at: 22/03/2021------------------------------
+***********************************************************************************
+-----------------------------------------------------------------------------------
+
+This the weekly update video for project 15 online queue maker: 
+
+During this week we worked on the setUp page, once the director logs in he can route to 
+this page to set up his queues. He starts by entering the name of the Queue and the cate-
+gories associated to it, reviews then submits. Once he submits, he gets redirected to the 
+queueManagement page where he can view the Queues he created. We worked on this page and 
+created the data-tables required to store the Queues information, providing the director 
+with the ability to manage the queues. This datatable has many functionalitis such as so-
+rting and searching. We also provided him with the edit page where he can
+alter his queue name or categories.
+
+On the other hand, we modified the guest page to allow the guest to enter his information, 
+name, phone number and the category he wishes to be served for after scanning the QR code 
+related to a specific queue(the one we created now).Once he submits, he gets redirected to 
+the guest waiting page where he can see his number in the queue. 
+
+--------------------------NEXT WEEK--------------------------------
+
+Django usualyy provides defualt html templates and form clasees for the user functionality
+but we need to customize them becasue we have three types of users and we are using our own
+custom template. Hence, next week we will be working on achieving this.
+
+
+----------------------------Week ended at: 29/03/2021------------------------------
+***********************************************************************************
+-----------------------------------------------------------------------------------
+
+We have worked on the user authentication, usually django provides default html forms and
+classes for the user operations like sign up sign in and forget password.
+But we have three types of users.
+But here we are using our own templates, so we had to build custom form classes and override
+the default models save functions and custom decorators that manage the access permissions for
+the director and the queue operator.
+
+Currently we have a table for all users with boolean flags that indicates if the user is an 
+admin or a director or a queue operator with a OneToOne relation with the director table and
+the queue operator table 
+
+
+--------------------------NEXT WEEK--------------------------------
+
+Implement the queue operations enqueue and dequeue which are a reflection of the queue
+operator functionalities that we need to Implement too which are served, Kicked out, walked out.
+
+----------------------------Week ended at: 05/04/2021------------------------------
+***********************************************************************************
+-----------------------------------------------------------------------------------
+
+
+
+
+--------------------------NEXT WEEK--------------------------------
+
+
