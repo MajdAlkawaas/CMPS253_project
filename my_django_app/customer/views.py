@@ -87,9 +87,11 @@ def queueSetup(request):
 @director_required()
 def queueManagement(request):
     current_director = Director.objects.get(user_id = request.user)
-    data     = Queue.objects.filter(Director = current_director)
+    data             = Queue.objects.filter(Director = current_director)
+    operators        = Queueoperator.objects.filter(Director=current_director)
     context  = {"data"    : data, 
-               "director" : current_director}
+               "director" : current_director,
+               "operators": operators}
                
     return render(request, 'customer/queueManagement.html', context) 
 
@@ -141,7 +143,8 @@ def error(request):
 
 
 @login_required()
-@queueoperator_required()
+@director_required()
+# @queueoperator_required()
 def QueueOperatorSignupView(request):
     if request.method == 'POST':
         print("HERE Request is post")
