@@ -105,16 +105,21 @@ def edit(request,queue_id):
     categories = Category.objects.filter(Queue_id = queue_id)
     current_director = Director.objects.get(user_id = request.user)
     operators        = Queueoperator.objects.filter(Director=current_director)
+    choices = []
+    for element in operators:
+        temp = (element, element.user.username)
+        choices.append(temp)
+    choices = tuple(choices)
     lista      = []
-
+    # print(operatorsNames)
     for i in categories:
         lista.append(i.Name)
 
     categoriesStr = ",".join(lista)
-    form          = EditForm(queue, categoriesStr, operators) 
+    form          = EditForm(queue, categoriesStr, choices) 
 
     if request.method == "POST":
-        form  = EditForm(queue, categoriesStr, operators, request.POST)
+        form  = EditForm(queue, categoriesStr, choices, request.POST)
         if form.is_valid():
             value = request.POST
             queue      = Queue.objects.get(id=queue_id)
