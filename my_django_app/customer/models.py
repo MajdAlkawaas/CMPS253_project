@@ -10,8 +10,6 @@ from PIL import Image, ImageDraw
 # Create your models here.
 
 
-
-
 class Customer(models.Model):
     Name             = models.CharField(max_length=120)
     ContactFirstName = models.CharField(max_length=50)
@@ -66,6 +64,8 @@ class Queueoperator(models.Model):
     Customer  = models.ForeignKey(Customer, on_delete=models.CASCADE)
     Director  = models.ForeignKey(Director, on_delete=models.CASCADE)
     Queue     = models.ManyToManyField(Queue)
+
+
 
 class Category(models.Model):
     Name      = models.CharField(max_length=50)
