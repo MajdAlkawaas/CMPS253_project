@@ -4,7 +4,7 @@ from .models import Director, Customer, Queue, Category, User, Queueoperator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .decorators import director_required, queueoperator_required
-from customer.forms import SingupForm, SigninForm, QueueOperatorSignup
+from customer.forms import SingupForm, SigninForm, QueueOperatorSignup, EditForm
 from django.views.generic import CreateView
 import json
 
@@ -61,6 +61,9 @@ def welcome(request):
     return render(request, 'customer/welcome.html')
 
 def forgot(request):
+    if request.method == "POST":
+        
+        pass
     return render(request, 'customer/forgot.html') 
 
 @login_required()
@@ -83,8 +86,8 @@ def queueSetup(request):
         return redirect('queueManagement-customer-page')
     return render(request, 'customer/queueSetup.html') 
 
-@login_required()
-@director_required()
+# @login_required()
+# @director_required()
 def queueManagement(request):
     current_director = Director.objects.get(user_id = request.user)
     data             = Queue.objects.filter(Director = current_director)
@@ -97,41 +100,49 @@ def queueManagement(request):
 
 @login_required()
 def edit(request,queue_id):
-    if request.method == "POST":
-        value = request.POST
-
-        queue      = Queue.objects.get(id=queue_id)
-        queue.Name = value.get('queueNameEdited')
-        queue.save()
-
-        listOfCategories = Category.objects.filter(Queue_id = queue_id)
-        for i in listOfCategories:
-            listOfCategories.delete()
-
-        categories = value.get("categoriesEdited")
-        categories = categories.split(',')
-
-        for i in range(len(categories)):
-            #Q: What is happening here??
-            category = Category(
-                Name  = categories[i],
-                Queue = queue
-            )
-            category.save()
-
-        return redirect('queueManagement-customer-page')
 
     queue      = Queue.objects.get(pk=queue_id)
-    categories = Category.objects.all().filter(Queue_id = queue_id)
+    categories = Category.objects.filter(Queue_id = queue_id)
+    current_director = Director.objects.get(user_id = request.user)
+    operators        = Queueoperator.objects.filter(Director=current_director)
     lista      = []
 
     for i in categories:
         lista.append(i.Name)
 
     categoriesStr = ",".join(lista)
-    context       = {"queue" : queue, "categoriesStr" : categoriesStr}
+    form          = EditForm(queue, categoriesStr, operators) 
+
+    if request.method == "POST":
+        form  = EditForm(queue, categoriesStr, operators, request.POST)
+        if form.is_valid():
+            value = request.POST
+            queue      = Queue.objects.get(id=queue_id)
+            queue.Name = form.cleaned_data.get("queueNameEdited")
+            queue.save()
+
+            listOfCategories = Category.objects.filter(Queue_id = queue_id)
+            listNames = []
+            for i in range(len(listOfCategories)):
+                listNames.append(listOfCategories[i].Name)
+            
+            categories = form.cleaned_data.get("categoriesEdited")
+            categories = categories.split(',')
+
+            for category in categories:
+                if category not in listNames:
+                     Category.objects.create(Name = category,
+                                             Queue = queue)
+
+            for category in listOfCategories:
+                if category.Name not in categories:
+                    category.delete()
+
+        return redirect('queueManagement-customer-page')
+    context       = {'form': form, "queue" : queue}
 
     return render(request, 'customer/edit.html', context) 
+
 
 @login_required()
 @director_required()
