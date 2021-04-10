@@ -124,9 +124,20 @@ operator functionalities that we need to Implement too which are served, Kicked 
 ***********************************************************************************
 -----------------------------------------------------------------------------------
 
+This the weekly update video for project 15 online queue maker: 
 
+In this week, we implemented another user to our website which is the queue operator. He will not 
+register to our website, but the director will give him credintials so that he can only sign in and go 
+to a specific page to manage the queues. We wrote some decarators to manage permissions between 
+the pages because the queue operator has only limited number of pages to access. In addition to the 
+queue operator, we have added a table for the directors containing all the queue operatro created by 
+this specifc director ( in addition to the list of queues that was already been created last week).
 
 
 --------------------------NEXT WEEK--------------------------------
+
+We have many things to do next week. First, we will have to assign queue operators to some queues to 
+manage. then we have to continue working on implemmenting the queue and finally we will create 
+a page for the quuee operatro so he can manage the queues ( meaning queueing and dequcing)
 
 
