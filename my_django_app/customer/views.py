@@ -4,7 +4,7 @@ from .models import Director, Customer, Queue, Category, User, Queueoperator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .decorators import director_required, queueoperator_required
-from customer.forms import SingupForm, SigninForm, QueueOperatorSignup
+from customer.forms import SingupForm, SigninForm, QueueOperatorSignup, EditForm
 from django.views.generic import CreateView
 import json
 
@@ -61,6 +61,9 @@ def welcome(request):
     return render(request, 'customer/welcome.html')
 
 def forgot(request):
+    if request.method == "POST":
+        
+        pass
     return render(request, 'customer/forgot.html') 
 
 @login_required()
@@ -83,8 +86,8 @@ def queueSetup(request):
         return redirect('queueManagement-customer-page')
     return render(request, 'customer/queueSetup.html') 
 
-@login_required()
-@director_required()
+# @login_required()
+# @director_required()
 def queueManagement(request):
     current_director = Director.objects.get(user_id = request.user)
     data             = Queue.objects.filter(Director = current_director)
@@ -98,37 +101,47 @@ def queueManagement(request):
 @login_required()
 def edit(request,queue_id):
 
-    director = Director.objects.get(user = request.user)
+    queue      = Queue.objects.get(pk=queue_id)
+    categories = Category.objects.filter(Queue_id = queue_id)
+    current_director = Director.objects.get(user_id = request.user)
+    operators        = Queueoperator.objects.filter(Director=current_director)
+    choices = []
+    for element in operators:
+        temp = (element, element.user.username)
+        choices.append(temp)
+    choices = tuple(choices)
+    lista      = []
+    # print(operatorsNames)
+    for i in categories:
+        lista.append(i.Name)
+
+    categoriesStr = ",".join(lista)
+    form          = EditForm(queue, categoriesStr, choices) 
 
     if request.method == "POST" and 'btnform1' in request.POST:
-        value = request.POST
+        form  = EditForm(queue, categoriesStr, choices, request.POST)
+        if form.is_valid():
+            value = request.POST
+            queue      = Queue.objects.get(id=queue_id)
+            queue.Name = form.cleaned_data.get("queueNameEdited")
+            queue.save()
 
-        queue      = Queue.objects.get(id=queue_id)
-        queue.Name = value.get('queueNameEdited')
-        queue.save()
+            listOfCategories = Category.objects.filter(Queue_id = queue_id)
+            listNames = []
+            for i in range(len(listOfCategories)):
+                listNames.append(listOfCategories[i].Name)
+            
+            categories = form.cleaned_data.get("categoriesEdited")
+            categories = categories.split(',')
 
-        listOfCategories = Category.objects.filter(Queue_id = queue_id)
-        for i in listOfCategories:
-            listOfCategories.delete()
+            for category in categories:
+                if category not in listNames:
+                     Category.objects.create(Name = category,
+                                             Queue = queue)
 
-        categories = value.get("categoriesEdited")
-        categories = categories.split(',')
-
-        for i in range(len(categories)):
-            #Q: What is happening here??
-            category = Category(
-                Name  = categories[i],
-                Queue = queue
-            )
-            category.save()
-
-        # queueOperators = value.getlist("favoritecharacter []")
-        # print(type(queueOperators[0]))
-        # operators = Queueoperator.objects.filter(Director = director)
-        # for i in range(2):
-        #     temp = operators.get(user= queueOperators[i].user)
-        #     print(temp)
-
+            for category in listOfCategories:
+                if category.Name not in categories:
+                    category.delete()
         return redirect('queueManagement-customer-page')
 
     elif request.method == 'POST' and 'btnform2' in request.POST:
@@ -136,22 +149,10 @@ def edit(request,queue_id):
         queue.delete() 
 
         return redirect('queueManagement-customer-page')
-
-    queue      = Queue.objects.get(pk=queue_id)
-    categories = Category.objects.all().filter(Queue_id = queue_id)
-    operators = Queueoperator.objects.filter(Director = director)
-    lista      = []
-
-    for i in categories:
-        lista.append(i.Name)
-
-    categoriesStr = ",".join(lista)
-    context       = {"queue" : queue, 
-                    "categoriesStr" : categoriesStr,
-                    "operators" : operators
-                    }
+    context       = {'form': form, "queue" : queue}
 
     return render(request, 'customer/edit.html', context) 
+
 
 @login_required()
 @director_required()
