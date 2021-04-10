@@ -97,7 +97,10 @@ def queueManagement(request):
 
 @login_required()
 def edit(request,queue_id):
-    if request.method == "POST":
+
+    director = Director.objects.get(user = request.user)
+
+    if request.method == "POST" and 'btnform1' in request.POST:
         value = request.POST
 
         queue      = Queue.objects.get(id=queue_id)
@@ -119,17 +122,34 @@ def edit(request,queue_id):
             )
             category.save()
 
+        # queueOperators = value.getlist("favoritecharacter []")
+        # print(type(queueOperators[0]))
+        # operators = Queueoperator.objects.filter(Director = director)
+        # for i in range(2):
+        #     temp = operators.get(user= queueOperators[i].user)
+        #     print(temp)
+
+        return redirect('queueManagement-customer-page')
+
+    elif request.method == 'POST' and 'btnform2' in request.POST:
+        queue      = Queue.objects.get(id=queue_id)
+        queue.delete() 
+
         return redirect('queueManagement-customer-page')
 
     queue      = Queue.objects.get(pk=queue_id)
     categories = Category.objects.all().filter(Queue_id = queue_id)
+    operators = Queueoperator.objects.filter(Director = director)
     lista      = []
 
     for i in categories:
         lista.append(i.Name)
 
     categoriesStr = ",".join(lista)
-    context       = {"queue" : queue, "categoriesStr" : categoriesStr}
+    context       = {"queue" : queue, 
+                    "categoriesStr" : categoriesStr,
+                    "operators" : operators
+                    }
 
     return render(request, 'customer/edit.html', context) 
 
@@ -142,8 +162,7 @@ def error(request):
     return render(request, 'customer/error.html')
 
 
-@login_required()
-@director_required()
+# @login_required()
 # @queueoperator_required()
 def QueueOperatorSignupView(request):
     if request.method == 'POST':
@@ -168,3 +187,9 @@ def QueueOperatorSignupView(request):
 
     return render(request, 'customer/QueueOperatorSignup.html', {'form': form})
 
+def QueueOperator(request):
+    # current_operator = Queueoperator.objects.get(user_id = request.user)
+    # queue = Queue.objects.filter(Active=True)
+    # category = Category.objects.all()
+    # result = category.filter(Queue=category)
+    return render(request, 'customer/queueOperator.html')
