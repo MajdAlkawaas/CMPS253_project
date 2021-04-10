@@ -132,8 +132,9 @@
                                         <label class="col-xl-3 col-lg-3 col-form-label text-right">Queue
                                             Name</label>
                                         <div class="col-lg-9 col-xl-6">
-                                            <input class="form-control form-control-lg form-control-solid" type="text"
-                                                value="{{queue.Name}}" placeholder="Ener the Queue name" name="queueNameEdited" />
+                                            <!-- <input class="form-control form-control-lg form-control-solid" type="text"
+                                                value="" placeholder="Ener the Queue name" name="queueNameEdited" /> -->
+                                                {{form.queueNameEdited}}
                                             <span class="form-text text-muted">Here is muted text</span>
                                         </div>
                                     </div>
@@ -154,12 +155,32 @@
                                     <div class="form-group row">
                                         <label class="col-xl-3 col-lg-3 col-form-label text-right">Categories</label>
                                         <div class="col-lg-9 col-xl-6">
-                                            <input class="form-control form-control-lg form-control-solid" type="text"
-                                                value="{{categoriesStr}}" placeholder='Write the categories' name="categoriesEdited" />
+                                            {{form.categoriesEdited}}
                                             <span class="form-text text-muted">Please enter the categories of the
                                                 queue.</span>
                                         </div>
                                     </div>
+
+
+                                    <div class="separator separator-dashed my-10"></div>
+
+                                    <div class="row">
+                                        <div class="col-lg-9 col-xl-6 offset-xl-3">
+                                            <h3 class="font-size-h6 mb-5">Queue Operators Info:</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label text-right">Queue Operators</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            {{form.queueOperator_list}}
+                                        </div>
+ 
+                                    </div>
+
+
+
+                                    
                                     <!-- <div class="pb-lg-0 pb-5">
                                         <button type="submit" id="kt_login_singin_form_submit_button"
                                             class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">SignIn</button>
@@ -167,6 +188,13 @@
                                     <div class="card-footer" style="float: right;">
                                         <button type="submit" class="btn btn-primary mr-2">Submit</button>
                                     </div>
+
+                                    <div class="card-footer" style="float: right;">
+                                        <button type="button" class="btn btn-danger">Danger</button>
+                                    </div>
+
+                                    
+                                  
 
                                 </form>
                             </div>
