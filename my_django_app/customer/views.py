@@ -118,7 +118,7 @@ def edit(request,queue_id):
     categoriesStr = ",".join(lista)
     form          = EditForm(queue, categoriesStr, choices) 
 
-    if request.method == "POST":
+    if request.method == "POST" and 'btnform1' in request.POST:
         form  = EditForm(queue, categoriesStr, choices, request.POST)
         if form.is_valid():
             value = request.POST
@@ -142,6 +142,11 @@ def edit(request,queue_id):
             for category in listOfCategories:
                 if category.Name not in categories:
                     category.delete()
+        return redirect('queueManagement-customer-page')
+
+    elif request.method == 'POST' and 'btnform2' in request.POST:
+        queue      = Queue.objects.get(id=queue_id)
+        queue.delete() 
 
         return redirect('queueManagement-customer-page')
     context       = {'form': form, "queue" : queue}
@@ -158,8 +163,7 @@ def error(request):
     return render(request, 'customer/error.html')
 
 
-@login_required()
-@director_required()
+# @login_required()
 # @queueoperator_required()
 def QueueOperatorSignupView(request):
     if request.method == 'POST':
@@ -184,3 +188,9 @@ def QueueOperatorSignupView(request):
 
     return render(request, 'customer/QueueOperatorSignup.html', {'form': form})
 
+def QueueOperator(request):
+    # current_operator = Queueoperator.objects.get(user_id = request.user)
+    # queue = Queue.objects.filter(Active=True)
+    # category = Category.objects.all()
+    # result = category.filter(Queue=category)
+    return render(request, 'customer/queueOperator.html')
