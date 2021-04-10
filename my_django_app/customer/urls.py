@@ -13,5 +13,4 @@ urlpatterns = [
     path('edit/<int:queue_id>', views.edit, name="edit-customer-page"),
     path('', views.home, name="customer-home"),
     path("QueueOperatorSignup/", views.QueueOperatorSignupView, name="QueueOperatorSignup"),
-    path("QueueOperator/", views.QueueOperator, name="QueueOperator"),
 ]
