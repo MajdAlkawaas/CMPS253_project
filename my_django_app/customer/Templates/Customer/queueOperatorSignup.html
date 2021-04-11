@@ -67,11 +67,10 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="login-aside d-flex flex-column flex-row-auto">
         <!--begin::Aside Top-->
         <div class="d-flex flex-column-auto flex-column pt-15 px-30">
-            <!--begin::Aside header-->
-            <a href="#" class="login-logo py-6">
-            <!-- TODO #1: Change Logo -->
-				<!-- <img src="CMPS253/Template/assets/media/logos/logo-1.png" class="max-h-70px" alt=""/> -->
-			</a>
+
+            <a href="#" class="text-center pt-2">
+                <img src= "{%static 'customer/logo_blue.png'%}" class="max-h-125px" alt=""/>
+            </a>
             <!--end::Aside header-->
 
             <!--begin: Wizard Nav-->
@@ -143,7 +142,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <!--begin::Aside Bottom-->
         <div class="aside-img-wizard d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center pt-2 pt-lg-5"
-            style="background-position-y: calc(100% + 3rem); background-image: url(assets/media/svg/illustrations/features.svg)">
+        style="background-position-y: calc(100% + 6rem); background-image: url({%static 'customer/bottom_left2.png' %})">
         </div>
         <!--end::Aside Bottom-->
     </div>
@@ -154,8 +153,16 @@ License: You must have a valid license purchased only from themeforest(the above
         <!--begin::Top-->
         <div class="text-right d-flex justify-content-center">
             <div class="top-signup text-right d-flex justify-content-end pt-5 pb-lg-0 pb-10">
+                
     			<span class="font-weight-bold text-muted font-size-h4">Having issues?</span>
-    			<a href="javascript:;" class="font-weight-bolder text-primary font-size-h4 ml-2" id="kt_login_signup">Get Help</a>
+                <a href="javascript:;" class="font-weight-bolder text-primary font-size-h4 ml-2" id="kt_login_signup">Get Help</a>
+                <!--begin::Logo-->
+                <!-- <a href="#" class="text-center pt-2">
+                    <img src= "{%static 'customer/Blue_sqrs.png'%}" class="max-h-125px" alt=""/>
+                </a> -->
+                <!--end::Logo-->
+
+
     		</div>
 		</div>
         <!--end::Top-->
