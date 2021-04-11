@@ -66,8 +66,8 @@ def forgot(request):
         pass
     return render(request, 'customer/forgot.html') 
 
-@login_required()
-@director_required()
+# @login_required()
+# @director_required()
 def queueSetup(request):
     if request.method == "POST":
         value = request.POST
