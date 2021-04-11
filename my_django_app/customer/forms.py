@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from customer.models import Customer, Director, User, Queueoperator
+from customer.models import Customer, Director, User, Queueoperator, Queue
 from django.db import transaction
 
 
@@ -25,9 +25,55 @@ class SigninForm(forms.Form):
                                     ))
 
 
+    
+
 # class Test_signin(forms.Form):
 #     username = forms.CharField(max_length=50)
 #     password = forms.CharField(widget=forms.PasswordInput())
+
+class EditForm(forms.Form):
+    queueNameEdited     = forms.CharField(max_length=100,
+                            widget=forms.TextInput(
+                                attrs={
+                                    "type"      :   "text",
+                                    "class"     :   "form-control form-control-lg form-control-solid",
+                                }
+                            )
+                        )
+
+    categoriesEdited    = forms.CharField(
+                            widget=forms.TextInput(
+                                attrs={
+                                    "type"      :   "text",
+                                    "class"     :   "form-control form-control-lg form-control-solid",
+                                }
+                            )
+                        )
+
+    queueOperator_list = forms.MultipleChoiceField(
+        choices= (),
+        widget=forms.CheckboxSelectMultiple(
+            attrs= {
+                'class' : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
+            }
+        ),
+    )
+
+    def __init__(self, queue, categoriesStr, operators, *args, **kwargs):
+        super(EditForm, self).__init__(*args, **kwargs)
+        self.operators = operators
+        print(operators)
+        print("___________________________")
+        print(type(operators))
+        self.fields["queueNameEdited"].widget.attrs["value"] = queue.Name
+        self.fields["categoriesEdited"].widget.attrs["value"] = categoriesStr
+        # self.fields["queueOperator_list"].choices = (('first', 'a'),
+        #                                              ('second', 'b'),
+        #                                              ('third', 'c'),
+        #                                             )
+        self.fields["queueOperator_list"].choices = operators
+
+    
 
 
 class SingupForm(UserCreationForm):
