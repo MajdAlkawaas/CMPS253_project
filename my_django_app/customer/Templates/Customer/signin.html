@@ -34,7 +34,7 @@
             <div class="login-aside d-flex flex-column flex-row-auto">
                 <!--begin::Aside Bottom-->
                 <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-x-center"
-                    style="background-position-y: calc(100% + 5rem); background-image: url(assets/media/svg/illustrations/login-visual-5.svg)">
+                    style=" background-image: url({%static 'customer/Siginin_left.png' %}); background-size: cover ;" >
                 </div>
                 <!--end::Aside Bottom-->
             </div>
@@ -45,9 +45,13 @@
                 <!--begin::Top-->
                 <div class="text-right d-flex justify-content-center">
                     <div class="top-signin text-right d-flex justify-content-end pt-5 pb-lg-0 pb-10">
-                        <span class="font-weight-bold text-muted font-size-h4">Having issues?</span>
-                        <a href="javascript:;" class="font-weight-bold text-primary font-size-h4 ml-2"
-                            id="kt_login_signup">Get Help</a>
+                        <!--begin::Logo-->
+                        <a href="#" class="text-center pt-2">
+                            <img src= "{%static 'customer/logo_blue.png'%}" class="max-h-125px" alt=""/>
+                        </a>
+                        <!--end::Logo-->
+                            
+
                     </div>
                 </div>
                 <!--end::Top-->

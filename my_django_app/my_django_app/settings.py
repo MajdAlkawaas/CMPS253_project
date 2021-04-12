@@ -121,9 +121,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'projectdb',
+            'NAME': 'mydjangodb',
             'USER': 'root',
-            'PASSWORD': 'Raafat1968',
+            'PASSWORD': 'Amjk.1234',
             'HOST': 'localhost',
             'PORT': '3306',
         }
