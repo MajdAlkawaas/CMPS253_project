@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .decorators import director_required, queueoperator_required
 from customer.forms import SingupForm, SigninForm, QueueOperatorSignup, EditForm
 from django.views.generic import CreateView
-import json
+import json 
 
 def signup(request):
     if request.method == 'POST':
@@ -61,10 +61,13 @@ def welcome(request):
     return render(request, 'customer/welcome.html')
 
 def forgot(request):
-    if request.method == "POST":
-        
-        pass
-    return render(request, 'customer/forgot.html') 
+    return render(request, 'customer/registration/forgot.html') 
+
+def password_reset_done(request):
+    return render(request, 'customer/registration/password_reset_done.html') 
+
+def password_reset_confirm(request):
+    return render(request, 'customer/registration/password_reset_confirm.html')
 
 @login_required()
 @director_required()
@@ -101,8 +104,8 @@ def queueManagement(request):
 @login_required()
 def edit(request,queue_id):
 
-    queue      = Queue.objects.get(pk=queue_id)
-    categories = Category.objects.filter(Queue_id = queue_id)
+    queue            = Queue.objects.get(pk=queue_id)
+    categories       = Category.objects.filter(Queue_id = queue_id)
     current_director = Director.objects.get(user_id = request.user)
     operators        = Queueoperator.objects.filter(Director=current_director)
     choices = []
@@ -163,8 +166,6 @@ def error(request):
     return render(request, 'customer/error.html')
 
 
-# @login_required()
-# @queueoperator_required()
 def QueueOperatorSignupView(request):
     if request.method == 'POST':
         print("HERE Request is post")
@@ -194,3 +195,4 @@ def QueueOperator(request):
     # category = Category.objects.all()
     # result = category.filter(Queue=category)
     return render(request, 'customer/queueOperator.html')
+
