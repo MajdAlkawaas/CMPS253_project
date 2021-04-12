@@ -4,7 +4,7 @@ from .models import Director, Customer, Queue, Category, User, Queueoperator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .decorators import director_required, queueoperator_required
-from customer.forms import SingupForm, SigninForm, QueueOperatorSignup, EditForm
+from customer.forms import SingupForm, SigninForm, QueueOperatorSignup, EditForm, QueueOperatorForm
 from django.views.generic import CreateView
 import json
 
@@ -66,8 +66,8 @@ def forgot(request):
         pass
     return render(request, 'customer/forgot.html') 
 
-@login_required()
-@director_required()
+# @login_required()
+# @director_required()
 def queueSetup(request):
     if request.method == "POST":
         value = request.POST
@@ -117,7 +117,6 @@ def edit(request,queue_id):
 
     categoriesStr = ",".join(lista)
     form          = EditForm(queue, categoriesStr, choices) 
-
     if request.method == "POST" and 'btnform1' in request.POST:
         form  = EditForm(queue, categoriesStr, choices, request.POST)
         if form.is_valid():
@@ -145,12 +144,13 @@ def edit(request,queue_id):
         return redirect('queueManagement-customer-page')
 
     elif request.method == 'POST' and 'btnform2' in request.POST:
+        print(request.POST)
         queue      = Queue.objects.get(id=queue_id)
         queue.delete() 
 
         return redirect('queueManagement-customer-page')
-    context       = {'form': form, "queue" : queue}
 
+    context       = {'form': form, "queue" : queue}
     return render(request, 'customer/edit.html', context) 
 
 
@@ -188,9 +188,14 @@ def QueueOperatorSignupView(request):
 
     return render(request, 'customer/QueueOperatorSignup.html', {'form': form})
 
-def QueueOperator(request):
-    # current_operator = Queueoperator.objects.get(user_id = request.user)
-    # queue = Queue.objects.filter(Active=True)
-    # category = Category.objects.all()
-    # result = category.filter(Queue=category)
-    return render(request, 'customer/queueOperator.html')
+def QueueOperatorView(request):
+
+    operator = Queueoperator.objects.get(user_id=request.user)
+    opqueues = operator.Queue.all()
+
+    form  = QueueOperatorForm(opqueues)
+    if request.method == 'POST':
+        form  = QueueOperatorForm(opqueues, request.POST)
+        return redirect("QueueOperator")
+    context = {"form" : form, "opqueues" : opqueues}
+    return render(request, 'customer/queueOperator.html', context)
