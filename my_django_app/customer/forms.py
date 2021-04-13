@@ -200,7 +200,7 @@ class UserSetPasswordForm(SetPasswordForm):
     #     print("HERE: I am working UserSetPasswordForm")
 
 
-    new_password1 = forms.CharField(widget=forms.EmailInput(attrs={
+    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={
         'class'       : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6',
         'placeholder' : 'New password',
         'type'        : 'password',
@@ -208,7 +208,7 @@ class UserSetPasswordForm(SetPasswordForm):
         'autocomplete': 'new-password'
         }))
 
-    new_password1 = forms.CharField(widget=forms.EmailInput(attrs={
+    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         'class'       : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6',
         'placeholder' : 'Confrim new password',
         'type'        : 'password',
