@@ -1,8 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from customer.models import Customer, Director, User, Queueoperator, Queue
 from django.db import transaction
-
 
                                         
 class SigninForm(forms.Form):
@@ -181,3 +180,38 @@ class QueueOperatorSignup(UserCreationForm):
         user.save()
         queueoperator = Queueoperator.objects.create(user=user, Director=director, Customer=director.Customer)
         return user
+
+
+class UserPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(UserPasswordResetForm, self).__init__(*args, **kwargs)
+        print("HERE: I am working UserPasswordResetForm")
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'class'      : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6',
+        'placeholder': 'Email',
+        'type'       : 'email',
+        'name'       : 'email'
+        }))
+
+
+class UserSetPasswordForm(SetPasswordForm):
+    # def __init__(self, *args, **kwargs):
+    #     super(UserPasswordResetForm, self).__init__(*args, **kwargs)
+    #     print("HERE: I am working UserSetPasswordForm")
+
+
+    new_password1 = forms.CharField(widget=forms.EmailInput(attrs={
+        'class'       : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6',
+        'placeholder' : 'New password',
+        'type'        : 'password',
+        'name'        : 'password',
+        'autocomplete': 'new-password'
+        }))
+
+    new_password1 = forms.CharField(widget=forms.EmailInput(attrs={
+        'class'       : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6',
+        'placeholder' : 'Confrim new password',
+        'type'        : 'password',
+        'name'        : 'password',
+        'autocomplete': 'new-password'
+        }))
