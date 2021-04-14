@@ -65,13 +65,16 @@ def welcome(request):
     return render(request, 'customer/welcome.html')
 
 def forgot(request):
-    if request.method == "POST":
-        
-        pass
-    return render(request, 'customer/forgot.html') 
+    return render(request, 'customer/registration/forgot.html') 
 
-@login_required()
-@director_required()
+def password_reset_done(request):
+    return render(request, 'customer/registration/password_reset_done.html') 
+
+def password_reset_confirm(request):
+    return render(request, 'customer/registration/password_reset_confirm.html')
+
+# @login_required()
+# @director_required()
 def queueSetup(request):
     if request.method == "POST":
         value = request.POST
@@ -96,8 +99,8 @@ def queueSetup(request):
 @login_required()
 def edit(request,queue_id):
 
-    queue      = Queue.objects.get(pk=queue_id)
-    categories = Category.objects.filter(Queue_id = queue_id)
+    queue            = Queue.objects.get(pk=queue_id)
+    categories       = Category.objects.filter(Queue_id = queue_id)
     current_director = Director.objects.get(user_id = request.user)
     operators        = Queueoperator.objects.filter(Director=current_director)
     choices = []
@@ -157,8 +160,6 @@ def error(request):
     return render(request, 'customer/error.html')
 
 
-# @login_required()
-# @queueoperator_required()
 def QueueOperatorSignupView(request):
     if request.method == 'POST':
         print("HERE Request is post")
@@ -190,6 +191,7 @@ def QueueOperatorView(request):
     context = {"form" : form}
     if request.method == 'POST':
         form  = QueueOperatorForm(opqueues, request.POST)
+
         if form.is_valid():
             chosenQueue = form.cleaned_data.get("Queue_list")
             if not chosenQueue.Active:
@@ -217,3 +219,4 @@ def queueManagement(request):
                "operators": operators}
                
     return render(request, 'customer/queueManagement.html', context) 
+

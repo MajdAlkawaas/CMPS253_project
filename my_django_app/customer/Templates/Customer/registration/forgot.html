@@ -70,26 +70,10 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="login login-3 wizard d-flex flex-column flex-lg-row flex-column-fluid">
             <!--begin::Aside-->
             <div class="login-aside d-flex flex-column flex-row-auto">
-                <!--begin::Aside Top-->
-                <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
-                    <!--begin::Aside Header-->
-                    <!-- <a href="#" class="login-logo text-center pt-lg-25 pb-10">
-				<img src="CMPS253/Template/assets/media/logos/logo-1.png" class="max-h-70px" alt=""/>
-			</a> -->
-                    <!--end::Aside Header-->
-
-                    <!--begin::Aside Title-->
-                    <!-- <h3 class="font-weight-bolder text-center font-size-h4 text-dark-50  line-height-xl">
-                User Experience & Interface Design<br/>
-                Strategy SaaS Solutions
-            </h3> -->
-                    <!--end::Aside Title-->
-                </div>
-                <!--end::Aside Top-->
 
                 <!--begin::Aside Bottom-->
                 <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-x-center"
-                    style="background-position-y: calc(100% + 5rem); background-image: url(assets/media/svg/illustrations/login-visual-5.svg)">
+                    style=" background-image: url({%static 'customer/pattren_left.png' %}); background-size: cover ;" >
                 </div>
                 <!--end::Aside Bottom-->
             </div>
@@ -100,9 +84,16 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!--begin::Top-->
                 <div class="text-right d-flex justify-content-center">
                     <div class="top-forgot text-right d-flex justify-content-end pt-5 pb-lg-0 pb-10">
-                        <span class="font-weight-bold text-muted font-size-h4">Having issues?</span>
+                        <!-- <span class="font-weight-bold text-muted font-size-h4">Having issues?</span>
                         <a href="javascript:;" class="font-weight-bold text-primary font-size-h4 ml-2"
-                            id="kt_login_signup">Get Help</a>
+                            id="kt_login_signup">Get Help</a> -->
+                        <!--begin::Logo-->
+                        <a href="#" class="text-center pt-2">
+                            <img src= "{%static 'customer/logo_blue.png'%}" class="max-h-125px" alt=""/>
+                        </a>
+                        <!--end::Logo-->
+
+
                     </div>
                 </div>
                 <!--end::Top-->
