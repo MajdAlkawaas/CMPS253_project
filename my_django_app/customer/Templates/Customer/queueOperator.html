@@ -37,6 +37,11 @@
 	<link rel="stylesheet" href="{%static 'customer/light1.css'%}">
 	<!--end::Layout Themes-->
 
+	<!-- <script>
+		window.setTimeout(function(){
+			window.location.reload();
+		},60000);
+	</script> -->
 
 
 </head>
@@ -88,7 +93,7 @@
 									<button class="btn btn-success active" style="width: 10em;">Choose queue</button>
 								</div>
 							</div>
-						</form>
+						</form>	
 
 						<!-- <div class="form-group">
 							<label for="exampleSelect2">Categories </label>
@@ -123,40 +128,26 @@
 										</tr>
 									</thead>
 									<tbody>
+										
+										{% for guest in guests%}
 										<tr>
-											<td>1</td>
-											<td>2</td>
-											<td>3</td>
+											<td>{{guest.GuestNumber}}</td>
+											<td>{{guest}}</td>
+											<td>{{guest.Category.Name}}</td>
 											<td>
 												<button class="btn btn-primary active"
-													style="width: 7em;">Request</button>
+												style="width: 7em;" disabled>Request</button>
 											</td>
 											<td>
-												<button class="btn btn-success active"
-													style="width: 7em;">Serve</button>
+												<button type="submit" class="btn btn-success active"
+												style="width: 7em;" id="served">Serve</button>
 											</td>
 											<td>
-												<button class="btn btn-danger active"
-													style="width: 7em;">Remove</button>
+												<button type="submit" class="btn btn-danger active"
+												style="width: 7em;" id="Removed">Remove</button>
 											</td>
 										</tr>
-										<tr>
-											<td>1</td>
-											<td>2</td>
-											<td>3</td>
-											<td>
-												<button class="btn btn-primary active"
-													style="width: 7em;">Request</button>
-											</td>
-											<td>
-												<button class="btn btn-success active"
-													style="width: 7em;">Serve</button>
-											</td>
-											<td>
-												<button class="btn btn-danger active"
-													style="width: 7em;">Remove</button>
-											</td>
-										</tr>
+										{%endfor%}
 									</tbody>
 								</table>
 							</div>
@@ -267,10 +258,10 @@
 
 		});
 
-		$(document).ready(function () {
-			$('#example2').DataTable();
+		// $(document).ready(function () {
+		// 	$('#example2').DataTable();
 
-		});
+		// });
 	</script>
 	<!-- <script src="{%static 'customer/queueManagement.js'%}"></script> -->
 	<!--end::Page Scripts-->
