@@ -5,8 +5,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .decorators import director_required, queueoperator_required
 from customer.forms import SingupForm, SigninForm, QueueOperatorSignup, EditForm, QueueOperatorForm
+from customer.Myqueue import MyQueue
+from guest.models import Guest
+from guest.views import guest_view_uuid
 from django.views.generic import CreateView
-import json 
 from django.core.mail import send_mail, BadHeaderError
 from .forms import UserPasswordResetForm, UserSetPasswordForm
 from django.template.loader import render_to_string
@@ -14,7 +16,7 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
-
+from django.db.models import Q
 
 def signup(request):
     if request.method == 'POST':
@@ -99,15 +101,6 @@ def queueSetup(request):
 
 # @login_required()
 # @director_required()
-def queueManagement(request):
-    current_director = Director.objects.get(user_id = request.user)
-    data             = Queue.objects.filter(Director = current_director)
-    operators        = Queueoperator.objects.filter(Director=current_director)
-    context  = {"data"    : data, 
-               "director" : current_director,
-               "operators": operators}
-               
-    return render(request, 'customer/queueManagement.html', context) 
 
 @login_required()
 def edit(request,queue_id):
@@ -122,7 +115,6 @@ def edit(request,queue_id):
         choices.append(temp)
     choices = tuple(choices)
     lista      = []
-    # print(operatorsNames)
     for i in categories:
         lista.append(i.Name)
 
@@ -190,7 +182,6 @@ def QueueOperatorSignupView(request):
             print("Here input is invalid")
             print(form.cleaned_data)
             print(form.is_valid)
-    # if a GET (or any other method) we'll create a blank form
     else:
         print("HERE Request is not post")
         form = QueueOperatorSignup()
@@ -198,15 +189,28 @@ def QueueOperatorSignupView(request):
     return render(request, 'customer/QueueOperatorSignup.html', {'form': form})
 
 def QueueOperatorView(request):
-
+    counter = 0
     operator = Queueoperator.objects.get(user_id=request.user)
     opqueues = operator.Queue.all()
 
     form  = QueueOperatorForm(opqueues)
+    context = {"form" : form}
     if request.method == 'POST':
         form  = QueueOperatorForm(opqueues, request.POST)
-        return redirect("QueueOperator")
-    context = {"form" : form, "opqueues" : opqueues}
+
+        if form.is_valid():
+            chosenQueue = form.cleaned_data.get("Queue_list")
+            if not chosenQueue.Active:
+                chosenQueue.Active = True
+                chosenQueue.save()
+            guests = Guest.objects.filter(Q(WalkedAway=False) & Q(Kickedout=False) & Q(Served=False) & Q(Queue = chosenQueue))
+            for guest in guests:
+                guest.GuestNumber = counter
+                counter+=1
+                guest.save()
+            context["opqueues"] = opqueues
+            context["guests"] = guests
+            return render(request, 'customer/queueOperator.html', context)
     return render(request, 'customer/queueOperator.html', context)
 
 def password_reset_request(request):
@@ -241,3 +245,16 @@ def password_reset_request(request):
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="customer/registration/password_reset.html", 
                     context={"password_reset_form":password_reset_form})
+
+def queueManagement(request):
+    current_director = Director.objects.get(user_id = request.user)
+    data             = Queue.objects.filter(Director = current_director)
+    operators        = Queueoperator.objects.filter(Director=current_director)
+    for i in data:
+        print(i.Active)
+    context  = {"data"    : data, 
+               "director" : current_director,
+               "operators": operators}
+               
+    return render(request, 'customer/queueManagement.html', context) 
+
