@@ -6,7 +6,6 @@ from .forms import UserPasswordResetForm, UserSetPasswordForm
 
 urlpatterns = [
 
-    path("password_reset", views.password_reset_request, name="password_reset"),
 
     path('password_reset/', 
         auth_views.PasswordResetView.as_view(
