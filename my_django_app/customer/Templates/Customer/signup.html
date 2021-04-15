@@ -196,9 +196,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="col-xl-6">
                                 <!--begin::Input-->
                                 <div class="form-group">
-                                    {% comment %} {{ form.FirstName.errors }} {% endcomment %}
                                     <label class="font-size-h6 font-weight-bolder text-dark">First Name</label>
-                                    {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="fname" placeholder="First Name" value="" /> {% endcomment %}
                                     {{ form.first_name }}
                                     
                                 </div>
@@ -208,7 +206,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <!--begin::Input-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Last Name</label>
-                                    {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="lname" placeholder="Last Name" value="" /> {% endcomment %}
                                     {{ form.last_name }}
                                 </div>
                                 <!--end::Input-->
@@ -221,7 +218,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <!--begin::Input-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Username</label>
-                                    {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="username" placeholder="User Name" value="" /> {% endcomment %}
                                     {{ form.username }}
                                 </div>
                                 <!--end::Input-->
@@ -230,7 +226,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <!--begin::Input-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
-                                    {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="email" placeholder="Email Address" value="" /> {% endcomment %}
                                     {{ form.email }}
                                 </div>
                                 <!--end::Input-->
@@ -239,26 +234,17 @@ License: You must have a valid license purchased only from themeforest(the above
                         <!--end::Row-->
 
 
-                        <!--begin::Form group-->
-                        <!-- <div class="form-group">
-                            <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
-                            <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="EmailAddress" autocomplete="on"/>
-                        </div> -->
-                        <!--end::Form group-->
 
                         <!--begin::Form Group-->
                         <div class="form-group">
                             <label class="font-size-h6 font-weight-bolder text-dark">Password</label>                            
-                            {% comment %} <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"  name="password" autocomplete="off" />     {% endcomment %}
                             {{form.password1}}
-                            {% comment %} {{form.errors.password1}} {% endcomment %}
                         </div>
                         <!--end::Form Group-->
 
                         <!--begin::Form Group-->
                         <div class="form-group">
                             <label class="font-size-h6 font-weight-bolder text-dark">Comfirm Password</label>                            
-                            {% comment %} <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"  name="password" autocomplete="off" />     {% endcomment %}
                             {{form.password2}}
 
                             <div class="fv-plugins-message-container">
