@@ -17,6 +17,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.db.models import Q
+import re
 
 def signup(request):
     if request.method == 'POST':
@@ -114,6 +115,7 @@ def edit(request,queue_id):
         temp = (element, element.user.username)
         choices.append(temp)
     choices = tuple(choices)
+    # print(choices)
     lista      = []
     for i in categories:
         lista.append(i.Name)
@@ -123,7 +125,6 @@ def edit(request,queue_id):
     if request.method == "POST" and 'btnform1' in request.POST:
         form  = EditForm(queue, categoriesStr, choices, request.POST)
         if form.is_valid():
-            value = request.POST
             queue      = Queue.objects.get(id=queue_id)
             queue.Name = form.cleaned_data.get("queueNameEdited")
             queue.save()
@@ -136,6 +137,28 @@ def edit(request,queue_id):
             categories = form.cleaned_data.get("categoriesEdited")
             categories = categories.split(',')
 
+            OperatorStringList = form.cleaned_data.get("queueOperator_list")
+            operatorsIDs = []
+            for item in OperatorStringList:
+                for s in item:
+                    temp = re.findall("\d+", s)
+                    if(len(temp) > 0):
+                        operatorsIDs.append(int(temp[0]))
+
+            # print()
+            for i in operatorsIDs:
+                op = Queueoperator.objects.get(user=i)
+                op.Queue.add(queue)
+            # print(Qoperators)
+            # for operator in range(3,5):
+            #     Qoperators = Queueoperator.objects.get(user=operator)
+            #     print("********************") 
+            #     print(Qoperators)
+            # print(Qoperators)
+            # for operator in qOperators:
+            #     operator.Queue = queue
+            #     operator.save()
+            
             for category in categories:
                 if category not in listNames:
                      Category.objects.create(Name = category,
@@ -147,7 +170,6 @@ def edit(request,queue_id):
         return redirect('queueManagement-customer-page')
 
     elif request.method == 'POST' and 'btnform2' in request.POST:
-        print(request.POST)
         queue      = Queue.objects.get(id=queue_id)
         queue.delete() 
 
