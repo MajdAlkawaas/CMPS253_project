@@ -69,7 +69,7 @@
                                 <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h3>
                                 <div class="text-muted font-weight-bold font-size-h4">
                                     New Here?
-                                    <a href="custom/pages/login/login-3/signup.html"
+                                    <a href="{% url 'signup-customer-page' %}"
                                         class="text-primary font-weight-bolder">Create Account</a>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                 <div class="d-flex justify-content-between mt-n5">
                                     <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
 
-                                    <a href="custom/pages/login/login-3/forgot.html"
+                                    <a href="{% url 'password_reset' %}"
                                         class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">
                                         Forgot Password ?
                                     </a>
@@ -135,7 +135,7 @@
                         "white": "#ffffff",
                         "primary": "#3699FF",
                         "secondary": "#E5EAEE",
-                        "success": "#1BC5BD",
+                        "success": "#1B78C5",
                         "info": "#8950FC",
                         "warning": "#FFA800",
                         "danger": "#F64E60",
@@ -146,7 +146,7 @@
                         "white": "#ffffff",
                         "primary": "#E1F0FF",
                         "secondary": "#EBEDF3",
-                        "success": "#C9F7F5",
+                        "success": "#C9E2F7",
                         "info": "#EEE5FF",
                         "warning": "#FFF4DE",
                         "danger": "#FFE2E5",
