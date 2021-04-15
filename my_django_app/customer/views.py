@@ -17,6 +17,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.db.models import Q
+from django.contrib import messages
 import re
 
 def signup(request):
@@ -55,8 +56,9 @@ def signin(request):
             if user is not None:
                 login(request, user)
                 print("HERE User {} is logged in".format(username))
-                return redirect('welcome-customer-page')
+                return redirect('queueManagement-customer-page')
             else:
+                messages.error(request,'username or password not correct')
                 print("HERE User is not logged in")
     else:
         form = SigninForm()
@@ -187,7 +189,6 @@ def home(request):
 def error(request):
     return render(request, 'customer/error.html')
 
-
 def QueueOperatorSignupView(request):
     if request.method == 'POST':
         print("HERE Request is post")
@@ -277,6 +278,12 @@ def queueManagement(request):
     context  = {"data"    : data, 
                "director" : current_director,
                "operators": operators}
+    
+    if request.method == 'POST':
+        logout(request)
+        return redirect('signin-customer-page')
+    if not request.user.is_authenticated:
+        return redirect('signin-customer-page')
                
     return render(request, 'customer/queueManagement.html', context) 
 

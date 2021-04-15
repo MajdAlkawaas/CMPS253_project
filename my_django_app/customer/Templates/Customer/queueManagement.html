@@ -104,13 +104,13 @@ License: You must have a valid license purchased only from themeforest(the above
 		<div class="d-flex flex-row flex-column-fluid page">
 
 			<!--begin::Aside-->
-			<div class="aside aside-left  aside-fixed  d-flex flex-column flex-row-auto" id="kt_aside">
+			<div class="aside aside-left  aside-fixed  d-flex flex-column flex-row-auto"  id="kt_aside">
 				<!--begin::Brand-->
 				<div class="brand flex-column-auto " id="kt_brand">
 					<!--begin::Logo-->
-					<!-- <a href="index.html" class="brand-logo"> -->
-					<!-- <img alt="Logo" src="CMPS253/Template/assets/media/logos/logo-light.png"/>
-		</a> -->
+					<a href="index.html" class="brand-logo">
+						<img alt="Logo" src="{%static 'customer/logo_white.png'%}" class="max-h-50px" alt=""/>
+					</a>
 					<!--end::Logo-->
 
 					<!--begin::Toggle-->
@@ -191,8 +191,11 @@ License: You must have a valid license purchased only from themeforest(the above
 						<!--begin::Topbar-->
 						<div class="topbar">
 
-
-
+							<div class="topbar-item">
+								<form method="POST"> {% csrf_token %}
+									<button type='submit' class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Log out</button>
+								</form>
+							</div>
 
 							<!--begin::User-->
 							<div class="topbar-item">
@@ -390,7 +393,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						"white": "#ffffff",
 						"primary": "#3699FF",
 						"secondary": "#E5EAEE",
-						"success": "#1BC5BD",
+						"success": "#1B78C5",
 						"info": "#8950FC",
 						"warning": "#FFA800",
 						"danger": "#F64E60",
@@ -401,7 +404,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						"white": "#ffffff",
 						"primary": "#E1F0FF",
 						"secondary": "#EBEDF3",
-						"success": "#C9F7F5",
+						"success": "#C9E2F7",
 						"info": "#EEE5FF",
 						"warning": "#FFF4DE",
 						"danger": "#FFE2E5",
