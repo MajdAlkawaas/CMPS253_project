@@ -10,16 +10,17 @@ class SigninForm(forms.Form):
                                         attrs={
                                             'type'       : 'email',
                                             'class'      : 'form-control h-auto py-7 px-6 rounded-lg border-0',
-                                            'placeholder': 'Email Address'
+                                            'placeholder': 'Username'
                                         }
                                     ))
     
     password    = forms.CharField(max_length=50,
                                     widget=forms.PasswordInput(
                                         attrs={
-                                            'type'            : 'password',
-                                            'class'           : 'form-control h-auto py-7 px-6 rounded-lg border-0',
-                                            'autocomplete'    : 'off'
+                                            'type'        : 'password',
+                                            'class'       : 'form-control h-auto py-7 px-6 rounded-lg border-0',
+                                            'placeholder' : 'Password',
+                                            'autocomplete': 'off'
                                         }
                                     ))
 
@@ -189,7 +190,6 @@ class UserPasswordResetForm(PasswordResetForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={
         'class'      : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6',
         'placeholder': 'Email',
-        'type'       : 'email',
         'name'       : 'email'
         }))
 
