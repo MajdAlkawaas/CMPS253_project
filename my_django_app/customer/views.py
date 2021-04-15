@@ -147,20 +147,10 @@ def edit(request,queue_id):
                     if(len(temp) > 0):
                         operatorsIDs.append(int(temp[0]))
 
-            # print()
             for i in operatorsIDs:
                 op = Queueoperator.objects.get(user=i)
                 op.Queue.add(queue)
-            # print(Qoperators)
-            # for operator in range(3,5):
-            #     Qoperators = Queueoperator.objects.get(user=operator)
-            #     print("********************") 
-            #     print(Qoperators)
-            # print(Qoperators)
-            # for operator in qOperators:
-            #     operator.Queue = queue
-            #     operator.save()
-            
+
             for category in categories:
                 if category not in listNames:
                      Category.objects.create(Name = category,
