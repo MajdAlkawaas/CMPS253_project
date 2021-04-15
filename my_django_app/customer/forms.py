@@ -32,7 +32,7 @@ class SigninForm(forms.Form):
 #     password = forms.CharField(widget=forms.PasswordInput())
 
 class EditForm(forms.Form):
-    queueNameEdited     = forms.CharField(max_length=100,
+    queueNameEdited     = forms.CharField(max_length=100, required=False,
                             widget=forms.TextInput(
                                 attrs={
                                     "type"      :   "text",
@@ -41,7 +41,7 @@ class EditForm(forms.Form):
                             )
                         )
 
-    categoriesEdited    = forms.CharField(
+    categoriesEdited    = forms.CharField(required=False,
                             widget=forms.TextInput(
                                 attrs={
                                     "type"      :   "text",
@@ -50,11 +50,11 @@ class EditForm(forms.Form):
                             )
                         )
 
-    queueOperator_list = forms.MultipleChoiceField(
+    queueOperator_list = forms.MultipleChoiceField(required=False,
         choices= (),
-        widget=forms.CheckboxSelectMultiple(
+        widget=forms.SelectMultiple(
             attrs= {
-                'class' : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
+                'class' : 'form-control selectpicker'
             }
         ),
     )

@@ -63,7 +63,7 @@ class Queueoperator(models.Model):
     CreatedAt = models.DateTimeField(auto_now=True)
     Customer  = models.ForeignKey(Customer, on_delete=models.CASCADE)
     Director  = models.ForeignKey(Director, on_delete=models.CASCADE)
-    Queue     = models.ManyToManyField(Queue)
+    Queue     = models.ManyToManyField(Queue, blank=True)
 
 
 
