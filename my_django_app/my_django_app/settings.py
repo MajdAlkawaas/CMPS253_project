@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -121,9 +120,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'mydjangodb',
+            'NAME': 'queuemaker-users-db',
             'USER': 'root',
-            'PASSWORD': 'Amjk.1234',
+            'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '3306',
         }
@@ -170,5 +169,4 @@ STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'customer.User'
 # STATIC_DIR = ''
-
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
