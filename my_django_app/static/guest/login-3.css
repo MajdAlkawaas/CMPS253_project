@@ -78,9 +78,9 @@
           transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
           transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
           transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
-          background-color: #C9F7F5; }
+          background-color: #C9E2F7; }
           .login.login-3 .login-aside .wizard-nav .wizard-steps .wizard-step[data-wizard-state="done"] .wizard-icon .wizard-check {
-            color: #1BC5BD;
+            color: #1B78C5;
             display: inline-block; }
           .login.login-3 .login-aside .wizard-nav .wizard-steps .wizard-step[data-wizard-state="done"] .wizard-icon .wizard-number {
             display: none; }
@@ -98,12 +98,12 @@
             transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
             transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
             transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
-            background-color: #C9F7F5; }
+            background-color: #C9E2F7; }
             .login.login-3 .login-aside .wizard-nav .wizard-steps .wizard-step[data-wizard-state="current"] .wizard-icon .wizard-check {
-              color: #1BC5BD;
+              color: #1B78C5;
               display: none; }
             .login.login-3 .login-aside .wizard-nav .wizard-steps .wizard-step[data-wizard-state="current"] .wizard-icon .wizard-number {
-              color: #1BC5BD; }
+              color: #1B78C5; }
           .login.login-3 .login-aside .wizard-nav .wizard-steps .wizard-step[data-wizard-state="current"] .wizard-label .wizard-title {
             color: #181C32; }
           .login.login-3 .login-aside .wizard-nav .wizard-steps .wizard-step[data-wizard-state="current"] .wizard-label .wizard-desc {
