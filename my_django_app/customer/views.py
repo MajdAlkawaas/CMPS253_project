@@ -263,8 +263,8 @@ def queueManagement(request):
     current_director = Director.objects.get(user_id = request.user)
     data             = Queue.objects.filter(Director = current_director)
     operators        = Queueoperator.objects.filter(Director=current_director)
-    for i in data:
-        print(i.Active)
+    # for i in data:
+    #     print(i.Active)
     context  = {"data"    : data, 
                "director" : current_director,
                "operators": operators}
