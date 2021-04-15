@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.urls import reverse
 from customer.models import Customer,Director, Category, Queue, User
 from guest.models import Guest
 from guest.forms import GuestForm
@@ -32,11 +34,18 @@ def guest_view_uuid(request, director_uuid):
     print("------------------------")
 
     form = GuestForm(categories = categories)
-    # form = GuestForm()
+    context = {
+        'queues'    : queues,
+        'director'  : user,
+        'customer'  : customer,
+        'categories': categories,
+        'form'      : form
+    }
     if request.method == 'POST':
         form = GuestForm(categories, request.POST)
         if form.is_valid():
-            
+
+            print("WORKING")
             print("guest.views\n HERE: ------CLEANED DATA------ \n", form.cleaned_data)
             print("------------------------")
             guest01 = Guest.objects.create(Name        = form.cleaned_data.get("name"),
@@ -46,21 +55,21 @@ def guest_view_uuid(request, director_uuid):
                                            Customer    = customer,
                                            Queue       = form.cleaned_data.get("categories_list").Queue)
             print("GUEST obj\n", guest01) 
-            return redirect('guest-waiting-page')
+            context['guest01'] = guest01
+            return HttpResponseRedirect('../../guestWaitingPage/' + str(guest01.id))
         else: 
             print("------------------------")
             print("guest.views\n HERE WRONG")
             print("------------------------")
 
-    context = {
-        'queues'    : queues,
-        'director'  : user,
-        'customer'  : customer,
-        'categories': categories,
-        'form'      : form
-    }
     return render(request, 'guest/guest.html', context) 
 
 
-def guest_waiting_page(request):
+def guest_waiting_page(request, guest_id):
+    if request.method == 'POST':
+        guest = Guest.objects.get(id=guest_id)
+        print(guest)
+        guest.WalkedAway = True
+        print(guest.WalkedAway)
+        guest.save()
     return render(request, "guest/waitingPage.html")
