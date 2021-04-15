@@ -9,8 +9,16 @@ from customer.Myqueue import MyQueue
 from guest.models import Guest
 from guest.views import guest_view_uuid
 from django.views.generic import CreateView
+from django.core.mail import send_mail, BadHeaderError
+from .forms import UserPasswordResetForm, UserSetPasswordForm
+from django.template.loader import render_to_string
+from django.db.models.query_utils import Q
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
 from django.db.models import Q
-import json
+from django.contrib import messages
+import re
 
 def signup(request):
     if request.method == 'POST':
@@ -48,8 +56,9 @@ def signin(request):
             if user is not None:
                 login(request, user)
                 print("HERE User {} is logged in".format(username))
-                return redirect('welcome-customer-page')
+                return redirect('queueManagement-customer-page')
             else:
+                messages.error(request,'username or password not correct')
                 print("HERE User is not logged in")
     else:
         form = SigninForm()
@@ -108,6 +117,7 @@ def edit(request,queue_id):
         temp = (element, element.user.username)
         choices.append(temp)
     choices = tuple(choices)
+    # print(choices)
     lista      = []
     for i in categories:
         lista.append(i.Name)
@@ -117,7 +127,6 @@ def edit(request,queue_id):
     if request.method == "POST" and 'btnform1' in request.POST:
         form  = EditForm(queue, categoriesStr, choices, request.POST)
         if form.is_valid():
-            value = request.POST
             queue      = Queue.objects.get(id=queue_id)
             queue.Name = form.cleaned_data.get("queueNameEdited")
             queue.save()
@@ -130,6 +139,18 @@ def edit(request,queue_id):
             categories = form.cleaned_data.get("categoriesEdited")
             categories = categories.split(',')
 
+            OperatorStringList = form.cleaned_data.get("queueOperator_list")
+            operatorsIDs = []
+            for item in OperatorStringList:
+                for s in item:
+                    temp = re.findall("\d+", s)
+                    if(len(temp) > 0):
+                        operatorsIDs.append(int(temp[0]))
+
+            for i in operatorsIDs:
+                op = Queueoperator.objects.get(user=i)
+                op.Queue.add(queue)
+
             for category in categories:
                 if category not in listNames:
                      Category.objects.create(Name = category,
@@ -141,7 +162,6 @@ def edit(request,queue_id):
         return redirect('queueManagement-customer-page')
 
     elif request.method == 'POST' and 'btnform2' in request.POST:
-        print(request.POST)
         queue      = Queue.objects.get(id=queue_id)
         queue.delete() 
 
@@ -158,7 +178,6 @@ def home(request):
 
 def error(request):
     return render(request, 'customer/error.html')
-
 
 def QueueOperatorSignupView(request):
     if request.method == 'POST':
@@ -207,6 +226,38 @@ def QueueOperatorView(request):
             return render(request, 'customer/queueOperator.html', context)
     return render(request, 'customer/queueOperator.html', context)
 
+def password_reset_request(request):
+    print("HERE: 01")
+    if request.method == "POST":
+        print("HERE: 02")
+        password_reset_form = UserPasswordResetForm(request.POST)
+        if password_reset_form.is_valid():
+            print("HERE: 03")
+            data = password_reset_form.cleaned_data['email']
+            associated_users = User.objects.filter(Q(email=data))
+            if associated_users.exists():
+                print("HERE: 04")
+                for user in associated_users:
+                    subject = "Password Reset Requested"
+                    email_template_name = "customer/registration/password_reset_email.txt"
+                    c = {
+                    "email":user.email,
+                    'domain':'127.0.0.1:8000',
+                    'site_name': 'Website',
+                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "user": user,
+                    'token': default_token_generator.make_token(user),
+                    'protocol': 'http',
+                    }
+                    email = render_to_string(email_template_name, c)
+                    try:
+                        send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
+                    except BadHeaderError:
+                        return HttpResponse('Invalid header found.')
+                    return redirect ("/password_reset/done/")
+    password_reset_form = PasswordResetForm()
+    return render(request=request, template_name="customer/registration/password_reset.html", 
+                    context={"password_reset_form":password_reset_form})
 
 def queueManagement(request):
     current_director = Director.objects.get(user_id = request.user)
@@ -215,6 +266,12 @@ def queueManagement(request):
     context  = {"data"    : data, 
                "director" : current_director,
                "operators": operators}
+    
+    if request.method == 'POST':
+        logout(request)
+        return redirect('signin-customer-page')
+    if not request.user.is_authenticated:
+        return redirect('signin-customer-page')
                
     return render(request, 'customer/queueManagement.html', context) 
 

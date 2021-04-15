@@ -1,8 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from customer.models import Customer, Director, User, Queueoperator, Queue
 from django.db import transaction
-
 
                                         
 class SigninForm(forms.Form):
@@ -11,16 +10,17 @@ class SigninForm(forms.Form):
                                         attrs={
                                             'type'       : 'email',
                                             'class'      : 'form-control h-auto py-7 px-6 rounded-lg border-0',
-                                            'placeholder': 'Email Address'
+                                            'placeholder': 'Username'
                                         }
                                     ))
     
     password    = forms.CharField(max_length=50,
                                     widget=forms.PasswordInput(
                                         attrs={
-                                            'type'            : 'password',
-                                            'class'           : 'form-control h-auto py-7 px-6 rounded-lg border-0',
-                                            'autocomplete'    : 'off'
+                                            'type'        : 'password',
+                                            'class'       : 'form-control h-auto py-7 px-6 rounded-lg border-0',
+                                            'placeholder' : 'Password',
+                                            'autocomplete': 'off'
                                         }
                                     ))
 
@@ -32,7 +32,7 @@ class SigninForm(forms.Form):
 #     password = forms.CharField(widget=forms.PasswordInput())
 
 class EditForm(forms.Form):
-    queueNameEdited     = forms.CharField(max_length=100,
+    queueNameEdited     = forms.CharField(max_length=100, required=False,
                             widget=forms.TextInput(
                                 attrs={
                                     "type"      :   "text",
@@ -41,7 +41,7 @@ class EditForm(forms.Form):
                             )
                         )
 
-    categoriesEdited    = forms.CharField(
+    categoriesEdited    = forms.CharField(required=False,
                             widget=forms.TextInput(
                                 attrs={
                                     "type"      :   "text",
@@ -50,11 +50,11 @@ class EditForm(forms.Form):
                             )
                         )
 
-    queueOperator_list = forms.MultipleChoiceField(
+    queueOperator_list = forms.MultipleChoiceField(required=False,
         choices= (),
-        widget=forms.CheckboxSelectMultiple(
+        widget=forms.SelectMultiple(
             attrs= {
-                'class' : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6'
+                'class' : 'form-control selectpicker'
             }
         ),
     )
@@ -181,3 +181,37 @@ class QueueOperatorSignup(UserCreationForm):
         user.save()
         queueoperator = Queueoperator.objects.create(user=user, Director=director, Customer=director.Customer)
         return user
+
+
+class UserPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(UserPasswordResetForm, self).__init__(*args, **kwargs)
+        print("HERE: I am working UserPasswordResetForm")
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'class'      : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6',
+        'placeholder': 'Email',
+        'name'       : 'email'
+        }))
+
+
+class UserSetPasswordForm(SetPasswordForm):
+    # def __init__(self, *args, **kwargs):
+    #     super(UserPasswordResetForm, self).__init__(*args, **kwargs)
+    #     print("HERE: I am working UserSetPasswordForm")
+
+
+    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class'       : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6',
+        'placeholder' : 'New password',
+        'type'        : 'password',
+        'name'        : 'password',
+        'autocomplete': 'new-password'
+        }))
+
+    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class'       : 'form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6',
+        'placeholder' : 'Confrim new password',
+        'type'        : 'password',
+        'name'        : 'password',
+        'autocomplete': 'new-password'
+        }))
