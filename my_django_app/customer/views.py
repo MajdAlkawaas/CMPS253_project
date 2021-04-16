@@ -56,7 +56,10 @@ def signin(request):
             if user is not None:
                 login(request, user)
                 print("HERE User {} is logged in".format(username))
-                return redirect('queueManagement-customer-page')
+                if user.is_director == True:
+                    return redirect('queueManagement-customer-page')
+                elif user.is_queueoperator == True:
+                    return redirect('QueueOperator')
             else:
                 messages.error(request,'username or password not correct')
                 print("HERE User is not logged in")
