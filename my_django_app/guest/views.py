@@ -66,10 +66,9 @@ def guest_view_uuid(request, director_uuid):
 
 
 def guest_waiting_page(request, guest_id):
+    guest = Guest.objects.get(id=guest_id)
     if request.method == 'POST':
-        guest = Guest.objects.get(id=guest_id)
-        print(guest)
         guest.WalkedAway = True
-        print(guest.WalkedAway)
         guest.save()
-    return render(request, "guest/waitingPage.html")
+    context = {"guest":guest}
+    return render(request, "guest/waitingPage.html", context)
