@@ -173,25 +173,10 @@ code.
 
 This the weekly update video for project 15 online queue maker: 
 
-In this week, we gave the director the ability to assign queueoperators to specific queues. From the 
-queuemanagement page, he clicks on the edit icon of this specific queue to take him to the queue edit
-page. From here, he assigns one or multiple queue operators to this queue. If we check from our admin 
-page we see that indeed the queue operators were assigned to this specific queue.
-
-We also worked on the queue operator page. In this page, the operator chooses the queue he is going
-to operate on and the guests belonging to the categories of this queue get displayed infront of the 
-queue operator and he has the ability to deal with only the first guest in the queue, either request, mark 
-as served and go to the next guest, or remove from the queue if he didnt show up. As shown here, all 
-buttons except those of the first guest in the queue are disabled. 
-
-Furthermore, we worked on the logo of our project. It is called Qvirt, taken from virtual Q. We added it 
-the different pages of our app as shown here. 
 
 
 --------------------------NEXT WEEK--------------------------------
 
-Next week, we will work on the forget password backend functionality as well as error-handling backend
-code.
 
 
 
