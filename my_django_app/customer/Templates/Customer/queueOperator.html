@@ -258,11 +258,23 @@
 
 		});
 
-		// $(document).ready(function () {
-		// 	$('#example2').DataTable();
+		$('#example1').DataTable({
+			"aoColumnDefs" :[
+			{ "bSortable": false, "aTargets": [ 0, 1, 2, 3 ,4, 5] },
+			// {dom: 'lrtip'},
+        	// { "bSearchable": false, "aTargets": [ 0, 1, 2, 3 ] }
+			]
+		})
 
-		// });
+		// $('#example1').DataTable({sDom: 'lrtip'});
+
+	
 	</script>
+	<style>
+	.dataTables_filter {
+		display: none;
+		}
+	</style>
 	<!-- <script src="{%static 'customer/queueManagement.js'%}"></script> -->
 	<!--end::Page Scripts-->
 	<!--end::Page Scripts-->
