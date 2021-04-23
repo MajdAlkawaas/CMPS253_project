@@ -40,7 +40,7 @@
 	<!-- <script>
 		window.setTimeout(function(){
 			window.location.reload();
-		},60000);
+		},30000);
 	</script> -->
 
 
@@ -63,7 +63,6 @@
 		<div class="d-flex flex-row flex-column-fluid page">
 
 			<!--begin::Wrapper-->
-			<!-- <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper"> -->
 
 			<!--begin::Content-->
 			<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
@@ -80,73 +79,49 @@
 						<div class="form-group row">
 							<label class="col-form-label text-right col-lg-3 col-sm-12">Queue</label>
 							<div class=" col-lg-4 col-md-9 col-sm-12">
-									<!-- <select class="form-control " id="kt_select2_1" name="param" id="exampleSelect2">
-										<option value="AK">Alaska</option>
-										<option value="HI">Hawaii</option>
-										<option value="CA">California</option>
-										<option value="NV">Nevada</option>
-										<option value="OR">Oregon</option>
-										<option value="WA">Washington</option>
-										<option value="AZ">Arizona</option>
-									</select> -->
 									{{form.Queue_list}}
-									<button class="btn btn-success active" style="width: 10em;">Choose queue</button>
+									<button class="btn btn-success active" style="width: 10em;" name="chooseQueue">Choose queue</button>
 								</div>
 							</div>
-						</form>	
-
-						<!-- <div class="form-group">
-							<label for="exampleSelect2">Categories </label>
-							{% comment %} <select multiple="" class="form-control" id="exampleSelect2" name="category_option">
-								<option>Choose a category</option>
-								{% for category in categories %}
-									<option> {{category.Name}} </option>
-								{% endfor %}
-							</select> {% endcomment %}
-							{{ form.categories_list }}
-						</div> -->
-
-
-
-
-
-
 
 						<div class="card card-custom gutter-b">
 							<div class="card-body">
 								<!-- <div class="tab-content"> -->
-								<!-- <div class="tab-pane fade" id="profile"> -->
-								<table id="example1" class="display" style="width:100%">
-									<thead>
-										<tr>
-											<th>Number</th>
-											<th>Name</th>
-											<th>Category</th>
-											<th>Request</th>
-											<th>Served</th>
-											<th>Removed</th>
-										</tr>
-									</thead>
-									<tbody>
-										
-										{% for guest in guests%}
-										<tr>
-											<td>{{guest.GuestNumber}}</td>
-											<td>{{guest}}</td>
-											<td>{{guest.Category.Name}}</td>
-											<td>
-												<button class="btn btn-primary active"
-												style="width: 7em;" disabled>Request</button>
-											</td>
-											<td>
-												<button type="submit" class="btn btn-success active"
-												style="width: 7em;" id="served">Serve</button>
-											</td>
-											<td>
-												<button type="submit" class="btn btn-danger active"
-												style="width: 7em;" id="Removed">Remove</button>
-											</td>
-										</tr>
+									<!-- <div class="tab-pane fade" id="profile"> -->
+										<table id="example1" class="display" style="width:100%">
+											<thead>
+												<tr>
+													<th>Number</th>
+													<th>Name</th>
+													<th>Category</th>
+													<th>Served</th>
+													<th>Request</th>
+													<th>Removed</th>
+												</tr>
+											</thead>
+											<tbody>
+												
+												{% for guest in guests%}
+												<tr>
+													<td>{{guest.GuestNumber}}</td>
+													<td>{{guest}}</td>
+													<td>{{guest.Category.Name}}</td>
+													<td>
+														<button type="submit" class="btn btn-primary active hi" style="width: 7em;" 
+														{%ifnotequal guest.GuestNumber guestNumbers%} disabled {% endifnotequal %}
+														name="btnform1">Request</button>
+													</td>
+													<td>
+														<button type="submit" class="btn btn-success active serve" style="width: 7em;" id="served"
+														{%ifnotequal guest.GuestNumber guestNumbers%} disabled {% endifnotequal %}
+														name="btnserve">Serve</button>
+													</td>
+													<td>
+														<button type="submit" class="btn btn-danger active remove" style="width: 7em;" id="Removed"
+														{%ifnotequal guest.GuestNumber guestNumbers%} disabled {% endifnotequal %}
+														name="btnremove">Remove</button>
+													</td>
+												</tr>
 										{%endfor%}
 									</tbody>
 								</table>
@@ -154,6 +129,7 @@
 						</div>
 						<!--end::Card-->
 					</div>
+				</form>	
 					<!--end::Container-->
 				</div>
 				<!--end::Entry-->
@@ -239,7 +215,6 @@
 	<script src="{%static 'customer/plugins.bundle.js'%}"></script>
 	<script src="{%static 'customer/prismjs.bundle.js'%}"></script>
 	<script src="{%static 'customer/scripts.bundle.js'%}"></script>
-	<script src="{%static 'customer/tagify.js'%}"></script>
 	<!--end::Global Theme Bundle-->
 
 
@@ -249,14 +224,34 @@
 	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<script>
 		$(document).ready(function () {
-			$("#myTab li:eq(0) a").tab('show'); // show 2nd tab on page load
-		});
-	</script>
-	<script>
-		$(document).ready(function () {
 			$('#example1').DataTable();
-
 		});
+			
+		function shit(){
+				
+			var myTable = $('#example1').DataTable();
+			var buttonserve = document.getElementsByClassName('serve');
+			for (let i = 0; i < buttonserve.length; i++) {
+				buttonserve[i].onclick = function(){
+					myTable.row().remove().draw();
+				}
+			}
+
+			var buttonremove = document.getElementsByClassName('remove');
+			for (let i = 0; i < buttonremove.length; i++) {
+				buttonremove[i].onclick = function(){
+					myTable.row().remove().draw();
+				}
+			}
+		}
+
+
+
+		
+		// var myTable = $('#example1').DataTable();
+		// $('#example1').on( 'click', 'tbody tr', function () {
+		// 	myTable.row( this ).remove().draw();
+		// } );
 
 		$('#example1').DataTable({
 			"aoColumnDefs" :[
@@ -268,7 +263,7 @@
 
 		// $('#example1').DataTable({sDom: 'lrtip'});
 
-	
+
 	</script>
 	<style>
 	.dataTables_filter {

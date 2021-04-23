@@ -204,30 +204,93 @@ def QueueOperatorSignupView(request):
 
     return render(request, 'customer/QueueOperatorSignup.html', {'form': form})
 
+chosenQueues = []
+guestsOut = []
 def QueueOperatorView(request):
-    counter = 0
     operator = Queueoperator.objects.get(user_id=request.user)
     opqueues = operator.Queue.all()
-
     form  = QueueOperatorForm(opqueues)
     context = {"form" : form}
-    if request.method == 'POST':
+    
+    if request.method == 'POST' and 'chooseQueue' in request.POST:
+        start = request.session.get('counter', 1)
         form  = QueueOperatorForm(opqueues, request.POST)
-
+        counter = start
         if form.is_valid():
             chosenQueue = form.cleaned_data.get("Queue_list")
+            chosenQueues.append(chosenQueue)
             if not chosenQueue.Active:
                 chosenQueue.Active = True
                 chosenQueue.save()
             guests = Guest.objects.filter(Q(WalkedAway=False) & Q(Kickedout=False) & Q(Served=False) & Q(Queue = chosenQueue))
+            guestNumbers = []
             for guest in guests:
-                guest.GuestNumber = counter
-                counter+=1
-                guest.save()
-            context["opqueues"] = opqueues
-            context["guests"] = guests
-            return render(request, 'customer/queueOperator.html', context)
+                if guest not in guestsOut:
+                    guest.GuestNumber = counter
+                    counter+=1
+                    guest.save()
+                    guestsOut.append(guest)
+                guestNumbers.append(guest.GuestNumber)
+            request.session['counter'] = counter + 1
+            if len(guestNumbers)!=0:
+                context["opqueues"] = opqueues
+                context["guests"] = guests
+                context["guestNumbers"] = min(guestNumbers)
+                return render(request, 'customer/queueOperator.html', context)
+            else:
+                return render(request, 'customer/queueOperator.html', context)
+
+    elif request.method == 'POST' and 'btnserve' in request.POST:
+        form  = QueueOperatorForm(opqueues, request.POST)
+        start = request.session.get('counter', 1)
+        counter = start
+        if form.is_valid():
+            chosenQueue = chosenQueues[0]
+            guests = Guest.objects.filter(Q(WalkedAway=False) & Q(Kickedout=False) & Q(Served=False) & Q(Queue = chosenQueue))
+            guestNumbers = []
+            for guest in guests:
+                guestNumbers.append(guest.GuestNumber)
+            if len(guestNumbers)!=0:
+                theOne = min(guestNumbers)
+                guestToBeDeleted = Guest.objects.get(Q(GuestNumber = theOne) & Q(Queue = chosenQueue))
+                guestToBeDeleted.Served = True
+                guestToBeDeleted.save()
+                context["opqueues"] = opqueues
+                context["guests"] = guests
+                context["guestNumbers"] = min(guestNumbers)
+                context["counter"] = counter
+                return render(request, 'customer/queueOperator.html', context)
+            else:
+                context["opqueues"] = opqueues
+                context["guests"] = guests
+                return render(request, 'customer/queueOperator.html', context)
+
+    elif request.method == 'POST' and 'btnremove' in request.POST:
+        form  = QueueOperatorForm(opqueues, request.POST)
+        start = request.session.get('counter', 1)
+        counter = start
+        if form.is_valid():
+            chosenQueue = chosenQueues[0]
+            guests = Guest.objects.filter(Q(WalkedAway=False) & Q(Kickedout=False) & Q(Served=False) & Q(Queue = chosenQueue))
+            guestNumbers = []
+            for guest in guests:
+                guestNumbers.append(guest.GuestNumber)
+            if len(guestNumbers)!=0:
+                theOne = min(guestNumbers)
+                guestToBeDeleted = Guest.objects.get(Q(GuestNumber = theOne) & Q(Queue = chosenQueue))
+                guestToBeDeleted.Kickedout = True
+                guestToBeDeleted.save()
+                context["opqueues"] = opqueues
+                context["guests"] = guests
+                context["guestNumbers"] = min(guestNumbers)
+                context["counter"] = counter
+                return render(request, 'customer/queueOperator.html', context)
+            else:
+                context["opqueues"] = opqueues
+                context["guests"] = guests
+                return render(request, 'customer/queueOperator.html', context)
     return render(request, 'customer/queueOperator.html', context)
+
 
 def password_reset_request(request):
     print("HERE: 01")
@@ -277,4 +340,3 @@ def queueManagement(request):
         return redirect('signin-customer-page')
                
     return render(request, 'customer/queueManagement.html', context) 
-
