@@ -18,3 +18,5 @@ class Guest(models.Model):
     Category           = models.ForeignKey('customer.Category', on_delete=models.CASCADE)
     Queueoperator      = models.ForeignKey('customer.Queueoperator', on_delete=models.CASCADE, null=True, blank=True)
 
+    def __str__(self):
+        return self.Name
