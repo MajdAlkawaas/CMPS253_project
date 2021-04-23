@@ -68,7 +68,7 @@ class EditForm(forms.Form):
 
 class QueueOperatorForm(forms.Form):
     Queue_list = forms.ModelChoiceField(
-        queryset= Queue.objects.none(),
+        queryset= Queue.objects.none(), required=False,
         widget=forms.Select(
             attrs = { 
                 'class' : 'form-control',

@@ -120,10 +120,10 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'queuemaker-users-db',
-            'USER': 'root',
-            'PASSWORD': '',
-            'HOST': 'localhost',
+            'NAME': 'cmps253db',
+            'USER': 'AhmedSadaqa@onlinequeuedb',
+            'PASSWORD': 'Ahmsad!@12',
+            'HOST': 'onlinequeuedb.mysql.database.azure.com',
             'PORT': '3306',
         }
     }
