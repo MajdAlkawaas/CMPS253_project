@@ -49,21 +49,60 @@
 <!--begin::Body-->
 
 <body id="kt_body"
-	class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+	class="header-fixed">
 
 	<!--begin::Main-->
-	<!--begin::Header Mobile-->
-	<div id="kt_header_mobile" class="header-mobile align-items-center  header-mobile-fixed ">
 
-
-	</div>
-	<!--end::Header Mobile-->
 	<div class="d-flex flex-column flex-root">
 		<!--begin::Page-->
 		<div class="d-flex flex-row flex-column-fluid page">
 
 			<!--begin::Wrapper-->
+			<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+			<!--begin::Header-->
+			<div id="kt_header" class="header  header-fixed ">
+				<!--begin::Container-->
+				<div class=" container-fluid  d-flex align-items-stretch justify-content-between">
+					<!--begin::Header Menu Wrapper-->
+					<div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
+						<!--begin::Header Logo-->
+						<div class="header-logo">
+							<a href="#">
+								<img alt="Logo" src="/static/customer/logo_white.png" class="max-h-50px">
+							</a>
+						</div>
+						<!--end::Header Logo-->
+						<!--begin::Header Menu-->
+						<div id="kt_header_menu" class="header-menu header-menu-mobile  header-menu-layout-default ">
+							<!--begin::Header Nav-->
+							<!--end::Header Nav-->
+						</div>
+						<!--end::Header Menu-->
+					</div>
+					<!--end::Header Menu Wrapper-->
 
+					<!--begin::Topbar-->
+					<div class="topbar">
+						<!--begin::User-->
+						<div class="topbar-item">
+							<div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+								<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+								<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{Queueoperator.user}}</span>
+								<span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
+									<span class="symbol-label font-size-h5 font-weight-bold">S</span>
+								</span>
+							</div>
+						</div>
+						<!--end::User-->
+					</div>
+					<!--end::Topbar-->
+				</div>
+				<!--end::Container-->
+			</div>
+			<!--end::Header-->
+			
+			
+			
 			<!--begin::Content-->
 			<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
 
@@ -74,15 +113,19 @@
 					<div class=" container ">
 						<!--begin::Card-->
 
-						<form action="" method="post">
+				<form action="" method="post">
 						{% csrf_token %}
 						<div class="form-group row">
 							<label class="col-form-label text-right col-lg-3 col-sm-12">Queue</label>
-							<div class=" col-lg-4 col-md-9 col-sm-12">
+							<div class="row">
+								<div class="col-md-9">
 									{{form.Queue_list}}
+								</div>
+								<div class="col-md-3">
 									<button class="btn btn-success active" style="width: 10em;" name="chooseQueue">Choose queue</button>
 								</div>
 							</div>
+						</div>
 
 						<div class="card card-custom gutter-b">
 							<div class="card-body">
@@ -109,7 +152,7 @@
 													<td>
 														<button type="submit" class="btn btn-primary active hi" style="width: 7em;" 
 														{%ifnotequal guest.GuestNumber guestNumbers%} disabled {% endifnotequal %}
-														name="btnform1">Request</button>
+														name="btnRequest">Request</button>
 													</td>
 													<td>
 														<button type="submit" class="btn btn-success active serve" style="width: 7em;" id="served"
@@ -135,14 +178,78 @@
 				<!--end::Entry-->
 			</div>
 			<!--end::Content-->
-			<!-- </div> -->
+			</div>
 			<!--end::Wrapper-->
 		</div>
 		<!--end::Page-->
 	</div>
 	<!--end::Main-->
 
-
+	<div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
+		<!--begin::Header-->
+		<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5" kt-hidden-height="40" style="">
+			<h3 class="font-weight-bold m-0">User Profile 
+			</h3>
+			<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
+				{% comment %} <i class="ki ki-close icon-xs text-muted"></i> {% endcomment %}
+				<span class="svg-icon svg-icon-primary svg-icon-2x">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12px" height="12px" viewBox="0 0 24 24" version="1.1">
+						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)" fill="#000000">
+								<rect x="0" y="7" width="10" height="2" rx="1"/>
+								<rect opacity="0.3" transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000) " x="0" y="7" width="16" height="2" rx="1"/>
+							</g>
+						</g>
+					</svg><!--end::Svg Icon-->
+				</span>
+			</a>
+		</div>
+		<!--end::Header-->
+		<!--begin::Content-->
+		<div class="offcanvas-content pr-5 mr-n5 scroll ps ps--active-y" style="height: 648px; overflow: hidden;">
+			<!--begin::Header-->
+			<div class="d-flex align-items-center mt-5">
+				<div class="symbol symbol-100 mr-5">
+					<div class="symbol-label" style="background-image:url('{%static 'customer/300_21.jpg'%}')"></div>
+					
+				</div>
+				<div class="d-flex flex-column">
+					<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{Queueoperator.user.first_name}}</a>
+					
+					<div class="navi mt-2">
+						<a href="#" class="navi-item">
+							<span class="navi-link p-0 pb-2">
+								<span class="navi-icon mr-1">
+									<span class="svg-icon svg-icon-lg svg-icon-primary">
+										<!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Mail-notification.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<rect x="0" y="0" width="24" height="24"></rect>
+												<path d="M21,12.0829584 C20.6747915,12.0283988 20.3407122,12 20,12 C16.6862915,12 14,14.6862915 14,18 C14,18.3407122 14.0283988,18.6747915 14.0829584,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,12.0829584 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000"></path>
+												<circle fill="#000000" opacity="0.3" cx="19.5" cy="17.5" r="2.5"></circle>
+											</g>
+										</svg>
+										<!--end::Svg Icon-->
+									</span>
+								</span>
+								<span class="navi-text text-muted text-hover-primary">{{Queueoperator.user.email}}</span>
+							</span>
+						</a>
+						<form method="POST"> {% csrf_token %}
+								<button type='submit' class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5" name="logOut">Log out</button>
+							</form>
+					</div>
+				</div>
+			</div>
+			<!--end::Header-->
+			
+			<!--begin::Separator-->
+			<div class="separator separator-dashed my-7"></div>
+			<!--end::Separator-->
+			
+		<div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 648px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 300px;"></div></div></div>
+		<!--end::Content-->
+	</div>
 
 
 
@@ -269,6 +376,13 @@
 	.dataTables_filter {
 		display: none;
 		}
+
+		.header {
+    background-color: #1e1e2d;
+}
+	#kt_quick_user_toggle:hover{
+		background-color: #292f48;
+	}
 	</style>
 	<!-- <script src="{%static 'customer/queueManagement.js'%}"></script> -->
 	<!--end::Page Scripts-->
