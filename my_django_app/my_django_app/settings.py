@@ -127,7 +127,7 @@ else:
             'PORT': '3306',
         }
     }
-}
+
 
 
 # import pymysql  # noqa: 402
