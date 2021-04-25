@@ -15,7 +15,6 @@ django-extensions==3.1.3
 django-serverside-datatable==0.1.1
 django-tagify==0.20
 excel==1.0.0
-gunicorn==20.1.0
 idna==2.10
 ipython-genutils==0.2.0
 isort==5.7.0
