@@ -1,17 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<!--
-Template Name: Metronic - Bootstrap 4 HTML, React, Angular 9 & VueJS Admin Dashboard Theme
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: https://1.envato.market/EA4JP
-Renew Support: https://1.envato.market/EA4JP
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
+
 <html lang="en">
 <!--begin::Head-->
 
@@ -28,14 +17,10 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
     <!--begin::Page Custom Styles(used by this page)-->
-    <!-- <link href="CMPS253/Template/assets/css/pages/wizard/wizard-3.css" rel="stylesheet" type="text/css"/> -->
+
     <link rel="stylesheet" href="{%static 'customer/wizard-3.css'%}">
     <!--end::Page Custom Styles-->
 
-    <!--begin::Global Theme Styles(used by all pages)-->
-    <!-- <link href="CMPS253/Template/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/> -->
-    <!-- <link href="CMPS253/Template/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css"/> -->
-    <!-- <link href="CMPS253/Template/assets/css/style.bundle.css" rel="stylesheet" type="text/css"/> -->
     <link rel="stylesheet" href="{%static 'customer/plugins.bundle.css'%}">
     <link rel="stylesheet" href="{%static 'customer/prismjs.bundle.css'%}">
     <link rel="stylesheet" href="{%static 'customer/style.bundle.css'%}">
@@ -46,40 +31,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     
 
-    <!--end::Global Theme Styles-->
 
-    <!--begin::Layout Themes(used by all pages)-->
-
-
-    <!-- <link href="CMPS253/Template/assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css"/>
-<link href="CMPS253/Template/assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css"/> -->
-    <!-- <link href="CMPS253/Template/assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css"/>
-<link href="CMPS253/Template/assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css"/>         -->
-    <!--end::Layout Themes-->
-
-    <!-- <link rel="shortcut icon" href="CMPS253/Template/assets/media/logos/favicon.ico"/> -->
-    <!-- <style>
-        .tagify--outside {
-            border: 0;
-        }
-
-        .tagify--outside .tagify__input {
-            order: -1;
-            flex: 100%;
-            border: 1px solid var(--tags-border-color);
-            margin-bottom: 1em;
-            transition: .1s;
-        }
-
-        .tagify--outside .tagify__input:hover {
-            border-color: var(--tags-hover-border-color);
-        }
-
-        .tagify--outside.tagify--focus .tagify__input {
-            transition: 0s;
-            border-color: var(--tags-focus-border-color);
-        }
-    </style> -->
 </head>
 <!--end::Head-->
 
@@ -146,16 +98,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </div>
 
                                         <div class="form-group">
-                                            <!-- <label class="col-form-label text-right col-lg-3 col-sm-12">Outside of the box example</label> -->
-                                            <!-- <div class="col-lg-6 col-md-9 col-sm-12"> -->
+                                            
                                                 <label>Categories (Please enter your different categories seperated by a comma)</label>
-                                                <!-- <input type="text" class="form-control" name="queueService" placeholder="Choose your service" value=""/> -->
                                                 <input type="text" id="qcategories" class="form-control" name="categories" placeholder="Categories" />
                                                     <span class="form-text text-muted">Please enter the services of the Queue.</span>
-                                                <!-- <div class="mt-3 text-muted">
-                                                    Please enter the services of the queue.
-                                                </div> -->
-                                            <!-- </div> -->
                                         </div>
 
                                     </div>
@@ -185,27 +131,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="separator separator-dashed my-5"></div>
                                         <!--end::Section-->
 
-                                        <!--begin::Section-->
-                                        <!-- <h6 class="font-weight-bolder mb-3">
-                            Delivery Service Type:
-                        </h6>
-                        <div class="text-dark-50 line-height-lg">
-                            <div>Overnight Delivery with Regular Packaging</div>
-                            <div>Preferred Morning (8:00AM - 11:00AM) Delivery</div>
-                        </div>
-                        <div class="separator separator-dashed my-5"></div> -->
-                                        <!--end::Section-->
-
-                                        <!--begin::Section-->
-                                        <!-- <h6 class="font-weight-bolder mb-3">
-                            Delivery Address:
-                        </h6>
-                        <div class="text-dark-50 line-height-lg">
-                            <div>Address Line 1</div>
-                            <div>Address Line 2</div>
-                            <div>Preston 3072, VIC, Australia</div>
-                        </div> -->
-                                        <!--end::Section-->
+                                        
                                     </div>
                                     <!--end: Wizard Step 5-->
 
@@ -219,17 +145,17 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <!--end::Aside Bottom-->
                                         <div class="mr-2">
                 
-                                            <button type="button"
+                                            <button type="button" id="prev" 
                                                 class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                                                 data-wizard-type="action-prev" id="prev">
                                                 Previous
                                             </button>
                                         </div>
                                         <div>
-                                            <button type="button" class="btn btn-success font-weight-bold text-uppercase px-9 py-4" data-wizard-action="submit">
+                                            <button id="button" type="button" class="btn btn-success font-weight-bold text-uppercase px-9 py-4" data-wizard-action="submit">
                                                 Submit
                                             </button>
-                                            <button type="button"
+                                            <button type="button" id="next"
                                                 class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                                                 data-wizard-type="action-next">
                                                 Next
@@ -322,6 +248,18 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="{%static 'customer/scripts.bundle.js'%}"></script>
     <!--end::Global Theme Bundle-->
 
+    <script>
+        window.onload = function(){
+            $("#button").hide();
+            var nextElement = document.getElementById("next");
+            $("#next").on('click',function(){
+            $("#button").show();
+            })
+            $("#prev").on('click', function(){
+                $("#button").hide();
+            })
+        }
+    </script>
 
     <!--begin::Page Scripts(used by this page)-->
     <script src="{%static 'customer/wizard-3.js'%}"></script>
@@ -348,24 +286,7 @@ License: You must have a valid license purchased only from themeforest(the above
         }
         
     </script>
-    <!-- <script src="{%static 'customer/tagify.js'%}"></script> -->
 
-    <!-- <script src="CMPS253/Template/assets/js/pages/custom/wizard/wizard-3.js"></script>
-            <script src="CMPS253/Template/assets/js/pages/crud/forms/widgets/tagify.js"></script> -->
-    <!--end::Page Scripts-->
-
-    <!-- <script>
-        var input = document.querySelector('input[name=categories]')
-        // init Tagify script on the above inputs
-        var tagify = new Tagify(input, {
-            whitelist: [],
-            dropdown: {
-                position: "input",
-                enabled: 0 // always opens dropdown when input gets focus
-            }
-        })
-        // console.log(tagify.value);
-    </script> -->
 </body>
 <!--end::Body-->
 
