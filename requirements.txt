@@ -36,7 +36,6 @@ PyMySQL==1.0.2
 pyparsing==2.4.7
 pyrsistent==0.17.3
 pytz==2021.1
-pywin32==300
 qrcode==6.1
 reportlab==3.5.67
 requests==2.25.1
