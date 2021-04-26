@@ -1,18 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<!--
-Template Name: Metronic - Bootstrap 4 HTML, React, Angular 9 & VueJS Admin Dashboard Theme
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: https://1.envato.market/EA4JP
-Renew Support: https://1.envato.market/EA4JP
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
+
 <html lang="en" >
     <!--begin::Head-->
     <head><base href="../../../../">
@@ -22,28 +11,29 @@ License: You must have a valid license purchased only from themeforest(the above
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
         <!-- favicon -->
-        <!-- <link rel="shortcut icon" href="{%static 'customer/favicon.ico'%}" type="image/x-icon"> 
-        <link rel="icon" href= "{%static 'customer/favicon.ico'%}" type="image/x-icon">  -->
+        
         
         <!-- Trying to add favicon but it's not working "useed the following Website:
         https://www.favicon-generator.org/" -->
     
-        <link rel="stylesheet" href="{%static 'customer/dark.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/dark1.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/light.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/light1.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/login-3.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/plugins.bundle.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/prismjs.bundle.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/style.bundle.css'%}">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/dark.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/dark1.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/light.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/light1.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/login-3.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/plugins.bundle.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/prismjs.bundle.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/style.bundle.css">
 
         <!--begin::Fonts-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>        <!--end::Fonts-->
 
 
-        <link rel="shortcut icon" href="{%static 'customer/Blue_sqrs.png' %}"/>                
+           <link rel="shortcut icon" href="https://majdalkawaas.github.io/static/customer/Blue_sqrs.png"/>
 
-</head>
+        <!-- <link rel="shortcut icon" href="CMPS253/Template/assets/media/logos/favicon.ico"/> -->
+
+            </head>
     <!--end::Head-->
 
     <!--begin::Body-->
@@ -59,7 +49,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="d-flex flex-column-fluid flex-column justify-content-between py-9 px-7 py-lg-13 px-lg-35">
             <!--begin::Logo-->
             <a href="#" class="text-center pt-2">
-                <img src= "{%static 'customer/logo_blue.png'%}" class="max-h-125px" alt=""/>
+                <img src= "https://majdalkawaas.github.io/static/customer/logo_blue.png" class="max-h-125px" alt=""/>
             </a>
             <!--end::Logo-->
     
@@ -133,7 +123,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <!--begin::Aside Bottom-->
         <div class="aside-img-wizard d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center pt-2 pt-lg-5"
-            style=" background-image: url({%static 'customer/bottom_left.png' %}); background-size: cover ;" >
+            style=" background-image: url(https://majdalkawaas.github.io/static/customer/bottom_left.png); background-size: cover ;" >
         </div>
         <!--end::Aside Bottom-->
     </div>
@@ -142,14 +132,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--begin::Content-->
     <div class="login-content flex-column-fluid d-flex flex-column p-10">
         <!--begin::Top-->
-{% comment %} 
-        <div class="text-right d-flex justify-content-center">
-            <div class="top-signup text-right d-flex justify-content-end pt-5 pb-lg-0 pb-10">
-    			<span class="font-weight-bold text-muted font-size-h4">Having issues?</span>
-    			<a href="javascript:;" class="font-weight-bolder text-primary font-size-h4 ml-2" id="kt_login_signup">Get Help</a>
-    		</div>
-		</div>
-{% endcomment %}
+
         <!--end::Top-->
 
         <!--begin::Wrapper-->
@@ -226,7 +209,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                         <!--begin::Form Group-->
                         <div class="form-group">
-                            <label class="font-size-h6 font-weight-bolder text-dark">Confirm Password</label>                            
+                            <label class="font-size-h6 font-weight-bolder text-dark">Comfirm Password</label>                            
                             {{form.password2}}
 
                             <div class="fv-plugins-message-container">
@@ -441,19 +424,16 @@ License: You must have a valid license purchased only from themeforest(the above
         <!--end::Global Config-->
 
     	<!--begin::Global Theme Bundle(used by all pages)-->
-                    <!-- <link rel="stylesheet" href="{%static 'customer/login-3.css'%}"> -->
-    	    	   <script src="{%static 'customer/plugins.bundle.js'%}"></script>
-    	    	   <script src="{%static 'customer/prismjs.bundle.js'%}"></script>
-    	    	   <script src="{%static 'customer/scripts.bundle.js'%}"></script>
-		    	   <!-- <script src="CMPS253/Template/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-		    	   <script src="CMPS253/Template/assets/js/scripts.bundle.js"></script> -->
+                   
+    	    	   <script src="https://majdalkawaas.github.io/static/customer/plugins.bundle.js"></script>
+    	    	   <script src="https://majdalkawaas.github.io/static/customer/prismjs.bundle.js"></script>
+    	    	   <script src="https://majdalkawaas.github.io/static/customer/scripts.bundle.js"></script>
+		    	   
 				<!--end::Global Theme Bundle-->
 
 
                     <!--begin::Page Scripts(used by this page)-->
-    	    	   <script src="{%static 'customer/login-3.js'%}"></script>
-                    <!-- <script src="CMPS253/Template/assets/js/pages/custom/login/login-3.js"></script> -->
-                            
+    	    	   <script src="https://majdalkawaas.github.io/static/customer/login-3.js"></script>        
                         <!--end::Page Scripts-->
             </body>
     <!--end::Body-->

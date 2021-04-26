@@ -1,18 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<!--
-Template Name: Metronic - Bootstrap 4 HTML, React, Angular 9 & VueJS Admin Dashboard Theme
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: https://1.envato.market/EA4JP
-Renew Support: https://1.envato.market/EA4JP
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
+
 <html lang="en" >
     <!--begin::Head-->
     <head><base href="../../../../">
@@ -20,20 +9,20 @@ License: You must have a valid license purchased only from themeforest(the above
         <title>Sign Up</title>
         <meta name="description" content="Singin page example"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        <link rel="stylesheet" href="{%static 'customer/dark.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/dark1.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/light.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/light1.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/login-3.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/plugins.bundle.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/prismjs.bundle.css'%}">
-        <link rel="stylesheet" href="{%static 'customer/style.bundle.css'%}">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/dark.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/dark1.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/light.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/light1.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/login-3.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/plugins.bundle.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/prismjs.bundle.css">
+        <link rel="stylesheet" href="https://majdalkawaas.github.io/static/customer/style.bundle.css">
 
         <!--begin::Fonts-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>        <!--end::Fonts-->
 
 
-               <link rel="shortcut icon" href="{%static 'customer/Blue_sqrs.png' %}"/>
+               <link rel="shortcut icon" href="https://majdalkawaas.github.io/static/customer/Blue_sqrs.png"/>
 
             </head>
     <!--end::Head-->
@@ -51,7 +40,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="d-flex flex-column-auto flex-column pt-15 px-30">
 
             <a href="#" class="text-center pt-2">
-                <img src= "{%static 'customer/logo_blue.png'%}" class="max-h-125px" alt=""/>
+                <img src= "https://majdalkawaas.github.io/static/customer/logo_blue.png" class="max-h-125px" alt=""/>
             </a>
             <!--end::Aside header-->
 
@@ -77,25 +66,6 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                     </div>
                     <!--end::Wizard Step 1 Nav-->
-
-                    <!--begin::Wizard Step 2 Nav-->
-                    <!-- <div class="wizard-step" data-wizard-type="step">
-                        <div class="wizard-wrapper">
-                            <div class="wizard-icon">
-                                <i class="wizard-check ki ki-check"></i>
-                                <span class="wizard-number">2</span>
-                            </div>
-                            <div class="wizard-label">
-                                <h3 class="wizard-title">
-                                    Customer
-                                </h3>
-                                <div class="wizard-desc">
-                                    Choose Customer
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!--end::Wizard Step 2 Nav-->
 
                     <!--begin::Wizard Step 3 Nav-->
                     <div class="wizard-step" data-wizard-type="step">
@@ -124,7 +94,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <!--begin::Aside Bottom-->
         <div class="aside-img-wizard d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center pt-2 pt-lg-5"
-            style=" background-image: url({%static 'customer/bottom_left.png' %}); background-size: cover ;" >
+            style=" background-image: url('https://majdalkawaas.github.io/static/customer/bottom_left.png'); background-size: cover ;" >
         </div>
         <!--end::Aside Bottom-->
     </div>
@@ -135,15 +105,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <!--begin::Top-->
         <div class="text-right d-flex justify-content-center">
             <div class="top-signup text-right d-flex justify-content-end pt-5 pb-lg-0 pb-10">
-{% comment %}                 
-    			<span class="font-weight-bold text-muted font-size-h4">Having issues?</span>
-                <a href="javascript:;" class="font-weight-bolder text-primary font-size-h4 ml-2" id="kt_login_signup">Get Help</a>
-{% endcomment %}
-                <!--begin::Logo-->
-                <!-- <a href="#" class="text-center pt-2">
-                    <img src= "{%static 'customer/Blue_sqrs.png'%}" class="max-h-125px" alt=""/>
-                </a> -->
-                <!--end::Logo-->
+
 
 
     		</div>
@@ -200,8 +162,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <!--begin::Input-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Username</label>
-                                    {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="username" placeholder="User Name" value="" /> {% endcomment %}
-                                    {{ form.username }}
+                                     {{ form.username }}
                                 </div>
                                 <!--end::Input-->
                             </div>
@@ -209,7 +170,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <!--begin::Input-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
-                                    {% comment %} <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="email" placeholder="Email Address" value="" /> {% endcomment %}
                                     {{ form.email }}
                                 </div>
                                 <!--end::Input-->
@@ -217,18 +177,9 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                         <!--end::Row-->
 
-
-                        <!--begin::Form group-->
-                        <!-- <div class="form-group">
-                            <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
-                            <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="EmailAddress" autocomplete="on"/>
-                        </div> -->
-                        <!--end::Form group-->
-
                         <!--begin::Form Group-->
                         <div class="form-group">
                             <label class="font-size-h6 font-weight-bolder text-dark">Password</label>                            
-                            {% comment %} <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"  name="password" autocomplete="off" />     {% endcomment %}
                             {{form.password1}}
                         </div>
                         <!--end::Form Group-->
@@ -236,7 +187,6 @@ License: You must have a valid license purchased only from themeforest(the above
                         <!--begin::Form Group-->
                         <div class="form-group">
                             <label class="font-size-h6 font-weight-bolder text-dark">Comfirm Password</label>                            
-                            {% comment %} <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"  name="password" autocomplete="off" />     {% endcomment %}
                             {{form.password2}}
                         </div>
                         <!--end::Form Group-->
@@ -244,25 +194,6 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                     <!--end: Wizard Step 1-->
 
-                    <!-- <div class="pb-5" data-wizard-type="step-content">
-                        <div class="pt-lg-0 pt-5 pb-15">
-                            <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Choose Customer</h3>
-                        </div>
-
-                        
-
-                        
-                        
-                        <div class="form-group">
-                            <label class="font-size-h6 font-weight-bolder text-dark">Customer</label>
-                            {{form.customer_list}}
-                             
-                        </div>
-
-                            </div>
-                        </div>
-                    </div>  -->
-                    <!--end: Wizard Step 2-->
 
                     
 
@@ -443,18 +374,18 @@ License: You must have a valid license purchased only from themeforest(the above
         <!--end::Global Config-->
 
     	<!--begin::Global Theme Bundle(used by all pages)-->
-                    <!-- <link rel="stylesheet" href="{%static 'customer/login-3.css'%}"> -->
-    	    	   <script src="{%static 'customer/plugins.bundle.js'%}"></script>
-    	    	   <script src="{%static 'customer/prismjs.bundle.js'%}"></script>
-    	    	   <script src="{%static 'customer/scripts.bundle.js'%}"></script>
-		    	   <!-- <script src="CMPS253/Template/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-		    	   <script src="CMPS253/Template/assets/js/scripts.bundle.js"></script> -->
+               
+    	    	   <script src="https://majdalkawaas.github.io/static/customer/plugins.bundle.js"></script>
+    	    	   <script src="https://majdalkawaas.github.io/static/customer/prismjs.bundle.js"></script>
+    	    	   <script src="https://majdalkawaas.github.io/static/customer/scripts.bundle.js"></script>
+
+		    	   
 				<!--end::Global Theme Bundle-->
 
 
                     <!--begin::Page Scripts(used by this page)-->
-    	    	   <script src="{%static 'customer/login-3.js'%}"></script>
-                    <!-- <script src="CMPS253/Template/assets/js/pages/custom/login/login-3.js"></script> -->
+    	    	   <script src="https://majdalkawaas.github.io/static/customer/login-3.js"></script>
+
                             
                         <!--end::Page Scripts-->
             </body>

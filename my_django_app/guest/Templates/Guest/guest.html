@@ -9,17 +9,17 @@
     <title>Document</title>
 
     <!--begin::Global Theme Styles(used by all pages)-->
-    <link rel="stylesheet" href="{%static 'guest/plugins.bundle.css'%}">
-    <link rel="stylesheet" href="{%static 'guest/prismjs.bundle.css'%}">
-    <link rel="stylesheet" href="{%static 'guest/style.bundle.css'%}">
+    <link rel="stylesheet" href="https://majdalkawaas.github.io/static/guest/plugins.bundle.css">
+    <link rel="stylesheet" href="https://majdalkawaas.github.io/static/guest/prismjs.bundle.css">
+    <link rel="stylesheet" href="https://majdalkawaas.github.io/static/guest/style.bundle.css">
     <!--end::Global Theme Styles-->
 
     <!--begin::Layout Themes(used by all pages)-->
 
-    <link rel="stylesheet" href="{%static 'guest/dark.css'%}">
-    <link rel="stylesheet" href="{%static 'guest/dark1.css'%}">
-    <link rel="stylesheet" href="{%static 'guest/light.css'%}">
-    <link rel="stylesheet" href="{%static 'guest/light1.css'%}">
+    <link rel="stylesheet" href="https://majdalkawaas.github.io/static/guest/dark.css">
+    <link rel="stylesheet" href="https://majdalkawaas.github.io/static/guest/dark1.css">
+    <link rel="stylesheet" href="https://majdalkawaas.github.io/static/guest/light.css">
+    <link rel="stylesheet" href="https://majdalkawaas.github.io/static/guest/light1.css">
     <!--end::Layout Themes-->
 
 </head>
@@ -374,24 +374,15 @@
                 
                 <div class="form-group">
                     <label>Name </label>
-                    {% comment %} <input type="text" class="form-control" name="name" placeholder="Enter name" /> {% endcomment %}
-					{{ form.name }}
+                    {{ form.name }}
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Phone Number</label>
-                    {% comment %} <input type="tel" class="form-control" name="PhoneNumber" id="exampleInputPassword1"
-                        placeholder="Enter phonenumber" pattern="^\d{4}-\d{3}-\d{4}$"/> {% endcomment %}
-					{{ form.phoneNumber }}	
+                    {{ form.phoneNumber }}	
                 </div>
                 <div class="form-group">
                     <label for="exampleSelect2">Categories </label>
-                    {% comment %} <select multiple="" class="form-control" id="exampleSelect2" name="category_option">
-                        <option>Choose a category</option>
-						{% for category in categories %}
-							<option> {{category.Name}} </option>
-						{% endfor %}
-                    </select> {% endcomment %}
-					{{ form.categories_list }}
+                    {{ form.categories_list }}
                 </div>
 
             </div>
@@ -467,10 +458,10 @@
     <!--end::Global Config-->
 
     <!--begin::Global Theme Bundle(used by all pages)-->
-    <script src="{%static 'guest/plugins.bundle.js'%}"></script>
-    <script src="{%static 'guest/prismjs.bundle.js'%}"></script>
-    <script src="{%static 'guest/scripts.bundle.js'%}"></script>
-    <script src="{%static 'guest/form-controls.js'%}"></script>
+    <script src="https://majdalkawaas.github.io/static/guest/plugins.bundle.js"></script>
+    <script src="https://majdalkawaas.github.io/static/guest/prismjs.bundle.js"></script>
+    <script src="https://majdalkawaas.github.io/static/guest/scripts.bundle.js"></script>
+    <script src="https://majdalkawaas.github.io/static/guest/form-controls.js"></script>
     <!--end::Global Theme Bundle-->
 </body>
 <!--end::Body-->
