@@ -121,6 +121,7 @@ def edit(request,queue_id):
     choices = []
     for element in operators:
         temp = (element, element.user.username)
+        # print("element type: ", type(element))
         choices.append(temp)
     choices = tuple(choices)
     # print(choices)
@@ -146,12 +147,15 @@ def edit(request,queue_id):
             categories = categories.split(',')
 
             OperatorStringList = form.cleaned_data.get("queueOperator_list")
+            # print(OperatorStringList)
             operatorsIDs = []
             for item in OperatorStringList:
-                for s in item:
-                    temp = re.findall("\d+", s)
-                    if(len(temp) > 0):
-                        operatorsIDs.append(int(temp[0]))
+                # for s in item:
+                temp = re.findall("\d+", item)
+                # print(temp)
+                if(len(temp) > 0):
+                    operatorsIDs.append(int(temp[0]))
+
 
             for i in operatorsIDs:
                 op = Queueoperator.objects.get(user=i)
