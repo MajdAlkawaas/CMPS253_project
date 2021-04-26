@@ -41,7 +41,7 @@ def signup(request):
         print("HERE Request is not post")
         form = SingupForm()
 
-    return render(request, 'customer/signup.html', {'form': form})
+    return render(request, 'Customer/signup.html', {'form': form})
 
 def signin(request):
     print("Sign in 01")
@@ -66,7 +66,7 @@ def signin(request):
     else:
         form = SigninForm()
     context = {'form': form}
-    return render(request, 'customer/signin.html', context)
+    return render(request, 'Customer/signin.html', context)
 
 def welcome(request):
     if request.method == 'POST':
@@ -74,16 +74,16 @@ def welcome(request):
         return redirect('signin-customer-page')
     if not request.user.is_authenticated:
         return redirect('signin-customer-page')
-    return render(request, 'customer/welcome.html')
+    return render(request, 'Customer/welcome.html')
 
 def forgot(request):
-    return render(request, 'customer/registration/forgot.html') 
+    return render(request, 'Customer/registration/forgot.html') 
 
 def password_reset_done(request):
-    return render(request, 'customer/registration/password_reset_done.html') 
+    return render(request, 'Customer/registration/password_reset_done.html') 
 
 def password_reset_confirm(request):
-    return render(request, 'customer/registration/password_reset_confirm.html')
+    return render(request, 'Customer/registration/password_reset_confirm.html')
 
 # @login_required()
 # @director_required()
@@ -103,7 +103,7 @@ def queueSetup(request):
             Category.objects.create(Name = category[i], Queue = queue)
 
         return redirect('queueManagement-customer-page')
-    return render(request, 'customer/queueSetup.html') 
+    return render(request, 'Customer/queueSetup.html') 
 
 # @login_required()
 # @director_required()
@@ -171,16 +171,16 @@ def edit(request,queue_id):
         return redirect('queueManagement-customer-page')
 
     context       = {'form': form, "queue" : queue}
-    return render(request, 'customer/edit.html', context) 
+    return render(request, 'Customer/edit.html', context) 
 
 
 # @login_required()
 # @director_required()
 def home(request):
-    return render(request, 'customer/home.html')
+    return render(request, 'Customer/home.html')
 
 def error(request):
-    return render(request, 'customer/error.html')
+    return render(request, 'Customer/error.html')
 
 def QueueOperatorSignupView(request):
     if request.method == 'POST':
@@ -202,7 +202,7 @@ def QueueOperatorSignupView(request):
         print("HERE Request is not post")
         form = QueueOperatorSignup()
 
-    return render(request, 'customer/QueueOperatorSignup.html', {'form': form})
+    return render(request, 'Customer/QueueOperatorSignup.html', {'form': form})
 
 chosenQueues = []
 guestsOut = []
@@ -236,9 +236,9 @@ def QueueOperatorView(request):
                 context["opqueues"] = opqueues
                 context["guests"] = guests
                 context["guestNumbers"] = min(guestNumbers)
-                return render(request, 'customer/queueOperator.html', context)
+                return render(request, 'Customer/queueOperator.html', context)
             else:
-                return render(request, 'customer/queueOperator.html', context)
+                return render(request, 'Customer/queueOperator.html', context)
 
     elif request.method == 'POST' and 'btnserve' in request.POST:
         form  = QueueOperatorForm(opqueues, request.POST)
@@ -259,11 +259,11 @@ def QueueOperatorView(request):
                 context["guests"] = guests
                 context["guestNumbers"] = min(guestNumbers)
                 context["counter"] = counter
-                return render(request, 'customer/queueOperator.html', context)
+                return render(request, 'Customer/queueOperator.html', context)
             else:
                 context["opqueues"] = opqueues
                 context["guests"] = guests
-                return render(request, 'customer/queueOperator.html', context)
+                return render(request, 'Customer/queueOperator.html', context)
 
     elif request.method == 'POST' and 'btnremove' in request.POST:
         form  = QueueOperatorForm(opqueues, request.POST)
@@ -284,12 +284,12 @@ def QueueOperatorView(request):
                 context["guests"] = guests
                 context["guestNumbers"] = min(guestNumbers)
                 context["counter"] = counter
-                return render(request, 'customer/queueOperator.html', context)
+                return render(request, 'Customer/queueOperator.html', context)
             else:
                 context["opqueues"] = opqueues
                 context["guests"] = guests
-                return render(request, 'customer/queueOperator.html', context)
-    return render(request, 'customer/queueOperator.html', context)
+                return render(request, 'Customer/queueOperator.html', context)
+    return render(request, 'Customer/queueOperator.html', context)
 
 
 def password_reset_request(request):
@@ -322,7 +322,7 @@ def password_reset_request(request):
                         return HttpResponse('Invalid header found.')
                     return redirect ("/password_reset/done/")
     password_reset_form = PasswordResetForm()
-    return render(request=request, template_name="customer/registration/password_reset.html", 
+    return render(request=request, template_name="Customer/registration/password_reset.html", 
                     context={"password_reset_form":password_reset_form})
 
 def queueManagement(request):
@@ -339,7 +339,7 @@ def queueManagement(request):
     if not request.user.is_authenticated:
         return redirect('signin-customer-page')
                
-    return render(request, 'customer/queueManagement.html', context) 
+    return render(request, 'Customer/queueManagement.html', context) 
 
 
 from reportlab.pdfgen import canvas  
