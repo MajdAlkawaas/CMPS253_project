@@ -1,6 +1,5 @@
 {% load static %}
 <!DOCTYPE html>
-
 <html lang="en">
 <!--begin::Head-->
 
@@ -15,12 +14,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
 
-
     <!--begin::Page Custom Styles(used by this page)-->
 
     <link rel="stylesheet" href="{%static 'customer/wizard-3.css'%}">
     <!--end::Page Custom Styles-->
 
+    <!--begin::Global Theme Styles(used by all pages)-->
     <link rel="stylesheet" href="{%static 'customer/plugins.bundle.css'%}">
     <link rel="stylesheet" href="{%static 'customer/prismjs.bundle.css'%}">
     <link rel="stylesheet" href="{%static 'customer/style.bundle.css'%}">
@@ -29,9 +28,11 @@
     <link rel="stylesheet" href="{%static 'customer/light.css'%}">
     <link rel="stylesheet" href="{%static 'customer/light1.css'%}">
 
-    
+    <link rel="shortcut icon" href="{%static 'customer/Blue_sqrs.png' %}"/>
 
-
+    <!--end::Global Theme Styles-->
+    <!--begin::Layout Themes(used by all pages)-->
+   
 </head>
 <!--end::Head-->
 
@@ -107,7 +108,6 @@
                                     </div>
                                     <!--end: Wizard Step 1-->
 
-
                                     <!--begin: Wizard Step 5-->
                                     <div class="pb-5" data-wizard-type="step-content">
                                         <!--begin::Section-->
@@ -130,19 +130,14 @@
                                         </div>
                                         <div class="separator separator-dashed my-5"></div>
                                         <!--end::Section-->
-
-                                        
+                        
                                     </div>
                                     <!--end: Wizard Step 5-->
 
                                     <!--begin: Wizard Actions-->
                                     <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                         
-                                        <!--begin::Aside Bottom-->
-                                        <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-x-center"
-                                            style=" background-position-y: calc(100%  ); background-image: url({%static 'customer/pattren_bottom.png' %}); background-size: cover ;" >
-                                        </div>
-                                        <!--end::Aside Bottom-->
+                                        
                                         <div class="mr-2">
                 
                                             <button type="button" id="prev" 
@@ -176,7 +171,6 @@
         <!--end::Container-->
     </div>
     <!--end::Entry-->
-
 
     <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
     <!--begin::Global Config(global config for global JS scripts)-->
@@ -269,8 +263,6 @@
             document.getElementById("result").innerHTML = q.value;
         }
 
-
-
         var cat = document.getElementById("qcategories");
         cat.onchange = function(){
             var temp = cat.value.split(",");
@@ -283,10 +275,8 @@
                 child.innerHTML = element;
                 parent1.appendChild(child);                
             });
-        }
-        
+        }     
     </script>
-
 </body>
 <!--end::Body-->
 
