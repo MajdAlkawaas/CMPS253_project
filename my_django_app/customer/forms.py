@@ -8,7 +8,7 @@ class SigninForm(forms.Form):
     username    = forms.CharField(max_length=250,
                                     widget=forms.TextInput(
                                         attrs={
-                                            'type'       : 'email',
+                                            
                                             'class'      : 'form-control h-auto py-7 px-6 rounded-lg border-0',
                                             'placeholder': 'Username'
                                         }
@@ -25,11 +25,6 @@ class SigninForm(forms.Form):
                                     ))
 
 
-    
-
-# class Test_signin(forms.Form):
-#     username = forms.CharField(max_length=50)
-#     password = forms.CharField(widget=forms.PasswordInput())
 
 class EditForm(forms.Form):
     queueNameEdited     = forms.CharField(max_length=100, required=False,
