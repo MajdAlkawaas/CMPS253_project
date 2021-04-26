@@ -174,8 +174,8 @@ def edit(request,queue_id):
     return render(request, 'customer/edit.html', context) 
 
 
-@login_required()
-@director_required()
+# @login_required()
+# @director_required()
 def home(request):
     return render(request, 'customer/home.html')
 
