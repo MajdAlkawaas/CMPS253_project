@@ -20,6 +20,9 @@ from django.db.models import Q
 from django.contrib import messages
 import re
 
+def test_header(request):
+    return render(request, 'customer/test_header.html')
+
 def signup(request):
     if request.method == 'POST':
         print("HERE Request is post")
@@ -170,12 +173,11 @@ def edit(request,queue_id):
 
         return redirect('queueManagement-customer-page')
 
-    context       = {'form': form, "queue" : queue}
-    return render(request, 'Customer/edit.html', context) 
+    context       = {'form': form, "queue" : queue, 'director':current_director}
+    return render(request, 'customer/edit.html', context) 
 
-
-# @login_required()
-# @director_required()
+@login_required()
+@director_required()
 def home(request):
     return render(request, 'Customer/home.html')
 
@@ -210,8 +212,14 @@ def QueueOperatorView(request):
     operator = Queueoperator.objects.get(user_id=request.user)
     opqueues = operator.Queue.all()
     form  = QueueOperatorForm(opqueues)
-    context = {"form" : form}
+    context = {"form"          : form,
+                "Queueoperator": operator}
     
+    if request.method == 'POST' and 'logOut' in request.POST:
+        logout(request)
+        return redirect('signin-customer-page')
+    if not request.user.is_authenticated:
+        return redirect('signin-customer-page')
     if request.method == 'POST' and 'chooseQueue' in request.POST:
         start = request.session.get('counter', 1)
         form  = QueueOperatorForm(opqueues, request.POST)
@@ -263,7 +271,26 @@ def QueueOperatorView(request):
             else:
                 context["opqueues"] = opqueues
                 context["guests"] = guests
-                return render(request, 'Customer/queueOperator.html', context)
+                return render(request, 'customer/queueOperator.html', context)
+    
+    
+    elif request.method == 'POST' and 'btnRequest' in request.POST:
+        currentGuestPhoneNumber = ""
+        form  = QueueOperatorForm(opqueues, request.POST)
+        start = request.session.get('counter', 1)
+        counter = start
+        if form.is_valid():
+            chosenQueue = chosenQueues[0]
+            guests = Guest.objects.filter(Q(WalkedAway=False) & Q(Kickedout=False) & Q(Served=False) & Q(Queue = chosenQueue))
+            guestNumbers = []
+            for guest in guests:
+                guestNumbers.append(guest.GuestNumber)
+            if len(guestNumbers)!=0:
+                theOne = min(guestNumbers)
+                guestToBeDeleted = Guest.objects.get(Q(GuestNumber = theOne) & Q(Queue = chosenQueue))
+                currentGuestPhoneNumber = guestToBeDeleted.PhoneNumber
+                print(currentGuestPhoneNumber)
+                send_sms(guestToBeDeleted.Name, currentGuestPhoneNumber)
 
     elif request.method == 'POST' and 'btnremove' in request.POST:
         form  = QueueOperatorForm(opqueues, request.POST)
@@ -339,8 +366,7 @@ def queueManagement(request):
     if not request.user.is_authenticated:
         return redirect('signin-customer-page')
                
-    return render(request, 'Customer/queueManagement.html', context) 
-
+    return render(request, 'customer/queueManagement.html', context) 
 
 from reportlab.pdfgen import canvas  
 from django.http import HttpResponse  
@@ -354,3 +380,21 @@ def getpdf(request):
     p.showPage()  
     p.save()  
     return response  
+
+from django.conf import settings                                                                                                                                                       
+from django.http import HttpResponse
+from twilio.rest import Client
+
+
+def send_sms(guestName, guestPhoneNumber):
+    message_to_broadcast = ("Mr/Ms {} You may be served now".format(guestName))
+    client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+
+    print("HERE", settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+    print(client)
+    print(guestPhoneNumber)
+    if guestPhoneNumber:
+        client.messages.create(to=guestPhoneNumber,
+                                from_=settings.TWILIO_NUMBER,
+                                body=message_to_broadcast)
+        print("HERE: it is done")
