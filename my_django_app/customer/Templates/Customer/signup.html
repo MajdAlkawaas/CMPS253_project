@@ -259,34 +259,40 @@
                         <!--end::Title-->
 
                         <!--begin::Section-->
+                        <script>
+                            document.getElementById("id_first_name").onchange = function(){
+                                var temp = document.getElementById("id_first_name").value;
+                                document.getElementById("firstName").innerHTML = `First Name: ${temp}`;
+                            }
+                            document.getElementById("id_last_name").onchange = function(){
+                                var temp1 = document.getElementById("id_last_name").value;
+                                document.getElementById("lastName").innerHTML = `Last Name: ${temp1}`;
+                            }
+                            document.getElementById("id_username").onchange = function(){
+                                var temp2 = document.getElementById("id_username").value;
+                                document.getElementById("username").innerHTML = `Username: ${temp2}`;
+                            }
+                            
+                            document.getElementById("id_email").onchange = function(){
+                                var temp3 = document.getElementById("id_email").value;
+                                document.getElementById("email").innerHTML = `Email Address: ${temp3}`;
+                            }
+                            
+                            // document.getElementById("id_customer_list").onchange = function(){
+                            //     var temp4 = document.getElementById("id_customer_list").value;
+                            //     document.getElementById("customer").innerHTML = `Customer: ${temp4}`;
+
+                            // }
+                        </script>
                         <h4 class="font-weight-bolder mb-3">
                             Account Settings:
                         </h4>
-                        <div class="text-dark-50 font-weight-bold line-height-lg mb-8">
-                            <div>Nick Stone</div>
-                            <div>+12233434-34</div>
-                            <div>nick.stone@gmail.com</div>
-                        </div>
-                        <!--end::Section-->
-
-                        <!--begin::Section-->
-                        <h4 class="font-weight-bolder mb-3">
-                            Address Details:
-                        </h4>
-                        <div class="text-dark-50 font-weight-bold line-height-lg mb-8">
-                            <div>Address Line 1</div>
-                            <div>Address Line 2</div>
-                            <div>Melbourne 3000, VIC, Australia</div>
-                        </div>
-                        <!--end::Section-->
-
-                        <!--begin::Section-->
-                        <h4 class="font-weight-bolder mb-3">
-                            Support Channels:
-                        </h4>
-                        <div class="text-dark-50 font-weight-bold line-height-lg mb-8">
-                            <div>Overnight Delivery with Regular Packaging</div>
-                            <div>Preferred Morning (8:00AM - 11:00AM) Delivery</div>
+                        <div class="text-dark-50 font-weight-bold line-height-lg mb-40">
+                            <div id="firstName"></div>
+                            <div id="lastName"></div>
+                            <div id="username"></div>
+                            <div id="email"></div>
+                            <div id="customer"></div>
                         </div>
                         <!--end::Section-->
                     </div>
