@@ -99,6 +99,10 @@ import pymysql  # noqa: 402
 pymysql.version_info = (1, 4, 6, 'final', 0)  # change mysqlclient version
 pymysql.install_as_MySQLdb()
 
+TWILIO_ACCOUNT_SID = 'AC548b48d01b1997dd7b20731b6f5b0edf'
+TWILIO_AUTH_TOKEN  = 'b3bc47d16a72ada045197375c5e131b0'
+TWILIO_NUMBER      = '+18646572771'
+
 # [START db_setup]
 if os.getenv('GAE_APPLICATION', None):
     # Running on production App Engine, so connect to Google Cloud SQL using
