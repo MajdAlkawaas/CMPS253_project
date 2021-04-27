@@ -205,7 +205,7 @@ def QueueOperatorSignupView(request):
         print("HERE Request is not post")
         form = QueueOperatorSignup()
 
-    return render(request, 'Customer/QueueOperatorSignup.html', {'form': form})
+    return render(request, 'Customer/queueOperatorSignup.html', {'form': form})
 
 chosenQueues = []
 guestsOut = []
@@ -433,3 +433,5 @@ def send_sms(guestName, guestPhoneNumber):
                                 from_=settings.TWILIO_NUMBER,
                                 body=message_to_broadcast)
         print("HERE: it is done")
+
+
