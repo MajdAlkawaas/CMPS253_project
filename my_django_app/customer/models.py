@@ -34,7 +34,9 @@ class Director(models.Model):
     director_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     QRcode        = models.ImageField(upload_to="QRcodes/", null=True, blank=True)
    
-    def save(self, domain="http://127.0.0.1:8000/", *args, **kwargs):
+    
+    # def save(self, domain="http://127.0.0.1:8000/", *args, **kwargs):
+    def save(self, domain="https://online-queue-test.azurewebsites.net/", *args, **kwargs):
         director_uuid = urllib.parse.urljoin(domain, 'customer/uuid/{}'.format(str(self.director_uuid)))
         qrcode_img = qrcode.make(director_uuid)
         
