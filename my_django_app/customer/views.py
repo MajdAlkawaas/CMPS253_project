@@ -122,6 +122,7 @@ def edit(request,queue_id):
     choices = []
     for element in operators:
         temp = (element, element.user.username)
+        # print("element type: ", type(element))
         choices.append(temp)
     choices = tuple(choices)
     # print(choices)
@@ -147,6 +148,7 @@ def edit(request,queue_id):
             categories = categories.split(',')
 
             OperatorStringList = form.cleaned_data.get("queueOperator_list")
+            # print(OperatorStringList)
             operatorsIDs = []
             for item in OperatorStringList:
                 temp = re.findall("\d+", item)
@@ -394,16 +396,26 @@ def queueManagement(request):
 
 from reportlab.pdfgen import canvas  
 from django.http import HttpResponse  
-  
-def getpdf(request):  
+from reportlab.lib.utils import ImageReader
+import os
+def getpdf(request):   
+    print("HERE:", os.getcwd())
+    current_director = Director.objects.get(user_id = request.user)
+    current_customer = current_director.Customer
+    print("customer:", current_customer)
+    QRcode_path = os.path.join(os.getcwd(), str(current_director.QRcode))
+    QRcode_path = "file:///C:/Users/student/Desktop/Project/CMPS253_project/my_django_app/QRcodes/qr_code-0aa6dfc8-e92a-4f01-8d80-70e99fb0f48f.png"
+    QRcode = ImageReader(QRcode_path)
     response = HttpResponse(content_type='application/pdf')  
-    response['Content-Disposition'] = 'attachment; filename="file.pdf"'  
+    response['Content-Disposition'] = 'attachment; filename="QRcode.pdf" '  
     p = canvas.Canvas(response)  
     p.setFont("Times-Roman", 55)  
-    p.drawString(100,700, "Hello, Javatpoint.")  
+    p.drawImage(QRcode, 10, 10, mask='auto')
+    p.drawString(100,700, str(current_customer))  
+
     p.showPage()  
     p.save()  
-    return response  
+    return response
 
 from django.conf import settings                                                                                                                                                       
 from django.http import HttpResponse
