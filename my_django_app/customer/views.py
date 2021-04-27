@@ -196,7 +196,7 @@ def QueueOperatorSignupView(request):
             print("---------------------")
             print(request)
             print("---------------------")
-            return HttpResponseRedirect('/signin/')
+            return HttpResponseRedirect('/queueManagement/')
         else:
             print("Here input is invalid")
             print(form.cleaned_data)
