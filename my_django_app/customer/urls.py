@@ -5,7 +5,7 @@ from .forms import UserPasswordResetForm, UserSetPasswordForm
 
 
 urlpatterns = [
-    path('pdf/test/', views.getpdf_test, name="pdf-file"),
+    # path('pdf/test/', views.getpdf_test, name="pdf-file"),
 
     path('pdf/', views.getpdf, name="pdf-file"),
 
