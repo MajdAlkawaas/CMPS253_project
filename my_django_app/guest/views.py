@@ -68,7 +68,7 @@ def guest_view_uuid(request, director_uuid):
             print("guest.views\n HERE WRONG")
             print("------------------------")
 
-    return render(request, 'guest/guest.html', context) 
+    return render(request, 'Guest/guest.html', context) 
 
 
 def guest_waiting_page(request, guest_id):
@@ -77,4 +77,4 @@ def guest_waiting_page(request, guest_id):
         guest.WalkedAway = True
         guest.save()
     context = {"guest":guest}
-    return render(request, "guest/waitingPage.html", context)
+    return render(request, "Guest/waitingPage.html", context)
