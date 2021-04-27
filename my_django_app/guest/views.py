@@ -13,7 +13,6 @@ from django.core.files import File
 from PIL import Image, ImageDraw
 
 
-
 def guest_view_uuid(request, director_uuid):
     director_uuid_hex = director_uuid.hex
     try:
@@ -29,9 +28,6 @@ def guest_view_uuid(request, director_uuid):
     for queue in queues:    
         categories = categories | Category.objects.filter(Queue = queue)
 
-    print("------------------------")
-    print("guest.views \nHERE Categories type:\n", type(categories))
-    print("------------------------")
 
     form = GuestForm(categories = categories)
     context = {
@@ -41,20 +37,30 @@ def guest_view_uuid(request, director_uuid):
         'categories': categories,
         'form'      : form
     }
+
     if request.method == 'POST':
+
+        start = request.session.get('counter', 1)
+        counter = start
         form = GuestForm(categories, request.POST)
         if form.is_valid():
 
-            print("WORKING")
-            print("guest.views\n HERE: ------CLEANED DATA------ \n", form.cleaned_data)
-            print("------------------------")
+            myQueue       = form.cleaned_data.get("categories_list").Queue
+            if(len(Guest.objects.filter(Queue = myQueue))==0):
+                myGuestsNumber = 1
+            else:
+                lastGuest = Guest.objects.filter(Queue = myQueue).last()
+                myGuestsNumber= lastGuest.GuestNumber + 1
+
+
             guest01 = Guest.objects.create(Name        = form.cleaned_data.get("name"),
                                            PhoneNumber = form.cleaned_data.get("phoneNumber"),
                                            Category    = form.cleaned_data.get("categories_list"),
                                            Director    = current_director,
+                                           GuestNumber = myGuestsNumber,
                                            Customer    = customer,
                                            Queue       = form.cleaned_data.get("categories_list").Queue)
-            print("GUEST obj\n", guest01) 
+            request.session['counter'] = counter + 1
             context['guest01'] = guest01
             return HttpResponseRedirect('../../guestWaitingPage/' + str(guest01.id))
         else: 
