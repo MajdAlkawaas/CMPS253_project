@@ -273,9 +273,13 @@ def QueueOperatorView(request):
                 
                 for guest in guestsFinal:
                     guestNumbersFinal.append(guest.GuestNumber)
-                context["opqueues"] = opqueues
-                context["guests"] = guestsFinal
-                context["guestNumbers"] = min(guestNumbersFinal)
+                if len(guestNumbersFinal)!=0:
+                    context["opqueues"] = opqueues
+                    context["guests"] = guestsFinal
+                else:
+                    context["opqueues"] = opqueues
+                    context["guests"] = guestsFinal
+                    context["guestNumbers"] = min(guestNumbersFinal)
                 # context["counter"] = counter
                 return render(request, 'Customer/queueOperator.html', context)
             else:
@@ -330,10 +334,13 @@ def QueueOperatorView(request):
 
                 for guest in guestsFinal:
                     guestNumbersFinal.append(guest.GuestNumber)
-
-                context["opqueues"] = opqueues
-                context["guests"] = guestsFinal
-                context["guestNumbers"] = min(guestNumbersFinal)
+                if len(guestNumbersFinal)!=0:
+                    context["opqueues"] = opqueues
+                    context["guests"] = guestsFinal
+                else:
+                    context["opqueues"] = opqueues
+                    context["guests"] = guestsFinal
+                    context["guestNumbers"] = min(guestNumbersFinal)
                 # context["counter"] = counter
                 return render(request, 'Customer/queueOperator.html', context)
             else:
