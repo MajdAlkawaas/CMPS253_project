@@ -22,7 +22,7 @@ import re
 import datetime
 
 def test_header(request):
-    return render(request, 'customer/test_header.html')
+    return render(request, 'Customer/test_header.html')
 
 def signup(request):
     if request.method == 'POST':
@@ -176,10 +176,9 @@ def edit(request,queue_id):
         return redirect('queueManagement-customer-page')
 
     context       = {'form': form, "queue" : queue, 'director':current_director}
-    return render(request, 'customer/edit.html', context) 
+    return render(request, 'Customer/edit.html', context) 
 
-@login_required()
-@director_required()
+
 def home(request):
     return render(request, 'Customer/home.html')
 
@@ -282,7 +281,7 @@ def QueueOperatorView(request):
             else:
                 context["opqueues"] = opqueues
                 context["guests"] = guests
-                return render(request, 'customer/queueOperator.html', context)
+                return render(request, 'Customer/queueOperator.html', context)
     
     
     elif request.method == 'POST' and 'btnRequest' in request.POST:
@@ -358,7 +357,7 @@ def password_reset_request(request):
                 print("HERE: 04")
                 for user in associated_users:
                     subject = "Password Reset Requested"
-                    email_template_name = "customer/registration/password_reset_email.txt"
+                    email_template_name = "Customer/registration/password_reset_email.txt"
                     c = {
                     "email":user.email,
                     'domain':'127.0.0.1:8000',
@@ -392,7 +391,7 @@ def queueManagement(request):
     if not request.user.is_authenticated:
         return redirect('signin-customer-page')
                
-    return render(request, 'customer/queueManagement.html', context) 
+    return render(request, 'Customer/queueManagement.html', context) 
 
 from reportlab.pdfgen import canvas  
 from django.http import HttpResponse  
@@ -404,7 +403,7 @@ def getpdf(request):
     current_customer = current_director.Customer
     print("customer:", current_customer)
     QRcode_path = os.path.join(os.getcwd(), str(current_director.QRcode))
-    QRcode_path = "file:///C:/Users/student/Desktop/Project/CMPS253_project/my_django_app/QRcodes/qr_code-0aa6dfc8-e92a-4f01-8d80-70e99fb0f48f.png"
+    # QRcode_path = "file:///C:/Users/student/Desktop/Project/CMPS253_project/my_django_app/QRcodes/qr_code-0aa6dfc8-e92a-4f01-8d80-70e99fb0f48f.png"
     QRcode = ImageReader(QRcode_path)
     response = HttpResponse(content_type='application/pdf')  
     response['Content-Disposition'] = 'attachment; filename="QRcode.pdf" '  
